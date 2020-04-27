@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:w="urn:import:nl.overheid.aerius.wui.widget" xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style gss="true">
+    .control {
+    cursor: pointer;
+    background-color: #d63327;
+    transition: background 0.15s ease-out;
+    }
+    .button {
+    width: 32px;
+    height: 32px;
+    transition: background 0.15s ease-out;
+    pointer-events: none;
+    }
+    .button > svg {
+    fill: #f5f5f5;
+    }
+    .control:hover {
+    background: rgba(0,0,0,0.12);
+    }
+    .control:hover .button > svg {
+    fill: #d63327;
+    }
+    .control:active .button > svg {
+    fill: #d80a08;
+    }
+  </ui:style>
+  <g:FlowPanel ui:field="control"
+    styleName="{style.control} {res.css.flex} {res.css.alignCenter} {res.css.justify}">
+    <g:SimplePanel ui:field="button" styleName="{style.button} {res.css.noShrink}" />
+  </g:FlowPanel>
+</ui:UiBinder>

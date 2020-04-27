@@ -1,0 +1,9 @@
+@def zIndexGeneric 15000;
+
+.gwt-PopupPanel {
+  z-index: zIndexGeneric;
+}
+
+.gwt-PopupDialog {
+  z-index: zIndexGeneric;
+}

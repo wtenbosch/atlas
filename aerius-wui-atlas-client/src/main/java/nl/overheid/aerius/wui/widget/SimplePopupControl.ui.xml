@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget"
+  xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style type="nl.overheid.aerius.wui.widget.MaskedButton.CustomStyle" gss="true">
+    .control {
+    padding: 6px 0px 7px;
+    cursor: pointer;
+    }
+    .disabled {
+    cursor: default !important;
+    background: none !important;
+    -user-select: none;
+    }
+    .disabled .button {
+    background-color: #cccccc !important;
+    }
+    .disabled .label {
+    color: #cccccc !important;
+    }
+    .button {
+    width: 32px;
+    height: 32px;
+    margin: 0px 9px;
+    background-color: #4d4d4d;
+    transition: background 0.15s ease-out;
+    }
+    .label {
+    transition: color 0.15s ease-out;
+    text-align: center;
+    color: #4d4d4d;
+    }
+    .control:hover .button {
+    background: #721516;
+    }
+    .control:hover .label {
+    color: #721516;
+    }
+    .control:active .button {
+    background: #d63327;
+    }
+    .control:active .label {
+    color: #d63327;
+    }
+    .selected .button {
+    background: #d63327 !important;
+    }
+    .selected .label {
+    color: #d63327 !important;
+    }
+  </ui:style>
+  <g:FlowPanel ui:field="control" styleName="{style.control} {res.css.flex} {res.css.alignCenter} {res.css.columns} {res.css.clickableBackground}">
+    <g:SimplePanel ui:field="button" styleName="{style.button} {res.css.noShrink}" />
+    <g:Label ui:field="label" styleName="{style.label}" />
+  </g:FlowPanel>
+</ui:UiBinder>

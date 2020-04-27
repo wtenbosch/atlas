@@ -1,0 +1,184 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .bootstrap {
+    flex-grow: 1;
+    min-height: 800px;
+    background: #9ca8a8 url(res/bg-nl.png) no-repeat center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .loadingPanel {
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px 5px rgba(91, 106, 104, .75);
+    width: 600px;
+    background-color: white;
+    padding-bottom: 15px;
+    overflow: hidden;
+    }
+    .loadingHeader, .browserNotSupportedHeader {
+    position: relative;
+    background: linear-gradient(rgb(154,32,29), rgb(114,16,21));
+    height: 200px;
+    transition: height 0.25s ease-out;
+    }
+    .browserNotSupportedHeader {
+    display: none;
+    height: 325px;
+    }
+    .logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    }
+    .loading {
+    position: absolute;
+    top: 30px;
+    padding: 6px 0px 2px;
+    right: 30px;
+    width: 24px;
+    height: 24px;
+    }
+    .body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    }
+    .ministry {
+    /* The svg is 214 PX wide, subtract 18 (36/2) gets us 196px to push to the right. */
+    margin-left: 196px;
+    }
+    .subtitle {
+    color: #888;
+    font-size: 0.9em;
+    text-align: center;
+    margin-bottom: 30px;
+    }
+    .headerBottom {
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+    }
+    .moment {
+    font-size: 1.1em;
+    color: white;
+    }
+    .browserNotSupportedText {
+    color: white;
+    }
+    .copyright {
+    font-size: 0.7em;
+    color: #e4e1dd;
+    }
+    .version {
+    font-size: 0.7em;
+    color: #e4e1dd;
+    position: absolute;
+    right: 30px;
+    bottom: 0px;
+    }
+    .browserbutton {
+    display: inline-block;
+    font-size: 15px;
+    background: linear-gradient(#DBE1E1, #B8C6C5) repeat scroll 0 0 transparent;
+    padding: 10px 0px;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    color: #333333;
+    text-align: center;
+    text-shadow: 0 1px 0 white;
+    text-decoration: none;
+    font-weight: bold;
+    width: 195px;
+    margin: 0 10px 10px 0;
+    }
+    .loginPanel {
+    overflow: hidden;
+    box-shadow: inset 0px 11px 8px -10px #333, inset 0px -11px 8px -10px #ccc;
+    background: #f2f4f3;
+    transition: height 0.25s ease-out;
+    }
+    .loginContainer {
+    display: flex;
+    }
+    .loginPanelLeft {
+    flex-basis: 50%;
+    margin: 10px 10px 0px 10px;
+    }
+    .loginPanelRight {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    margin: 10px 10px 0px 10px;
+    }
+    .inputField {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    outline: 0;
+    transition: all 0.15s ease-out;
+    }
+    .inputField:hover {
+    border: 1px solid #aaa;
+    }
+    .inputField:focus {
+    border: 1px solid #000;
+    }
+    .submitField {
+    padding: 10px;
+    margin: 10px;
+    transition: all 0.15s ease-out;
+    }
+    .error {
+    text-align: center;
+    font-weight: bold;
+    color: #d63327;
+    }
+  </ui:style>
+  <g:HTMLPanel styleName="{style.bootstrap}">
+    <div class="{style.loadingPanel}">
+      <div ui:field="loadingHeader" class="{style.loadingHeader}">
+        <img src="res/splash-aerius-monitor.svg" class="{style.logo}" />
+        <img src="res/loading.gif" class="{style.loading}" ui:field="loadingElement" />
+        <div class="{style.headerBottom}">
+          <p class="{style.moment}" ui:field="loadingText">Een ogenblik, de applicatie wordt geladen...</p>
+          <p class="{style.copyright}">AERIUS is een geregistreerd merk van het Ministerie van Landbouw, Natuur en Voedselkwaliteit</p>
+        </div>
+        <p class="{style.version}">Versie Alpha 2018</p>
+      </div>
+      <div ui:field="loginPanel" class="{style.loginPanel}">
+        <div class="{style.loginContainer}">
+          <div class="{style.loginPanelLeft}">
+            <h1>Inloggen</h1>
+            <p>Inloggen is alleen nodig wanneer u teksten wilt bewerken en/of ongepubliceerde delen wilt inzien. Klik <a href="application.html">hier</a> om door te gaan naar de application zonder in te loggen.</p>
+          </div>
+          <div class="{style.loginPanelRight}">
+            <input ui:field="userField" type="text" placeholder="Gebruikersnaam" class="{style.inputField}" />
+            <input ui:field="passField" type="password" placeholder="Wachtwoord" class="{style.inputField}" />
+            <button ui:field="submitButton" class="{style.submitField}">Inloggen</button>
+          </div>
+        </div>
+        <p ui:field="errorField" class="{style.error}" style="display:none;">De gebruikersnaam/wachtwoord combinatie is incorrect</p>
+      </div>
+      <div id="browserNotSupportedHeader" class="{style.browserNotSupportedHeader}">
+        <img src="res/splash-aerius-monitor.svg" class="{style.logo}" />
+        <div class="{style.headerBottom}">
+          <h2 class="{style.browserNotSupportedText}">Uw browser is ongeschikt voor de applicatie.</h2>
+          <p class="{style.browserNotSupportedText}">Download en installeer één van onderstaande browsers of gebruik een vergelijkbare moderne versie.</p>
+          <p>
+            <a href="http://www.google.com/chrome" class="{style.browserbutton}">Chrome</a> <a href="http://support.apple.com/downloads/#safari" class="{style.browserbutton}">Safari</a> <a href="http://www.mozilla.org/firefox/" class="{style.browserbutton}">Firefox</a> <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" class="{style.browserbutton}">Internet Explorer</a>
+          </p>
+          <p class="{style.copyright}">AERIUS is een geregistreerd merk van het Ministerie van Landbouw, Natuur en Voedselkwaliteit</p>
+        </div>
+        <p class="{style.version}">Versie Alpha 2018</p>
+      </div>
+      <div class="{style.body}">
+      <img src="res/rivm-logo-nederlands.svg" class="{style.ministry}" />
+      <p class="{style.subtitle}">AERIUS is ontwikkeld in opdracht van de Rijksoverheid en de gezamelijke provincies.</p>
+      <img src="res/provincies.svg"/>
+      </div>
+    </div>
+  </g:HTMLPanel>
+</ui:UiBinder>

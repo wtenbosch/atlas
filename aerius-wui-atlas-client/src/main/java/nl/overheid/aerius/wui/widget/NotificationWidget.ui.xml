@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget"
+  xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style type="nl.overheid.aerius.wui.widget.NotificationWidget.CustomStyle">
+    .panel {
+    margin: 10px;
+    padding: 20px 20px;
+    border-radius: 3px;
+    max-width: 600px;
+    width: 100%;
+    color: white;
+    background-color: #5858c5fe;
+    opacity: 1;
+    transition: opacity 0.15s ease-out;
+    }
+    .error {
+    background-color: #a00e;
+    font-weight: bold;
+    }
+    .warning {
+    background-color: #f93e;
+    }
+  </ui:style>
+  <g:Label styleName="{style.panel}" ui:field="message" />
+</ui:UiBinder>

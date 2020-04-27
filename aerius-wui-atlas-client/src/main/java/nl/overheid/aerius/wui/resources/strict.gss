@@ -1,0 +1,307 @@
+.infoText table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.infoText td {
+border: 1px solid #ccc;
+padding: 5px;
+}
+
+input {
+	font-family: 'RO-Sans-Text', Arial, Sans-Serif;
+	font-size: 12pt;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #4d4d4d;
+}
+div {
+	outline: 0;
+}
+text {
+	fill: #4d4d4d;
+}
+
+.glassPanel {
+    background: #3333;
+    transition: background .2s ease-out;
+    z-index: 14000;
+}
+
+.glassPanelFull {
+    background: rgba(255,255,255,0.7) !important;
+}
+
+/* An absolute minimum height for the application, any smaller than this makes it ridiculous so a scrollbar is warranted. */
+.rootLayoutPanel {
+	/*min-height: 500px;*/
+}
+
+.elementMargin {
+	margin-bottom: 15px;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex>* {
+	min-width: 0;
+	min-height: 0;
+}
+
+.columns {
+	flex-direction: column;
+}
+
+.justify {
+	justify-content: center;
+}
+
+.distribute {
+	justify-content: space-between;
+}
+.spaceAround {
+	justify-content: space-around;
+}
+
+.alignCenter {
+	align-items: center;
+}
+
+.stretch {
+	align-items: stretch;
+}
+
+.grow {
+	flex-grow: 1;
+}
+
+.noShrink {
+	flex-shrink: 0;
+}
+
+.rowReverse {
+	flex-direction: row-reverse;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}
+
+.unicode, .unicode > * {
+  font-family: "Lucida Sans Unicode", "Arial Unicode MS";
+}
+.clickableBackground {
+    transition: background 0.15s ease-out;
+    cursor: pointer;
+}
+.clickableBackground:hover {
+    background: rgba(0,0,0,0.1);
+}
+.clickableBackground:active {
+    background: rgba(0,0,0,0.12);
+}
+.focus {
+    background: rgba(0,0,0,0.12) !important;
+}
+
+.loader {
+	width: 24px !important;
+	height: 24px !important;
+}
+
+.overflow {
+	overflow: hidden;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  background: #f5f5f5;
+  border: 1px solid #999;
+  transition: border 0.15s ease-out, border 0.15s ease-out;
+  margin-top: -9px;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  border-color: #666;
+}
+input[type=range]::-webkit-slider-thumb:active {
+  border-color: #333;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: #d3d3d3;
+  height: 4px;
+  outline: 0;
+  transition: background 0.15s ease-out;
+}
+input[type=range]::-webkit-slider-runnable-track:hover {
+  background: #d6332755;
+}
+input[type=range]::-webkit-slider-runnable-track:active {
+  background: #d6332755;
+}
+input[type=range]::moz-range-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  background: #f5f5f5;
+  border: 1px solid #999;
+  transition: border 0.15s ease-out;
+}
+input[type=range]::-moz-range-thumb:hover {
+  border-color: #666;
+}
+input[type=range]::-moz-range-thumb:active {
+  border-color: #333;
+}
+input[type=range]::-moz-range-track {
+  background: #d3d3d3;
+  height: 4px;
+  outline: 0;
+  transition: background 0.15s ease-out;
+}
+input[type=range]::-moz-range-track:hover {
+  background: #d6332755;
+}
+input[type=range]::-moz-range-track:active {
+  background: #d6332755;
+}
+input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  background: #f5f5f5;
+  border: 1px solid #999;
+  margin-top: -3px;
+  transition: border 0.15s ease-out, border 0.15s ease-out;
+}
+input[type=range]::-ms-thumb:hover {
+  border-color: #666;
+}
+input[type=range]::-ms-thumb:active {
+  border-color: #333;
+}
+input[type=range]::-ms-track {
+  outline: 0;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  height: 4px;
+  transition: background 0.15s ease-out;
+}
+input[type=range]::-ms-fill-lower {
+  background: #d3d3d3;
+}
+input[type=range]::-ms-fill-lower:hover {
+  background: rgba(214, 51, 39, 0.33);
+}
+input[type=range]::-ms-fill-lower:active {
+  background: rgba(214, 51, 39, 0.33);
+}
+input[type=range]::-ms-fill-upper {
+  background: #d3d3d3;
+}
+input[type=range]::-ms-fill-upper:hover {
+  background: rgba(214, 51, 39, 0.33);
+}
+input[type=range]::-ms-fill-upper:active {
+  background: rgba(214, 51, 39, 0.33);
+}
+input[type=text].search {
+  width: 250px;
+  padding: 5px 20px;
+  font-size: 14pt;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  cursor: text;
+  transition: all 0.1s ease-out;
+  color: #333;
+  outline: 0;
+}
+input[type=text].search:hover {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+}
+input[type=text].search:focus {
+  background-color: #f3f3f3;
+  border: 1px solid #aaa;
+}
+
+.elementPadding {
+  padding: 20px;
+}
+
+.marginAround {
+  margin: 20px;
+}
+
+.fullPrintWidth {
+  width: 21cm;
+  margin: 0in;
+  padding: 0in;
+}
+.printWidth {
+  width: 17cm;
+  margin: 0in;
+  padding: 0in;
+}
+/*
+.scaledPrintWidth {
+  width: 17cm;
+  margin: 0in;
+  padding: 0in;
+}
+*/
+.scaledPrintWidth {
+  width: 24.285cm;
+  transform: scale(0.7);
+  transform-origin-x: 0;
+  transform-origin-y: 0;
+  -webkit-transform-origin-x: 0;
+  -webkit-transform-origin-y: 0;
+  margin: 0in;
+  padding: 0in;
+}
+.printWidth > * {
+  -webkit-print-color-adjust: exact;
+}
+.printBreakBeforeAvoid {
+  page-break-before: avoid;
+  position: relative;
+}
+.printBreakBeforeAvoid > * {
+  page-break-before: avoid;
+}
+.printBreak {
+  page-break-before: avoid;
+  page-break-inside: avoid;
+  position: relative;
+}
+.printBreak > * {
+  page-break-before: avoid;
+  page-break-inside: avoid;
+}
+.printBreakAfter {
+  page-break-after: always;
+}
+.ieSvg {
+  background-color: transparent !important;
+}
+

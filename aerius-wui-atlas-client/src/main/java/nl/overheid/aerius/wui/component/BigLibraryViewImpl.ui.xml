@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R' />
+  <ui:style>
+    .container {
+    background: #f5f5f5;
+    }
+    .panel {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
+    grid-template-rows: repeat( auto-fit, minmax(150px, 210px));
+    grid-gap: 4px;
+    transition: all 0.2s;
+    }
+  </ui:style>
+  <g:FlowPanel styleName="{res.css.flex} {res.css.columns} {res.css.grow} {style.container}">
+    <g:SimplePanel ui:field="viewModeGuide" styleName="{res.css.flex} {res.css.alignCenter} {res.css.justify} {res.css.grow} {res.css.noShrink}" />
+    <!--
+    <g:FlowPanel ui:field="container" styleName="{style.panel} {res.css.grow}" />
+     -->
+  </g:FlowPanel>
+</ui:UiBinder>

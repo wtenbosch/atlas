@@ -1,0 +1,12 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style>
+  .slider {
+    height: 30px;
+  }
+  </ui:style>
+  <g:HTMLPanel styleName="{res.css.flex} {style.slider}">
+    <input ui:field="input" class="{res.css.grow}" type="range" min="0" max="100" step="1" />
+  </g:HTMLPanel>
+</ui:UiBinder>

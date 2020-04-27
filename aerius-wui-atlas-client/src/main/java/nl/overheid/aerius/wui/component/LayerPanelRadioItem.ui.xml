@@ -1,0 +1,84 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:e="urn:import:nl.overheid.aerius.wui.main.ui.editor"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R' />
+  <ui:style type="nl.overheid.aerius.wui.component.LayerPanelRadioItem.CustomStyle">
+    .clustered {
+    background: #f5f5f5;
+    }
+    .border {
+    border-top: 1px solid #f5f5f5;
+    user-select: none;
+    }
+    .border:hover {
+    background-color:
+    rgba(50, 50, 50, 0.1);
+    }
+    .label {
+    padding: 10px 10px;
+    cursor: pointer;
+    }
+    .legend {
+    overflow: hidden;
+    box-sizing: border-box;
+    }
+    .inner {
+    padding: 10px;
+    }
+    .button {
+    cursor: pointer;
+    width: 24px;
+    height: 26px;
+    }
+    .listBox {
+    font-family: inherit;
+    font-size: inherit;
+    color: #4d4d4d;
+    padding: 5px 0px;
+    background: #f5f5f588;
+    border: 1px solid transparent;
+    outline: 0;
+    transition: border 0.15s ease-out;
+    margin-right: 10px;
+    }
+    .listBox:hover {
+    border: 1px solid #aaa;
+    }
+    .listBox:active {
+    border: 1px solid #888;
+    }
+    .innerPanel {
+    padding-left: 50px;
+    }
+    .paddingRight {
+    width: 41px;
+    margin-left: 10px;
+    }
+    .toggle {
+    width: 24px;
+    height: 26px;
+    padding-left: 5px;
+    }
+  </ui:style>
+  <g:FlowPanel styleName="{style.border} {res.css.noShrink}">
+    <g:FlowPanel styleName="{res.css.flex} {res.css.alignCenter} {res.css.distribute}">
+      <w:FlipButton ui:field="flipButton" addStyleNames="{style.inner} {style.button}" />
+      <g:ListBox ui:field="layerListBox" styleName="{style.listBox} {res.css.grow}" />
+      <g:SimplePanel ui:field="hideButtonContainer">
+        <g:ToggleButton ui:field="hideButton" styleName="{style.button} {style.inner} {style.toggle} {res.css.noShrink}" />
+      </g:SimplePanel>
+    </g:FlowPanel>
+    <w:AnimatedFlowPanel ui:field="inner" styleName="{style.legend}" visible="false">
+      <g:FlowPanel styleName="{res.css.flex}">
+        <g:FlowPanel styleName="{res.css.grow} {style.innerPanel}">
+          <g:FlowPanel ui:field="selectorContainer" />
+          <w:SliderBar ui:field="opacitySlider" />
+          <g:SimplePanel ui:field="legend" />
+        </g:FlowPanel>
+        <g:SimplePanel ui:field="innerCluster" styleName="{style.paddingRight}" />
+      </g:FlowPanel>
+    </w:AnimatedFlowPanel>
+  </g:FlowPanel>
+</ui:UiBinder>

@@ -1,0 +1,49 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:e="urn:import:nl.overheid.aerius.wui.main.ui.editor"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R' />
+  <ui:style>
+    .container {
+    padding: 20px;
+    padding-right: 70px;
+    background: white;
+    overflow: auto;
+    }
+    .title {
+    margin-bottom: 5px;
+    }
+    .subTitle {
+    margin-top: 5px;
+    }
+    .selectorContainer {
+    margin: 20px 0px;
+    }
+    .paragraph {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    }
+    
+    .html sub, .html sup {
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+    }
+    .html sub {
+    top: 0.4em;
+    }
+  </ui:style>
+  <g:FlowPanel styleName="{style.container}">
+    <w:HeadingWidget ui:field="titleField" n="2" styleName="{style.title}" />
+    <w:HeadingWidget ui:field="subtitleField" n="3" styleName="{style.subTitle}" />
+    <w:HeadingWidget ui:field="chapterField" n="1" />
+    <g:FlowPanel ui:field="selectorContainer" styleName="{style.selectorContainer}" />
+    <g:HTML ui:field="html" styleName="{style.html}" />
+    <g:HTML ui:field="explanation" styleName="{style.html}" />
+    <g:Anchor ui:field="link" target="_blank" />
+  </g:FlowPanel>
+</ui:UiBinder>

@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:e="urn:import:nl.overheid.aerius.wui.main.ui.editor"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:nl.overheid.aerius.wui.component"
+  xmlns:w="urn:import:nl.overheid.aerius.wui.widget">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style type="nl.overheid.aerius.wui.component.Natura2000SVG.CustomStyle">
+    .highlight {
+    fill: #d63327;
+    }
+    .target {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    }
+    .target > g {
+    cursor: pointer;
+    }
+    .outer {
+    fill: none;
+    stroke-width: 4px;
+    stroke: transparent;
+    transition: 0.15s ease-out stroke;
+    pointer-events: none;
+    }
+    .hitbox {
+    fill: transparent;
+    }
+    .highlight .outer {
+    stroke: #d63327;
+    }
+    .inner {
+    fill: #222;
+    }
+    .debug {
+    position: absolute;
+    opacity: 0.8;
+    }
+  </ui:style>
+  <g:HTMLPanel ui:field="svgContainer" styleName="{res.css.flex} {res.css.grow}">
+    <g:FlowPanel visible="false" ui:field="debugPanel" styleName="{style.debug}">
+      <g:TextBox ui:field="correctTransformXField" />
+      <g:TextBox ui:field="correctTransformYField" />
+      <g:TextBox ui:field="correctTranslateXField" />
+      <g:TextBox ui:field="correctTranslateYField" />
+      <g:TextBox ui:field="correctMinXField" />
+      <g:TextBox ui:field="correctMinYField" />
+      <g:TextBox ui:field="correctMaxXField" />
+      <g:TextBox ui:field="correctMaxYField" />
+      <g:TextBox ui:field="shortcut" />
+      <g:TextBox ui:field="shortcut2" />
+    </g:FlowPanel>
+    <svg ui:field="svgTarget" class="{style.target}">
+    </svg>
+  </g:HTMLPanel>
+</ui:UiBinder>

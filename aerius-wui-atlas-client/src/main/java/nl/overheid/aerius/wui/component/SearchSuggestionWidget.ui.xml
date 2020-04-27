@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:e="urn:import:nl.overheid.aerius.wui.main.ui.editor"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget"
+  xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R' />
+  <ui:style>
+    .panel {
+    cursor: pointer;
+    }
+    .panel:hover > .label {
+    background-color: rgba(0,0,0,0.1);
+    }
+    .panel:hover > .type {
+    background-color: #d63327;
+    color: white;
+    }
+    .panel:active > .type {
+    background-color: #dc3733;
+    color: white;
+    }
+    .label {
+    padding: 20px;
+    user-select: none;
+    transition: background-color 0.15s ease-out, color 0.15s ease-out;
+    }
+    .type {
+    flex-basis: 100px;
+    background: rgba(0,0,0,0.15);
+    }
+  </ui:style>
+  <g:FocusPanel ui:field="panel">
+    <g:FlowPanel styleName="{res.css.flex} {style.panel}">
+      <g:Label ui:field="typeField" styleName="{style.label} {style.type} {res.css.noShrink}" />
+      <g:Label ui:field="titleField" styleName="{style.label} {res.css.grow}" />
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>

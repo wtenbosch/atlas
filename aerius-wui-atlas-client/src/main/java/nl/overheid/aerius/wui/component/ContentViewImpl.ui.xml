@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:w="urn:import:nl.overheid.aerius.wui.widget" xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style>
+    .contentPanel {
+    background: #f5f5f5;
+    overflow: auto;
+    }
+    .contentContainer {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-width: 540px;
+    }
+  </ui:style>
+  <w:SwitchPanel ui:field="contentPanel" styleName="{style.contentPanel} {res.css.flex} {res.css.grow}">
+    <w:ContentLoadingWidget />
+    <g:FlowPanel styleName="{res.css.flex} {res.css.grow} {res.css.columns} {style.contentContainer}">
+      <c:LegendViewer ui:field="legendViewer" />
+      <c:ChapterViewer ui:field="chapterViewer" />
+    </g:FlowPanel>
+    <c:BigLibraryView ui:field="libraryViewer" />
+    <g:SimplePanel styleName="{res.css.flex} {res.css.grow} {res.css.alignCenter} {res.css.justify}">
+      <g:Label text="Er is geen data beschikbaar voor deze weergave." />
+    </g:SimplePanel>
+  </w:SwitchPanel>
+</ui:UiBinder>

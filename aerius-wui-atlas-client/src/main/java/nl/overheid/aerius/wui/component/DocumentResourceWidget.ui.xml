@@ -1,0 +1,54 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:e="urn:import:nl.overheid.aerius.wui.main.ui.editor"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='img' type='nl.overheid.aerius.wui.resources.ImageResources' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R' />
+  <ui:style>
+    .documentSection {
+    cursor: pointer;
+    padding: 0px 5px;
+    user-select: none;
+    }
+    .textPanel {
+    padding: 10px;
+    }
+    .documentSection:hover {
+    color: #721516;
+    }
+    .documentSection:hover .name {
+    text-decoration: underline;
+    }
+    .documentSection:active {
+    color: #d63327;
+    }
+    .inherit {
+    color: inherit;
+    }
+    .button {
+    width: 32px;
+    height: 32px;
+    background-color: #4d4d4d;
+    transition: background 0.15s ease-out;
+    }
+    .documentSection:hover .button {
+    background: #721516;
+    }
+    .documentSection:active .button {
+    background: #d63327;
+    }
+    .text {
+    color: inherit;
+    padding: 2px;
+    }
+  </ui:style>
+  <g:FocusPanel styleName="{style.documentSection} {res.css.elementMargin} {res.css.clickableBackground}" ui:field="link">
+    <g:FlowPanel styleName="{style.inherit} {res.css.flex} {res.css.alignCenter}">
+      <g:SimplePanel ui:field="icon" styleName="{style.button} {res.css.noShrink}" />
+      <g:FlowPanel styleName="{style.inherit} {style.textPanel}">
+        <g:Label ui:field="name" styleName="{style.text} {style.name}" />
+        <g:Label ui:field="date" styleName="{style.text}" />
+      </g:FlowPanel>
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>

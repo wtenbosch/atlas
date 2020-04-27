@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:w="urn:import:nl.overheid.aerius.wui.widget"
+  xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style>
+    .panel {
+    position: relative;
+    user-select: none;
+    }
+    .arrow {
+    width: 0px;
+    height: 0px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 8px solid #4d4d4d;
+    position: absolute;
+    right: 0px;
+    padding: 0px 5px;
+    }
+    .image {
+    width: 32px;
+    height: 32px;
+    margin: 0px 9px;
+    background-color: #4d4d4d;
+    transition: background 0.15s ease-out;
+    }
+  </ui:style>
+  <g:FocusPanel ui:field="panel" styleName="{style.panel} {res.css.flex} {res.css.clickableBackground}">
+    <g:FlowPanel styleName="{res.css.grow} {res.css.flex} {res.css.alignCenter} {res.css.justify}">
+      <g:SimplePanel ui:field="imagePanel" styleName="{res.css.noShrink} {style.image}" />
+      <g:SimplePanel styleName="{style.arrow}" />
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>

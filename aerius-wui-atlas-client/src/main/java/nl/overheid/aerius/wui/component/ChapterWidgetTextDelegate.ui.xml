@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:w="urn:import:nl.overheid.aerius.wui.widget" xmlns:c="urn:import:nl.overheid.aerius.wui.component">
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style>
+    .container {
+    margin-top: 65px;
+    padding: 20px;
+    overflow: auto;
+    }
+    .html {
+    max-width: 600px;
+    flex-basis: 600px;
+    padding-right: 50px;
+    }
+    .documents {
+    max-width: 600px;
+    }
+  </ui:style>
+  <g:FlowPanel styleName="{res.css.flex} {style.container} {res.css.wrap}">
+    <g:FlowPanel styleName="{style.html}">
+      <w:HeadingWidget ui:field="chapterField" n="1" />
+      <g:FlowPanel ui:field="selectorContainer" />
+      <c:SelectableTextWidget ui:field="selectableText" />
+    </g:FlowPanel>
+  </g:FlowPanel>
+</ui:UiBinder>
+ 

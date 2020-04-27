@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
+  <ui:style>
+    .headerBox {
+    line-height: 24px;
+    cursor: pointer;
+    padding: 0px 10px 10px 10px;
+    }
+    .headerBox:hover path {
+      fill: #d63327;
+    }
+    .headerBox:hover .areaGroupLabel {
+      text-decoration: underline;
+    }
+    .button {
+    transform: rotate(180deg);
+    width: 24px;
+    height: 24px;
+    }
+    path {
+      transition: fill 0.2s ease-out;
+    }
+    .areaGroupLabel {
+    font-weight: bold;
+    padding-left: 10px;
+    }
+  </ui:style>
+  <g:FocusPanel ui:field="backButton">
+    <g:FlowPanel styleName="{res.css.flex} {res.css.alignCenter} {style.headerBox}">
+      <g:SimplePanel ui:field="flipButton" styleName="{style.button}" />
+      <g:Label ui:field="areaGroupName" styleName="{style.areaGroupLabel}" />
+    </g:FlowPanel>
+  </g:FocusPanel>
+</ui:UiBinder>
