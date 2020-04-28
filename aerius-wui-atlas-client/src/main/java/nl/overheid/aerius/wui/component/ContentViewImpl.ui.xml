@@ -12,7 +12,6 @@
     position: relative;
     overflow: hidden;
     height: 100%;
-    min-width: 540px;
     }
   </ui:style>
   <w:SwitchPanel ui:field="contentPanel" styleName="{style.contentPanel} {res.css.flex} {res.css.grow}">
