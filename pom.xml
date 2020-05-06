@@ -166,6 +166,7 @@
         <module>aerius-wui-atlas-shared</module>
         <module>aerius-wui-geo-client</module>
         <module>aerius-wui-geo-ol3-client</module>
+        <module>atlas-service-cms</module>
       </modules>
     </profile>
   </profiles>
