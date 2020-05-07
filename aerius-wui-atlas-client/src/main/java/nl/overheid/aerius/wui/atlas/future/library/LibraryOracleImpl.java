@@ -28,11 +28,13 @@ import nl.overheid.aerius.shared.domain.NarrowLibrary;
 import nl.overheid.aerius.wui.atlas.future.CachingOracle;
 import nl.overheid.aerius.wui.atlas.service.LibraryServiceAsync;
 import nl.overheid.aerius.wui.domain.cache.CacheContext;
-import nl.overheid.aerius.wui.util.FilterUtil;
+import nl.overheid.aerius.wui.util.FilterAssistant;
 
 @Singleton
 public class LibraryOracleImpl extends CachingOracle<NarrowLibrary> implements LibraryOracle {
   private final LibraryServiceAsync libraryService;
+  
+  @Inject FilterAssistant filterAssistant;
 
   @Inject
   public LibraryOracleImpl(final CacheContext context, final LibraryServiceAsync storyService, final LibraryCache cache) {
@@ -43,13 +45,13 @@ public class LibraryOracleImpl extends CachingOracle<NarrowLibrary> implements L
 
   @Override
   public boolean getStories(final List<Criterium> filters, final AsyncCallback<NarrowLibrary> future) {
-    final String[] fltr = FilterUtil.I.formatFilters(filters);
+    final String[] fltr = filterAssistant.formatFilters(filters);
 
     return ask(cache, fltr, c -> libraryService.getStories(c, fltr), future);
   }
 
   @Override
   public boolean getStories(final Map<String, String> filters, final AsyncCallback<NarrowLibrary> callback) {
-    return getStories(FilterUtil.I.toCriteria(filters), callback);
+    return getStories(filterAssistant.toCriteria(filters), callback);
   }
 }

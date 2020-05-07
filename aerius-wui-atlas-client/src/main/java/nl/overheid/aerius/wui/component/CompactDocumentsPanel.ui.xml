@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
   xmlns:w="urn:import:nl.overheid.aerius.wui.widget" xmlns:c="urn:import:nl.overheid.aerius.wui.component"
   xmlns:m="urn:import:nl.overheid.aerius.wui.atlas.ui" xmlns:context="urn:import:nl.overheid.aerius.wui.atlas.ui.context">
-  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.ApplicationMessages' />
+  <ui:with field='i18n' type='nl.overheid.aerius.wui.i18n.AtlasMessages' />
   <ui:with field='res' type='nl.overheid.aerius.wui.resources.R.ApplicationResource' />
   <ui:style>
   </ui:style>

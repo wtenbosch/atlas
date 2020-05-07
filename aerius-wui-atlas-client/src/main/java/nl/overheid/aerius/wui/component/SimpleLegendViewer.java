@@ -37,7 +37,7 @@ import nl.overheid.aerius.wui.atlas.command.LegendHiddenCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.factories.MainLegendWidgetFactory;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.widget.AnimatedFlowPanel;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
@@ -131,7 +131,7 @@ public class SimpleLegendViewer extends EventComposite implements LegendViewer {
       this.visible = visible;
     }
 
-    legendTitleField.setText(visible ? M.messages().legendTitle() : null);
+    legendTitleField.setText(visible ? AtlasM.messages().legendTitle() : null);
     targetPanel.setVisible(visible, animate);
   }
 

@@ -29,7 +29,7 @@ import nl.overheid.aerius.wui.domain.auth.AuthorizationInfo;
 
 @Singleton
 public class LibraryServiceAsyncImpl implements LibraryServiceAsync {
-  private static final String METHOD_NAME = "GetStoriesByLabel";
+  private static final String METHOD_NAME = "library";
 
   private final AuthContext authContext;
 
@@ -43,10 +43,10 @@ public class LibraryServiceAsyncImpl implements LibraryServiceAsync {
     final Optional<AuthorizationInfo> authInfo = authContext.getAuthInfo();
 
     if (authInfo.isPresent()) {
-      RequestUtil.doAuthenticatedMethodGet(authInfo.get(), METHOD_NAME, v -> LibraryJsonParser.wrap(v), callback, fltr);
+      LegacyRequestUtil.doAuthenticatedMethodGet(authInfo.get(), METHOD_NAME, v -> LibraryJsonParser.wrap(v), callback, fltr);
       // RequestUtil.doMethodGet(METHOD_NAME, v -> LibraryJsonParser.wrap(v), callback, fltr);
     } else {
-      RequestUtil.doMethodGet(METHOD_NAME, v -> LibraryJsonParser.wrap(v), callback, fltr);
+      LegacyRequestUtil.doMethodGet(METHOD_NAME, v -> LibraryJsonParser.wrap(v), callback, fltr);
     }
   }
 }

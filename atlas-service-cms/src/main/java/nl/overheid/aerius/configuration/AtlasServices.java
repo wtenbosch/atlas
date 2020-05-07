@@ -8,4 +8,6 @@ public interface AtlasServices {
   String getSelector();
 
   String getComponents();
+
+  String getTextTemplates();
 }

@@ -1,7 +1,6 @@
 package nl.overheid.aerius.wui.atlas.util;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,18 +11,16 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Location;
 import com.google.web.bindery.event.shared.EventBus;
 
-import nl.overheid.aerius.shared.domain.AreaGroupType;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
 import nl.overheid.aerius.shared.domain.DocumentResource;
 import nl.overheid.aerius.shared.domain.NarrowLibrary;
-import nl.overheid.aerius.shared.domain.NatureArea;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.Story;
+import nl.overheid.aerius.wui.atlas.service.LegacyRequestUtil;
 import nl.overheid.aerius.wui.atlas.service.RequestUtil;
-import nl.overheid.aerius.wui.atlas.service.parser.CommonJson.JSONObjectHandle;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONObjectHandle;
 import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.util.FilterUtil;
 import nl.overheid.aerius.wui.util.NotificationUtil;
 import nl.overheid.aerius.wui.util.TemplatedString;
 
@@ -40,8 +37,6 @@ public class UglyBoilerPlate {
    * Some simple default layers for background
    */
   public static final List<String> DEFAULT_LAYERS = new ArrayList<>();
-  
-  public static final String N2000_AREA = "natura2000AreaCode";
   static {
     DEFAULT_LAYERS.add("location-natura2000-area-natura2000-directive-areas-all");
     DEFAULT_LAYERS.add("location-natura2000-area-included-receptors-all");
@@ -205,27 +200,6 @@ public class UglyBoilerPlate {
     return datasetDefault;
   }
 
-  public static Map<AreaGroupType, List<NatureArea>> sortAreaGroupTypes(final LinkedHashMap<AreaGroupType, List<NatureArea>> map) {
-    final Map<AreaGroupType, List<NatureArea>> result = new LinkedHashMap<>();
-    result.put(AreaGroupType.FRIESLAND, new ArrayList<>());
-    result.put(AreaGroupType.GRONINGEN, new ArrayList<>());
-    result.put(AreaGroupType.NOORDHOLLAND, new ArrayList<>());
-    result.put(AreaGroupType.DRENTHE, new ArrayList<>());
-    result.put(AreaGroupType.FLEVOLAND, new ArrayList<>());
-    result.put(AreaGroupType.OVERIJSSEL, new ArrayList<>());
-    result.put(AreaGroupType.UTRECHT, new ArrayList<>());
-    result.put(AreaGroupType.GELDERLAND, new ArrayList<>());
-    result.put(AreaGroupType.ZUIDHOLLAND, new ArrayList<>());
-    result.put(AreaGroupType.NOORDBRABANT, new ArrayList<>());
-    result.put(AreaGroupType.ZEELAND, new ArrayList<>());
-    result.put(AreaGroupType.LIMBURG, new ArrayList<>());
-    result.put(AreaGroupType.RIJKSOVERHEID, new ArrayList<>());
-
-    map.forEach((k, v) -> result.computeIfPresent(k, (o, n) -> v));
-
-    return result;
-  }
-
   public static String fixAreaId(final String imageSource) {
     final String replaced = imageSource.replace("area.area_id", "natura2000AreaCode");
     if (!imageSource.equals(replaced)) {
@@ -292,7 +266,7 @@ public class UglyBoilerPlate {
   }
 
   public static void notifyReroute(final EventBus eventBus) {
-    final String rerouter = RequestUtil.getRerouter();
+    final String rerouter = LegacyRequestUtil.getRerouter();
     if (rerouter != null) {
       NotificationUtil.broadcastWarning(eventBus, "Note: Entered development mode. Rerouting backend requests to " + rerouter);
     }
@@ -301,17 +275,22 @@ public class UglyBoilerPlate {
   public static void setDevelopmentRerouter() {
     final String rerouter = Location.getParameter("reroute");
     if (rerouter != null) {
+      LegacyRequestUtil.rerouteCmsRequests(rerouter);
       RequestUtil.rerouteCmsRequests(rerouter);
     }
   }
+  
+  public static final String LEVEL = "level";
+  public static final String ASSESSMENT_AREA_ID = "gebied";
+  public static final String RECEPTOR_ID = "rec";
 
   @Deprecated
   public static boolean hasArea() {
-    return Window.Location.getParameterMap().containsKey(FilterUtil.ASSESSMENT_AREA_ID);
+    return Window.Location.getParameterMap().containsKey(ASSESSMENT_AREA_ID);
   }
 
   @Deprecated
   public static String getAreaId() {
-    return Window.Location.getParameter(FilterUtil.ASSESSMENT_AREA_ID);
+    return Window.Location.getParameter(ASSESSMENT_AREA_ID);
   }
 }

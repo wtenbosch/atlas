@@ -7,6 +7,7 @@ import java.util.Map;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
 import nl.overheid.aerius.shared.domain.StoryFragment;
 import nl.overheid.aerius.wui.atlas.service.parser.CommonJson;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONArrayHandle;
 import nl.overheid.aerius.wui.atlas.util.ViewModeUtil;
 import nl.overheid.aerius.wui.dev.GWTProd;
 

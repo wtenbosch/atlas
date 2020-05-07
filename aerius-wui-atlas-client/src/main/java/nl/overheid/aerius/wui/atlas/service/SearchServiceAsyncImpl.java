@@ -38,7 +38,7 @@ public class SearchServiceAsyncImpl implements SearchServiceAsync {
   public void getQueryResult(final String query, final AsyncCallback<List<SearchSuggestion>> callback) {
     final String url = cfg.getSearchEndpoint() + query;
 
-    RequestUtil.doGet(url, v -> SearchQueryResultJsonParser.wrap(v), callback);
+    LegacyRequestUtil.doGet(url, v -> SearchQueryResultJsonParser.wrap(v), callback);
 
     callback.onSuccess(new ArrayList<>());
   }

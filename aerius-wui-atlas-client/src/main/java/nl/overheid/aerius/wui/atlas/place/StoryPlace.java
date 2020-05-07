@@ -22,15 +22,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import nl.overheid.aerius.shared.domain.PanelNames;
+import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.PlaceTokenizer;
 import nl.overheid.aerius.wui.place.TokenizerUtils;
-import nl.overheid.aerius.wui.util.FilterUtil;
 
 public class StoryPlace extends ApplicationPlace {
-  private static final String RECEPTOR = FilterUtil.RECEPTOR_ID;
-
-  public static final String STORY_TOKEN = FilterUtil.ASSESSMENT_AREA_ID;
+  private static final String RECEPTOR = UglyBoilerPlate.RECEPTOR_ID;
+  public static final String STORY_TOKEN = UglyBoilerPlate.ASSESSMENT_AREA_ID;
 
   private static final String CONTEXT = "deel";
   private static final String STORY = "onderwerp";
@@ -78,8 +77,8 @@ public class StoryPlace extends ApplicationPlace {
       final Map<String, String> filters = new HashMap<>(place.getFilters());
 
       final Map<String, String> pairs = new LinkedHashMap<>();
-      filters.computeIfPresent(FilterUtil.ASSESSMENT_AREA_ID, (k, v) -> {
-        pairs.put(FilterUtil.ASSESSMENT_AREA_ID, v);
+      filters.computeIfPresent(UglyBoilerPlate.ASSESSMENT_AREA_ID, (k, v) -> {
+        pairs.put(UglyBoilerPlate.ASSESSMENT_AREA_ID, v);
         return null;
       });
       pairs.put(STORY, Optional.ofNullable(place.getStory()).orElse(""));
@@ -92,11 +91,7 @@ public class StoryPlace extends ApplicationPlace {
       composites.put(DATASET, place.getDataset());
       composites.put(CONTEXT, place.getPanel() == null ? null : place.getPanel().getTitle());
 
-//      if (!AbstractAtlasReplacementAssistant.DEFAULT_RECEPTOR.equals(place.getReceptorId())) {
-//        composites.put(RECEPTOR, place.getReceptorId());
-//      }
-
-      composites.remove(FilterUtil.LEVEL);
+      composites.remove(UglyBoilerPlate.LEVEL);
 
       return TokenizerUtils.format(pairs, composites);
     }

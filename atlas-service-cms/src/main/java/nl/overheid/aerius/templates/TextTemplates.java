@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,13 +17,19 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
-import templates.TextTemplateBase;
+import nl.overheid.aerius.configuration.AtlasServices;
 
 public class TextTemplates {
   private static final Logger LOG = LoggerFactory.getLogger(TextTemplates.class);
 
+  private final AtlasServices cfg;
+
+  public TextTemplates(final AtlasServices cfg) {
+    this.cfg = cfg;
+  }
+
   public void init() throws IOException {
-    final String base = TextTemplateBase.class.getPackage().toString().split(" ")[1].replace(".", File.separator);
+    final String base = cfg.getTextTemplates();
 
     final MutableDataSet options = new MutableDataSet();
 
@@ -54,10 +59,7 @@ public class TextTemplates {
   private List<File> getResourceFiles(final String base) throws IOException {
     LOG.info("Looking for and indexing all markdown texts in: {}", base);
 
-    final ClassLoader loader = getContextClassLoader();
-    final URL url = loader.getResource(base);
-    final String path = url.getPath();
-    return scavenge(new File(path)).collect(Collectors.toList());
+    return scavenge(new File(base)).collect(Collectors.toList());
   }
 
   private Stream<File> scavenge(final File file) {
@@ -68,9 +70,5 @@ public class TextTemplates {
     } else {
       return Stream.of();
     }
-  }
-
-  private ClassLoader getContextClassLoader() {
-    return Thread.currentThread().getContextClassLoader();
   }
 }

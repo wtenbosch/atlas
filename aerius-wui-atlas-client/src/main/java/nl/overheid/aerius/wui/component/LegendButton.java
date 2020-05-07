@@ -21,7 +21,7 @@ import com.google.gwt.resources.client.DataResource;
 import nl.overheid.aerius.wui.atlas.command.LegendDisplayCommand;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.resources.R;
 
 public class LegendButton extends SVGButton {
@@ -43,6 +43,6 @@ public class LegendButton extends SVGButton {
 
   @Override
   protected void onHover() {
-    HoverSelectionUtil.displayBottom(this, M.messages().legendTitle());
+    HoverSelectionUtil.displayBottom(this, AtlasM.messages().legendTitle());
   }
 }

@@ -10,7 +10,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import nl.overheid.aerius.shared.domain.SearchSuggestion;
 import nl.overheid.aerius.shared.domain.SearchSuggestion.Builder;
 import nl.overheid.aerius.shared.domain.SearchSuggestionType;
-import nl.overheid.aerius.wui.atlas.service.parser.CommonJson.JSONArrayHandle;
 import nl.overheid.aerius.wui.future.JsonAsyncCallback;
 
 public final class SearchQueryResultJsonParser implements AsyncCallback<JSONValue> {

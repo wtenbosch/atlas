@@ -20,11 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.ImplementedBy;
 
 import nl.overheid.aerius.shared.domain.NarrowLibrary;
-import nl.overheid.aerius.shared.service.LibraryService;
 
-/**
- * Async of {@link LibraryService}
- */
 @ImplementedBy(LibraryServiceAsyncImpl.class)
 public interface LibraryServiceAsync {
   void getStories(AsyncCallback<NarrowLibrary> callback, String[] fltr);

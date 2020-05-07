@@ -16,8 +16,6 @@ import nl.overheid.aerius.geo.domain.layer.WMSLayerConfig;
 import nl.overheid.aerius.geo.domain.legend.ComponentLegendConfig;
 import nl.overheid.aerius.geo.domain.legend.LegendConfig;
 import nl.overheid.aerius.geo.domain.legend.TextLegendConfig;
-import nl.overheid.aerius.wui.atlas.service.parser.CommonJson.JSONArrayHandle;
-import nl.overheid.aerius.wui.atlas.service.parser.CommonJson.JSONObjectHandle;
 import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.future.JsonAsyncCallback;
 

@@ -22,7 +22,7 @@ import nl.overheid.aerius.wui.atlas.command.StorySelectionChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.UserAuthorizationChangedCommand;
 import nl.overheid.aerius.wui.atlas.command.UserAuthorizationCommand;
 import nl.overheid.aerius.wui.atlas.event.UserAuthorizationChangedEvent;
-import nl.overheid.aerius.wui.atlas.service.RequestUtil;
+import nl.overheid.aerius.wui.atlas.service.LegacyRequestUtil;
 import nl.overheid.aerius.wui.atlas.service.parser.OAuthJsonParser;
 import nl.overheid.aerius.wui.atlas.util.TimeUtil;
 import nl.overheid.aerius.wui.config.EnvironmentConfiguration;
@@ -34,7 +34,7 @@ import nl.overheid.aerius.wui.domain.cache.CacheContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.future.AppAsyncCallback;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 
 public class BasicAuthorizationDaemon extends BasicEventComponent implements AuthorizationDaemon {
   protected static final String COOKIE_ACCESS_TOKEN = "aerius_oauth_access_token";
@@ -95,7 +95,7 @@ public class BasicAuthorizationDaemon extends BasicEventComponent implements Aut
     final RequestBuilder bldr = new RequestBuilder(RequestBuilder.POST, cfg.getLoginEndpoint());
     bldr.setHeader("Accept", "application/json");
     bldr.setHeader("Content-Type", "application/json");
-    bldr.setRequestData(RequestUtil.formatJsonPayload(payload));
+    bldr.setRequestData(LegacyRequestUtil.formatJsonPayload(payload));
     bldr.setCallback(new RequestCallback() {
       @Override
       public void onResponseReceived(final Request request, final Response response) {
@@ -111,7 +111,7 @@ public class BasicAuthorizationDaemon extends BasicEventComponent implements Aut
     try {
       bldr.send();
     } catch (final RequestException e) {
-      fail(e, M.messages().loginClientError());
+      fail(e, AtlasM.messages().loginClientError());
     }
   }
 
@@ -127,16 +127,16 @@ public class BasicAuthorizationDaemon extends BasicEventComponent implements Aut
     // final RequestBuilder bldr = new RequestBuilder(RequestBuilder.POST, ServiceEndPoint.I.format("oauth/token"));
     final RequestBuilder bldr = new RequestBuilder(RequestBuilder.POST, cfg.getAuthenticationEndpoint());
     bldr.setHeader("Content-Type", "application/x-www-form-urlencoded");
-    bldr.setRequestData(RequestUtil.formatQueryStringPayload(payload));
+    bldr.setRequestData(LegacyRequestUtil.formatQueryStringPayload(payload));
 
     bldr.setCallback(
-        OAuthJsonParser.wrap(AppAsyncCallback.create((final AuthorizationInfo i) -> succeed(i), e -> fail(e, M.messages().loginWrongAuth()))));
+        OAuthJsonParser.wrap(AppAsyncCallback.create((final AuthorizationInfo i) -> succeed(i), e -> fail(e, AtlasM.messages().loginWrongAuth()))));
 
     try {
       bldr.send();
     } catch (final RequestException e) {
       GWTProd.log(e.getMessage());
-      fail(e, M.messages().loginClientError());
+      fail(e, AtlasM.messages().loginClientError());
     }
   }
 

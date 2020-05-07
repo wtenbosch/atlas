@@ -40,7 +40,7 @@ import nl.overheid.aerius.geo.wui.Map;
 import nl.overheid.aerius.wui.atlas.daemon.search.SearchSuggestionDaemon;
 import nl.overheid.aerius.wui.atlas.event.MapSearchSuggestionEvent;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.util.StyleUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
@@ -74,7 +74,7 @@ public class MapSearchWidgetImpl extends EventComposite implements MapSearchWidg
     initWidget(UI_BINDER.createAndBindUi(this));
     popup = new MapSearchPopup(this);
 
-    StyleUtil.setPlaceHolder(searchField, M.messages().searchPlaceHolder());
+    StyleUtil.setPlaceHolder(searchField, AtlasM.messages().searchPlaceHolder());
 
     popup.addCloseHandler(() -> searchContainer.setStyleName(style.focus(), false));
     searchField.ensureDebugId(AtlasTestIDs.INPUT_MAP_SEARCH);

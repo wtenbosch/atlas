@@ -1,13 +1,10 @@
 package nl.overheid.aerius.wui.atlas.service.parser;
 
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import nl.overheid.aerius.shared.domain.Story;
-import nl.overheid.aerius.wui.future.JsonAsyncCallback;
 
-public class StoryJsonParser extends CommonJson implements AsyncCallback<JSONValue> {
+public class StoryJsonParser implements AsyncCallback<String> {
   private final AsyncCallback<Story> callback;
 
   private StoryJsonParser(final AsyncCallback<Story> callback) {
@@ -15,8 +12,8 @@ public class StoryJsonParser extends CommonJson implements AsyncCallback<JSONVal
   }
 
   @Override
-  public void onSuccess(final JSONValue result) {
-    parse(new JSONObjectHandle(result.isObject()));
+  public void onSuccess(final String result) {
+    parse(JSONObjectHandle.fromText(result));
   }
 
   private void parse(final JSONObjectHandle object) {
@@ -43,11 +40,7 @@ public class StoryJsonParser extends CommonJson implements AsyncCallback<JSONVal
     callback.onFailure(caught);
   }
 
-  public static AsyncCallback<JSONValue> convert(final AsyncCallback<Story> callback) {
+  public static AsyncCallback<String> convert(final AsyncCallback<Story> callback) {
     return new StoryJsonParser(callback);
-  }
-
-  public static RequestCallback wrap(final AsyncCallback<Story> callback) {
-    return JsonAsyncCallback.create(convert(callback));
   }
 }

@@ -7,7 +7,7 @@ import com.google.web.bindery.event.shared.EventBus;
 
 import nl.overheid.aerius.shared.domain.StoryFilterOption;
 import nl.overheid.aerius.wui.atlas.command.StoryFilterSelectionChangeCommand;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 
 public class StoryFilterControl extends SimpleMaskedButton<StoryFilterOption> {
   private static final StoryFilterControlUiBinder UI_BINDER = GWT.create(StoryFilterControlUiBinder.class);
@@ -39,6 +39,6 @@ public class StoryFilterControl extends SimpleMaskedButton<StoryFilterOption> {
 
   @Override
   protected String getLabel(final StoryFilterOption option) {
-    return M.messages().storyFilterOption(option);
+    return AtlasM.messages().storyFilterOption(option);
   }
 }

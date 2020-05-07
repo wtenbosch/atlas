@@ -14,7 +14,7 @@ import nl.overheid.aerius.wui.atlas.command.HealthcheckRequestCommand;
 import nl.overheid.aerius.wui.atlas.event.AdblockerDetectedEvent;
 import nl.overheid.aerius.wui.atlas.event.RequestClientLoadFailureEvent;
 import nl.overheid.aerius.wui.atlas.event.RequestServerLoadFailureEvent;
-import nl.overheid.aerius.wui.atlas.service.RequestUtil;
+import nl.overheid.aerius.wui.atlas.service.LegacyRequestUtil;
 import nl.overheid.aerius.wui.atlas.util.FakeCallback;
 import nl.overheid.aerius.wui.config.EnvironmentConfiguration;
 import nl.overheid.aerius.wui.dev.GWTProd;
@@ -74,7 +74,7 @@ public class AdblockInterceptorDaemonImpl extends BasicEventComponent implements
       return;
     }
 
-    RequestUtil.doGet(endpoint, FakeCallback.create(""),
+    LegacyRequestUtil.doGet(endpoint, FakeCallback.create(""),
         AppAsyncCallback.create(v -> succeedRequest(v), t -> failRequest(t)));
   }
 

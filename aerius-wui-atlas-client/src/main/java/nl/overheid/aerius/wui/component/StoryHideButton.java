@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 import nl.overheid.aerius.wui.atlas.command.StoryExitCommand;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 
 public class StoryHideButton extends HideButton {
   private Runnable killer;
@@ -34,12 +34,12 @@ public class StoryHideButton extends HideButton {
 
   @Override
   protected void onHover() {
-    killer = HoverSelectionUtil.displayRight(this, M.messages().exitStory());
+    killer = HoverSelectionUtil.displayRight(this, AtlasM.messages().exitStory());
   }
 
   @Override
   protected void onSelect() {
-    if (Window.confirm(M.messages().exitStoryConfirm())) {
+    if (Window.confirm(AtlasM.messages().exitStoryConfirm())) {
       eventBus.fireEvent(new StoryExitCommand());
     }
 

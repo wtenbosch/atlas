@@ -6,7 +6,6 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import nl.overheid.aerius.wui.atlas.service.parser.CommonJson.JSONObjectHandle;
 import nl.overheid.aerius.wui.future.JsonAsyncCallback;
 
 public final class BboxJsonParser implements AsyncCallback<JSONValue> {

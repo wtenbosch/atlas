@@ -32,7 +32,7 @@ import nl.overheid.aerius.wui.atlas.daemon.config.Configurations;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.ui.context.info.BasicPanelComposite;
 import nl.overheid.aerius.wui.config.EnvironmentConfiguration;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 
 public class ContextPreferencesViewImpl extends BasicPanelComposite implements ContextPreferencesView {
   private static final ContextPreferencesViewImplUiBinder UI_BINDER = GWT.create(ContextPreferencesViewImplUiBinder.class);
@@ -88,7 +88,7 @@ public class ContextPreferencesViewImpl extends BasicPanelComposite implements C
     layerOpacityActivate.ensureDebugId(AtlasTestIDs.BUTTON_LAYER_OPACITY_ACTIVATE);
     layerOpacityDeactivate.ensureDebugId(AtlasTestIDs.BUTTON_LAYER_OPACITY_DEACTIVATE);
 
-    applicationVersion.setText(M.messages().applicationVersion(cfg.getApplicationVersion() == null ? "-" : cfg.getApplicationVersion()));
+    applicationVersion.setText(AtlasM.messages().applicationVersion(cfg.getApplicationVersion() == null ? "-" : cfg.getApplicationVersion()));
   }
 
   @UiHandler("kgActivate")

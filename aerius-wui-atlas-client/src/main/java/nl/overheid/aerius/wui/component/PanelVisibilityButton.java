@@ -28,7 +28,7 @@ import nl.overheid.aerius.wui.atlas.command.ContextPanelOpenCommand;
 import nl.overheid.aerius.wui.atlas.event.PanelSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.resources.R;
 
 public class PanelVisibilityButton extends SVGButton {
@@ -63,7 +63,7 @@ public class PanelVisibilityButton extends SVGButton {
 
   @Override
   protected void onHover() {
-    HoverSelectionUtil.displayRight(this, open ? M.messages().contextPanelCollapse(panel) : M.messages().contextPanelOpen(panel));
+    HoverSelectionUtil.displayRight(this, open ? AtlasM.messages().contextPanelCollapse(panel) : AtlasM.messages().contextPanelOpen(panel));
   }
 
   public void setClosed() {

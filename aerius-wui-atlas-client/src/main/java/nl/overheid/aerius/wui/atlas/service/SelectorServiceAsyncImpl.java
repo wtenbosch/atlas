@@ -37,6 +37,6 @@ public class SelectorServiceAsyncImpl implements SelectorServiceAsync {
   public void getSelectorConfiguration(final String url, final AsyncCallback<SelectorConfiguration> callback) {
     final String correctedUrl = url;
 
-    RequestUtil.doGet(replacer.replace(correctedUrl), v -> SelectorJsonParser.wrap(url, v), callback);
+    LegacyRequestUtil.doGet(replacer.replace(correctedUrl), v -> SelectorJsonParser.wrap(url, v), callback);
   }
 }

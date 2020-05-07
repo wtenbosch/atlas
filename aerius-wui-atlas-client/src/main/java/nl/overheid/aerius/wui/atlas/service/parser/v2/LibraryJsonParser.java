@@ -10,6 +10,7 @@ import nl.overheid.aerius.shared.domain.DocumentResource;
 import nl.overheid.aerius.shared.domain.NarrowLibrary;
 import nl.overheid.aerius.shared.domain.StoryInformation;
 import nl.overheid.aerius.wui.atlas.service.parser.CommonJson;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONObjectHandle;
 
 public final class LibraryJsonParser extends CommonJson {
   private LibraryJsonParser() {}

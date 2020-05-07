@@ -38,7 +38,6 @@ import nl.overheid.aerius.geo.event.LayerVisibleEvent;
 import nl.overheid.aerius.geo.event.MapSetExtentEvent;
 import nl.overheid.aerius.wui.atlas.command.ActivateBigContextCommand;
 import nl.overheid.aerius.wui.atlas.command.ActivateSmallContextCommand;
-import nl.overheid.aerius.wui.atlas.command.AreaGroupChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.BroadcastSelectorsCommand;
 import nl.overheid.aerius.wui.atlas.command.ChapterReplacementCommand;
 import nl.overheid.aerius.wui.atlas.command.ChapterReplacementEvent;
@@ -51,7 +50,6 @@ import nl.overheid.aerius.wui.atlas.command.ContextPanelOpenCommand;
 import nl.overheid.aerius.wui.atlas.command.DataSetChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.DeveloperModeActivationCommand;
 import nl.overheid.aerius.wui.atlas.command.DeveloperModeDeactivationCommand;
-import nl.overheid.aerius.wui.atlas.command.NaturaChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.NoStoryCommand;
 import nl.overheid.aerius.wui.atlas.command.PanelSelectionChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.SelectionCommand;
@@ -66,7 +64,6 @@ import nl.overheid.aerius.wui.atlas.daemon.library.LibraryStatusChangedEvent;
 import nl.overheid.aerius.wui.atlas.event.ActivatorActiveEvent;
 import nl.overheid.aerius.wui.atlas.event.ActivatorInactiveEvent;
 import nl.overheid.aerius.wui.atlas.event.AdblockerDetectedEvent;
-import nl.overheid.aerius.wui.atlas.event.AreaGroupChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.ContextOptionsChangedEvent;
 import nl.overheid.aerius.wui.atlas.event.ContextPanelCollapseEvent;
@@ -122,20 +119,20 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
   @EventHandler(handles = { NotificationEvent.class, ChapterSelectionChangeEvent.class, ContextOptionsChangedEvent.class,
       PanelSelectionChangeEvent.class, DataSetChangeEvent.class, DataSetListChangeEvent.class, LibraryChangeEvent.class,
       StoryFragmentChangedEvent.class, StoryOptionsChangedEvent.class, StoryLoadedEvent.class, LayerAddedEvent.class, ToggleLayerPanelEvent.class,
-      AreaGroupChangeEvent.class, StorySelectionChangeEvent.class, SelectorConfigurationChangeEvent.class, NaturaChangeCommand.class,
-      InfoLocationChangeEvent.class, UserAuthorizationChangedEvent.class, LayerVisibleEvent.class, LayerHiddenEvent.class,
-      UserAuthorizationChangedEvent.class, StoryFilterSelectionChangeEvent.class, MapSearchSuggestionEvent.class,
-      ActivatorActiveEvent.class, ActivatorInactiveEvent.class, ChapterReplacementEvent.class, SelectionEvent.class, SelectorConfigurationReloadEvent.class,
-      PanelConfigurationChangeEvent.class })
+      StorySelectionChangeEvent.class, SelectorConfigurationChangeEvent.class, InfoLocationChangeEvent.class, UserAuthorizationChangedEvent.class,
+      LayerVisibleEvent.class, LayerHiddenEvent.class, UserAuthorizationChangedEvent.class, StoryFilterSelectionChangeEvent.class,
+      MapSearchSuggestionEvent.class, ActivatorActiveEvent.class, ActivatorInactiveEvent.class, ChapterReplacementEvent.class, SelectionEvent.class,
+      SelectorConfigurationReloadEvent.class, PanelConfigurationChangeEvent.class
+  })
   public void onSimpleGenericEvent(final SimpleGenericEvent e) {
     log(e.getClass().getSimpleName(), e.getValue());
   }
 
   @SuppressWarnings("rawtypes")
   @EventHandler(handles = { ChapterSelectionChangeCommand.class, PanelSelectionChangeCommand.class, DataSetChangeCommand.class,
-      InfoLocationChangeCommand.class, LayerAddedCommand.class, ToggleLayerPanelCommand.class, AreaGroupChangeCommand.class,
-      StorySelectionChangeCommand.class, UserAuthorizationChangedCommand.class, LayerVisibleCommand.class, LayerHiddenCommand.class,
-      UserAuthorizationChangedCommand.class, StoryFilterSelectionChangeCommand.class, ChapterReplacementCommand.class, SelectionCommand.class })
+      InfoLocationChangeCommand.class, LayerAddedCommand.class, ToggleLayerPanelCommand.class, StorySelectionChangeCommand.class,
+      UserAuthorizationChangedCommand.class, LayerVisibleCommand.class, LayerHiddenCommand.class, UserAuthorizationChangedCommand.class,
+      StoryFilterSelectionChangeCommand.class, ChapterReplacementCommand.class, SelectionCommand.class })
   public void onSimpleGenericCommand(final SimpleGenericCommand c) {
     log(c.getClass().getSimpleName(), c.getValue());
   }

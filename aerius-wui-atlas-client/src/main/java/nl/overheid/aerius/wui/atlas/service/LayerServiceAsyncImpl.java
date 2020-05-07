@@ -48,14 +48,14 @@ public class LayerServiceAsyncImpl extends StaggeredService implements LayerServ
 
   @Override
   public void getBbox(final DatasetConfiguration dataset, final String area, final AsyncCallback<BboxContainer> callback) {
-    RequestUtil.doGet(cfg.getLayerEndpoint() + "GetBbox?dataset=" + dataset.code() + "&areaId=" + area,
+    LegacyRequestUtil.doGet(cfg.getLayerEndpoint() + "GetBbox?dataset=" + dataset.code() + "&areaId=" + area,
         v -> BboxJsonParser.wrap(v),
         callback);
   }
 
   @Override
   public void getBbox(final String area, final AsyncCallback<BboxContainer> callback) {
-    RequestUtil.doGet(cfg.getLayerEndpoint() + "GetBbox?&areaId=" + area,
+    LegacyRequestUtil.doGet(cfg.getLayerEndpoint() + "GetBbox?&areaId=" + area,
         v -> BboxJsonParser.wrap(v),
         callback);
   }

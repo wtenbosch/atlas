@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 import nl.overheid.aerius.shared.domain.Selector;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.resources.R;
 
 public class SelectorPopup extends PopupPanel {
@@ -91,7 +91,7 @@ public class SelectorPopup extends PopupPanel {
       }
     }.schedule(20);
 
-    searchBox.getElement().setPropertyString("placeholder", M.messages().searchPlaceHolder());
+    searchBox.getElement().setPropertyString("placeholder", AtlasM.messages().searchPlaceHolder());
   }
 
   @UiHandler("searchBox")

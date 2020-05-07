@@ -27,7 +27,7 @@ import nl.overheid.aerius.shared.domain.DatasetConfiguration;
 import nl.overheid.aerius.wui.atlas.command.DataSetChangeCommand;
 import nl.overheid.aerius.wui.atlas.event.DataSetChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.DataSetListChangeEvent;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.widget.HorizontalMenuItemListWidget;
 import nl.overheid.aerius.wui.widget.HorizontalMenuItemPopup;
 
@@ -39,7 +39,7 @@ public class HorizontalDataSetListWidget extends HorizontalMenuItemListWidget<Da
   private EventBus eventBus;
 
   public HorizontalDataSetListWidget() {
-    super(M.messages().contextDataSetTitle(), M.messages().contextDataSetDescription());
+    super(AtlasM.messages().contextDataSetTitle(), AtlasM.messages().contextDataSetDescription());
   }
 
   @Override

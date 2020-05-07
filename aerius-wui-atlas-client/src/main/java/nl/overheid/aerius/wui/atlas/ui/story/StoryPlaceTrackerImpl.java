@@ -45,7 +45,7 @@ import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
 import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.PlaceController;
-import nl.overheid.aerius.wui.util.FilterUtil;
+import nl.overheid.aerius.wui.util.FilterAssistant;
 
 /**
  * PlaceTracker for StoryActivity, responsible for keeping the Place and the
@@ -57,6 +57,8 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
   private final StoryPlaceTrackerImplEventBinder EVENT_BINDER = GWT.create(StoryPlaceTrackerImplEventBinder.class);
   private final PlaceController placeController;
   private final StoryContext context;
+  
+  @Inject FilterAssistant filterAssistant;
 
   @Inject
   public StoryPlaceTrackerImpl(final PlaceController placeController, final StoryContext context) {
@@ -95,9 +97,9 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
     GWTProd.log("Deselecting story: " + context.getStory());
 
     if (context.getStory() != null) {
-      final List<Criterium> criteria = FilterUtil.I.constructLibraryFiltersFromStory(context.getStory().info().properties());
+      final List<Criterium> criteria = filterAssistant.constructLibraryFiltersFromStory(context.getStory().info().properties());
 
-      final Map<String, String> filters = FilterUtil.I.toMap(criteria);
+      final Map<String, String> filters = filterAssistant.toMap(criteria);
 
       place.setFilters(filters);
     }

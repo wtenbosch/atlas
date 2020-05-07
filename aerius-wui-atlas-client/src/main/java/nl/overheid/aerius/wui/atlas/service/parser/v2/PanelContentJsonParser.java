@@ -7,6 +7,9 @@ import java.util.Map;
 
 import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.wui.atlas.service.parser.CommonJson;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONArrayHandle;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONObjectHandle;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONValueHandle;
 
 public final class PanelContentJsonParser extends CommonJson {
   public static PanelContent parse(final JSONObjectHandle panel) {

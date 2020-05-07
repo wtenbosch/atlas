@@ -25,6 +25,6 @@ import nl.overheid.aerius.wui.atlas.service.parser.AvailabilityJsonParser;
 public class AvailabilityServiceAsyncImpl implements AvailabilityServiceAsync {
   @Override
   public void getAvailability(final String url, final AsyncCallback<Boolean> callback) {
-    RequestUtil.doGet(url, v -> AvailabilityJsonParser.wrap(v), callback);
+    LegacyRequestUtil.doGet(url, v -> AvailabilityJsonParser.wrap(v), callback);
   }
 }

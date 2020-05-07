@@ -28,7 +28,7 @@ import nl.overheid.aerius.wui.atlas.command.DataSetChangeCommand;
 import nl.overheid.aerius.wui.atlas.event.DataSetChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.DataSetListChangeEvent;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.widget.VerticalMenuItemListWidget;
 import nl.overheid.aerius.wui.widget.VerticalMenuItemPopup;
 
@@ -40,7 +40,7 @@ public class DataSetListWidget extends VerticalMenuItemListWidget<DatasetConfigu
   private EventBus eventBus;
 
   public DataSetListWidget() {
-    super(M.messages().contextDataSetTitle(), M.messages().contextDataSetDescription());
+    super(AtlasM.messages().contextDataSetTitle(), AtlasM.messages().contextDataSetDescription());
     ensureDebugId(AtlasTestIDs.BUTTON_DATASET);
   }
 

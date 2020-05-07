@@ -167,6 +167,8 @@
         <module>aerius-wui-geo-client</module>
         <module>aerius-wui-geo-ol3-client</module>
         <module>atlas-service-cms</module>
+        <module>atlas-service-layers</module>
+        <module>atlas-service-selectors</module>
       </modules>
     </profile>
   </profiles>

@@ -35,7 +35,7 @@ import nl.overheid.aerius.geo.event.MapEventBus;
 import nl.overheid.aerius.geo.wui.Map;
 import nl.overheid.aerius.wui.atlas.daemon.search.SearchSuggestionDaemon;
 import nl.overheid.aerius.wui.atlas.event.MapSearchSuggestionEvent;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.util.StyleUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
@@ -64,7 +64,7 @@ public class CompactMapSearchWidgetImpl extends EventComposite implements Compac
     initWidget(UI_BINDER.createAndBindUi(this));
     popup = new MapSearchPopup(this);
 
-    StyleUtil.setPlaceHolder(searchField, M.messages().searchPlaceHolder());
+    StyleUtil.setPlaceHolder(searchField, AtlasM.messages().searchPlaceHolder());
   }
 
   @UiHandler("searchField")

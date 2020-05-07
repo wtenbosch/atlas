@@ -12,6 +12,8 @@ import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.shared.domain.PanelNames;
 import nl.overheid.aerius.shared.domain.SelectorResource;
 import nl.overheid.aerius.wui.atlas.service.parser.CommonJson;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONArrayHandle;
+import nl.overheid.aerius.wui.atlas.service.parser.JSONObjectHandle;
 
 public final class ChapterJsonParser extends CommonJson {
   public static Map<String, Chapter> parse(final JSONArrayHandle chapters) {

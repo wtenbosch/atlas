@@ -28,8 +28,6 @@ import nl.overheid.aerius.wui.atlas.factories.MainLegendWidgetFactory;
 import nl.overheid.aerius.wui.atlas.factories.SelectableTextWidgetFactory;
 import nl.overheid.aerius.wui.domain.auth.AuthContext;
 import nl.overheid.aerius.wui.domain.auth.AuthContextImpl;
-import nl.overheid.aerius.wui.domain.filter.FilterContext;
-import nl.overheid.aerius.wui.domain.filter.FilterContextObservableImpl;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.domain.story.StoryContextObservableImpl;
 import nl.overheid.aerius.wui.history.HTML5Historian;
@@ -44,7 +42,6 @@ public class AtlasClientModule extends AbstractGinModule {
 
     // Bind contexts
     bind(StoryContext.class).to(StoryContextObservableImpl.class);
-    bind(FilterContext.class).to(FilterContextObservableImpl.class);
     bind(AuthContext.class).to(AuthContextImpl.class).in(Singleton.class);
 
     // Bind factories

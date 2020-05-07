@@ -30,18 +30,15 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.shared.domain.Replacement;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.wui.atlas.command.ChapterReplacementCommand;
 import nl.overheid.aerius.wui.atlas.command.StoryReplacementCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.StorySelectionChangeEvent;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
 import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
-import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.PlaceController;
 
 public abstract class AbstractAtlasReplacementAssistant extends GenericReplacementAssistant {
@@ -152,15 +149,6 @@ public abstract class AbstractAtlasReplacementAssistant extends GenericReplaceme
   @EventHandler
   public void onStorySelectionChangeEvent(final StorySelectionChangeEvent e) {
     storyReplacements.clear();
-
-    final ApplicationPlace place = placeController.getPlace();
-    if (place instanceof StoryPlace) {
-      final StoryPlace storyplace = (StoryPlace) place;
-      final Map<String, String> filters = storyplace.getFilters();
-      if (filters.containsKey(FilterUtil.ASSESSMENT_AREA_ID)) {
-        eventBus.fireEvent(new StoryReplacementCommand(new Replacement("natura2000AreaCode", filters.get(FilterUtil.ASSESSMENT_AREA_ID))));
-      }
-    }
   }
 
   @Override

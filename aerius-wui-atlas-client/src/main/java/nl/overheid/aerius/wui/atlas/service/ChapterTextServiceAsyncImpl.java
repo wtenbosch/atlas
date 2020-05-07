@@ -40,10 +40,10 @@ public class ChapterTextServiceAsyncImpl implements ChapterTextServiceAsync {
     final Optional<AuthorizationInfo> authInfo = authContext.getAuthInfo();
 
     if (authInfo.isPresent()) {
-      RequestUtil.doGet(url, v -> ChapterTextJsonParser.wrap(v), callback);
+      LegacyRequestUtil.doGet(url, v -> ChapterTextJsonParser.wrap(v), callback);
       throw new RuntimeException("Authenticated text gets are not yet implemented.");
     } else {
-      RequestUtil.doGet(url, v -> ChapterTextJsonParser.wrap(v), callback);
+      LegacyRequestUtil.doGet(url, v -> ChapterTextJsonParser.wrap(v), callback);
     }
   }
 }

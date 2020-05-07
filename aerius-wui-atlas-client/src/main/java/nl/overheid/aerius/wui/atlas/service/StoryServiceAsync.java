@@ -20,11 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.ImplementedBy;
 
 import nl.overheid.aerius.shared.domain.Story;
-import nl.overheid.aerius.shared.service.StoryService;
 
-/**
- * Async of {@link StoryService}
- */
 @ImplementedBy(StoryServiceAsyncImpl.class)
 public interface StoryServiceAsync {
   void getStory(String story, AsyncCallback<Story> callback);

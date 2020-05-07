@@ -11,7 +11,7 @@ import com.google.web.bindery.event.shared.binder.EventHandler;
 import nl.overheid.aerius.shared.domain.StoryFilterOption;
 import nl.overheid.aerius.wui.atlas.event.StoryFilterSelectionChangeEvent;
 import nl.overheid.aerius.wui.component.StoryFilterPopup;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.resources.R;
 
 public class StoryFilterWidget extends CompactMenuItemListWidget<StoryFilterOption> {
@@ -30,7 +30,7 @@ public class StoryFilterWidget extends CompactMenuItemListWidget<StoryFilterOpti
 
   @Override
   protected String getName(final StoryFilterOption selection) {
-    return M.messages().storyFilterOption(selection);
+    return AtlasM.messages().storyFilterOption(selection);
   }
 
   @Override

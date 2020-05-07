@@ -16,7 +16,6 @@
  */
 package nl.overheid.aerius.wui.atlas.ui.story;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,7 +51,6 @@ import nl.overheid.aerius.wui.atlas.event.DataSetChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.DataSetListChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.LibraryChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.MapActiveEvent;
-import nl.overheid.aerius.wui.atlas.event.NatureAreaChangedEvent;
 import nl.overheid.aerius.wui.atlas.event.PanelSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.SelectorConfigurationClearEvent;
 import nl.overheid.aerius.wui.atlas.event.SelectorEvent;
@@ -73,7 +71,7 @@ import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
 import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.PlaceController;
-import nl.overheid.aerius.wui.util.FilterUtil;
+import nl.overheid.aerius.wui.util.FilterAssistant;
 import nl.overheid.aerius.wui.util.SelectorUtil;
 
 public class StoryCommandRouterImpl extends AbstractCommandRouter implements StoryCommandRouter {
@@ -87,6 +85,8 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
   @Inject private LibraryOracle libraryOracle;
 
   @Inject protected ReceptorUtil receptorUtil;
+
+  @Inject protected FilterAssistant filterAssistant;
 
   protected StoryContext context;
   private final MapContext mapContext;
@@ -121,7 +121,6 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     }
 
     final StoryPlace currentPlace = getStoryPlace(e.getValue());
-
     doStoryPlaceChange(currentPlace);
   }
 
@@ -140,16 +139,14 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
   }
 
   private void doStoryPlaceChange(final StoryPlace currentPlace) {
-    final String storyUid = currentPlace.getStory();
-    final Optional<String> area = Optional.ofNullable(currentPlace.getFilters().get(FilterUtil.ASSESSMENT_AREA_ID));
-    area.ifPresent(areaId -> eventBus.fireEvent(new NatureAreaChangedEvent(areaId)));
 
+    final String storyUid = currentPlace.getStory();
     if (context.getStory() == null || !context.getStory().uid().equals(storyUid)) {
       if (storyUid == null) {
         eventBus.fireEvent(new NoStoryCommand());
         eventBus.fireEvent(new PanelSelectionChangeEvent(currentPlace.getPanel()));
 
-        final List<Criterium> filters = FilterUtil.I.constructLibraryFiltersFromPlace(currentPlace);
+        final List<Criterium> filters = filterAssistant.constructLibraryFiltersFromPlace(currentPlace);
 
         if (!filters.isEmpty()) {
           libraryOracle.getStories(filters, library -> {
@@ -158,6 +155,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
         } else {
           GWTProd.warn("Could not recover library for empty story.");
         }
+        
       } else {
         storyOracle.getStory(storyUid, story -> {
           // Handle edge-case where we are no longer in the story place when done
@@ -167,7 +165,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
             return;
           }
 
-          final List<Criterium> filters = FilterUtil.I.constructLibraryFiltersFromPlace(currentPlace);
+          final List<Criterium> filters = filterAssistant.constructLibraryFiltersFromPlace(currentPlace);
 
           libraryOracle.getStories(filters, library -> {
             eventBus.fireEvent(new LibraryChangeEvent(library));
@@ -182,23 +180,6 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
   private void initialiseStory(final Story story) {
     context.reset();
     context.initStory(story);
-  }
-
-  @EventHandler
-  public void onNatureAreaChangedEvent(final NatureAreaChangedEvent e) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
-
-    final Map<String, String> filters = new HashMap<>(place.getFilters());
-    filters.put(FilterUtil.ASSESSMENT_AREA_ID, e.getValue());
-
-    final StoryPlace copyTo = place.copyTo(new StoryPlace());
-
-    if (e.getSuggestion() != null) {
-      copyTo.setReceptorId(null);
-    }
-
-    copyTo.setFilters(filters);
-    placeController.goTo(copyTo);
   }
 
   @EventHandler
@@ -288,25 +269,6 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
 
     // Special-case the year, and explicitly set it in the selector context
     selectors.setIfNotSet(e.getValue());
-  }
-
-  @EventHandler
-  public void onSelectorChangeEventArea(final SelectorEvent e) {
-    if (!SelectorUtil.matchesStrict(UglyBoilerPlate.N2000_AREA, e)) {
-      return;
-    }
-
-    e.getSelector().getValue().ifPresent(area -> {
-      // Special-case the area, and explicitly set it in the place filter
-      final StoryPlace place = getStoryPlace(placeController.getPlace());
-
-      final Map<String, String> filters = new HashMap<>(place.getFilters());
-      filters.put(FilterUtil.ASSESSMENT_AREA_ID, area);
-
-      final StoryPlace copyTo = place.copyTo(new StoryPlace());
-      copyTo.setFilters(filters);
-      placeController.goTo(copyTo);
-    });
   }
 
   @EventHandler

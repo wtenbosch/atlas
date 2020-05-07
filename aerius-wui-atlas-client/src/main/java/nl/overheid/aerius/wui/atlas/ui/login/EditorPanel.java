@@ -23,7 +23,7 @@ import nl.overheid.aerius.wui.atlas.command.UserAuthorizationChangedCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.PanelSelectionChangeEvent;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
 public class EditorPanel extends EventComposite {
@@ -49,7 +49,7 @@ public class EditorPanel extends EventComposite {
 
   @UiHandler("logoutButton")
   public void onLogoutButton(final ClickEvent e) {
-    if (Window.confirm(M.messages().logoutConfirmMessage())) {
+    if (Window.confirm(AtlasM.messages().logoutConfirmMessage())) {
       eventBus.fireEvent(new UserAuthorizationChangedCommand(null));
     }
   }

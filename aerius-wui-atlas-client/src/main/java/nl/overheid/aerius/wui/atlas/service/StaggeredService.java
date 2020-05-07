@@ -14,7 +14,7 @@ public abstract class StaggeredService {
   private final List<Runnable> straglers = new ArrayList<>();
 
   protected <T> void request(final String url, final Function<AsyncCallback<T>, RequestCallback> parser, final AsyncCallback<T> callback) {
-    straglers.add(() -> RequestUtil.doGet(url, parser, ProxiedCallback.wrap(callback, () -> requestNext())));
+    straglers.add(() -> LegacyRequestUtil.doGet(url, parser, ProxiedCallback.wrap(callback, () -> requestNext())));
 
     if (!busy) {
       busy = true;

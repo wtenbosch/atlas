@@ -6,7 +6,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import nl.overheid.aerius.shared.domain.PanelConfiguration;
 import nl.overheid.aerius.shared.domain.PanelNames;
 import nl.overheid.aerius.wui.atlas.command.PanelSelectionChangeCommand;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.util.ContextNavigationImageUtil;
 import nl.overheid.aerius.wui.widget.SimpleMaskedButton;
 
@@ -48,6 +48,6 @@ public class ContextNavigationControl extends SimpleMaskedButton<PanelConfigurat
 
   @Override
   protected String getLabel(final PanelConfiguration conf) {
-    return M.messages().contextNavigationOption(conf.asConfigurationProperties().getPanelType());
+    return AtlasM.messages().contextNavigationOption(conf.asConfigurationProperties().getPanelType());
   }
 }

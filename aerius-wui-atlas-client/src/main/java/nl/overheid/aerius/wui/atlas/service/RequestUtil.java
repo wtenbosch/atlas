@@ -1,27 +1,19 @@
 package nl.overheid.aerius.wui.atlas.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import elemental2.dom.FormData;
+import elemental2.dom.XMLHttpRequest;
 
 import nl.overheid.aerius.wui.config.EnvironmentConfiguration;
 import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.domain.auth.AuthorizationInfo;
-import nl.overheid.aerius.wui.future.DebuggableRequest;
+import nl.overheid.aerius.wui.util.TemplatedString;
 
 public class RequestUtil {
-  private static final int CLIENT_TIMEOUT = 30000;
-
   private static String rerouteCmsRequest;
-
   private static EnvironmentConfiguration cfg;
 
   public static void init(final EnvironmentConfiguration cfg) {
@@ -33,56 +25,83 @@ public class RequestUtil {
     rerouteCmsRequest = uri;
   }
 
-  public static String getRerouter() {
-    return rerouteCmsRequest;
+  /** GET **/
+
+  public static <T> void doGet(final String uri, final Function<AsyncCallback<T>, AsyncCallback<String>> parser, final AsyncCallback<T> callback) {
+    doGet(uri, null, parser, callback);
   }
 
-  public static <T> void doMethodGet(final String methodName, final Function<AsyncCallback<T>, RequestCallback> parser,
-      final AsyncCallback<T> callback, final String... keyvalues) {
-    doAuthenticatedMethodGet(null, methodName, parser, callback, keyvalues);
+  public static <T> void doGet(final String uri, final Map<String, String> queryString,
+      final Function<AsyncCallback<T>, AsyncCallback<String>> parser, final AsyncCallback<T> callback) {
+    doGet(uri, queryString, parser.apply(callback));
   }
 
-  public static <T> void doAuthenticatedMethodGet(final AuthorizationInfo authInfo, final String methodName,
-      final Function<AsyncCallback<T>, RequestCallback> parser, final AsyncCallback<T> callback, final String... keyvalues) {
-    if (authInfo != null) {
-      throw new RuntimeException("Authorization information present however this is not longer supported.");
-    }
+  public static <T> void doGet(final String uri, final AsyncCallback<String> callback) {
+    doGet(uri, (Map<String, String>) null, callback);
+  }
 
-    final StringBuilder bldr = new StringBuilder("?");
+  public static <T> void doGet(final String uri, final Map<String, String> queryString, final AsyncCallback<String> callback) {
+    doRequest("GET", uri + format(queryString), callback);
+  }
 
-    for (int i = 0; i < keyvalues.length; i += 2) {
-      if (i != 0) {
-        bldr.append("&");
+  /** POST **/
+
+  public static <T> void doPost(final String uri, final Function<AsyncCallback<T>, AsyncCallback<String>> parser, final AsyncCallback<T> callback) {
+    doPost(uri, null, parser, callback);
+  }
+
+  public static void doPost(final String uri, final AsyncCallback<String> callback) {
+    doPost(uri, (FormData) null, callback);
+  }
+
+  public static <T> void doPost(final String uri, final FormData payload, final Function<AsyncCallback<T>, AsyncCallback<String>> parser,
+      final AsyncCallback<T> callback) {
+    doPost(uri, payload, parser.apply(callback));
+  }
+
+  public static <T> void doPost(final String uri, final FormData payload, final AsyncCallback<String> callback) {
+    doRequest("POST", uri, payload, callback);
+  }
+
+  /** DELETE **/
+
+  public static <T> void doDelete(final String uri, final Function<AsyncCallback<T>, AsyncCallback<String>> parser, final AsyncCallback<T> callback) {
+    doDelete(uri, null, parser, callback);
+  }
+
+  public static <T> void doDelete(final String uri, final FormData payload, final Function<AsyncCallback<T>, AsyncCallback<String>> parser,
+      final AsyncCallback<T> callback) {
+    doDelete(uri, payload, parser.apply(callback));
+  }
+
+  public static <T> void doDelete(final String uri, final FormData payload, final AsyncCallback<String> callback) {
+    doRequest("DELETE", uri, callback);
+  }
+
+  /** REQUEST **/
+
+  private static void doRequest(final String method, final String uri, final AsyncCallback<String> callback) {
+    doRequest(method, uri, null, callback);
+  }
+
+  private static void doRequest(final String method, final String uri, final FormData payload, final AsyncCallback<String> callback) {
+    final XMLHttpRequest req = new XMLHttpRequest();
+
+    req.addEventListener("error", evt -> {
+      handleError(callback, req.responseText);
+    });
+    req.addEventListener("load", evt -> {
+      if (req.status != 200) {
+        handleError(callback, req.responseText);
+      } else {
+        callback.onSuccess(req.responseText);
       }
+    });
 
-      bldr.append(keyvalues[i]);
+    final String host = cms();
 
-      if (keyvalues.length > i + 1) {
-        bldr.append("=");
-        bldr.append(keyvalues[i + 1]);
-      }
-    }
-
-    doCmsMethodGet(methodName + bldr.toString(), parser, callback);
-  }
-
-  public static <T> void doCmsMethodGet(final String methodName,
-      final Function<AsyncCallback<T>, RequestCallback> parser, final AsyncCallback<T> callback) {
-    final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, cms() + methodName);
-    if (cfg.getBasicAuthCredentials() != null) {
-      builder.setHeader("Authorization", "Basic " + cfg.getBasicAuthCredentials());
-    }
-
-    final RequestCallback rawCallback = parser.apply(callback);
-    installDebugging(builder.getUrl(), rawCallback);
-
-    builder.setTimeoutMillis(CLIENT_TIMEOUT);
-    builder.setCallback(rawCallback);
-    try {
-      builder.send();
-    } catch (final RequestException e) {
-      callback.onFailure(e);
-    }
+    req.open(method, host + uri);
+    req.send(payload);
   }
 
   private static String cms() {
@@ -96,65 +115,33 @@ public class RequestUtil {
     }
   }
 
-  private static void installDebugging(final String url, final RequestCallback rawCallback) {
-    if (rawCallback instanceof DebuggableRequest) {
-      ((DebuggableRequest) rawCallback).setRequestOrigin(url);
-    }
+  private static void handleError(final AsyncCallback<String> callback, final String responseText) {
+    callback.onFailure(new HttpRequestException(responseText));
   }
 
-  public static <T> void doGet(final String url, final Function<AsyncCallback<T>, RequestCallback> parser, final AsyncCallback<T> callback) {
-    final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-    if (cfg.getBasicAuthCredentials() != null) {
-      builder.setHeader("Authorization", "Basic " + cfg.getBasicAuthCredentials());
+  private static String format(final Map<String, String> queryString) {
+    final StringBuilder bldr = new StringBuilder("?");
+    if (queryString != null) {
+      queryString.forEach((k, v) -> {
+        bldr.append(k + "=" + v + "&");
+      });
     }
 
-    final RequestCallback rawCallback = parser.apply(callback);
-    installDebugging(builder.getUrl(), rawCallback);
+    // Prune the last (either a & or ?)
+    bldr.setLength(bldr.length() - 1);
 
-    builder.setTimeoutMillis(CLIENT_TIMEOUT);
-    builder.setCallback(rawCallback);
-    try {
-      builder.send();
-    } catch (final RequestException e) {
-      callback.onFailure(e);
-    }
+    return bldr.toString();
   }
 
-  public static String formatQueryStringPayload(final Map<String, String> map) {
-    final List<String> parts = new ArrayList<>();
-
-    for (final Entry<String, String> entry : map.entrySet()) {
-      final StringBuilder bldr = new StringBuilder();
-      bldr.append(entry.getKey());
-      bldr.append("=");
-      bldr.append(entry.getValue());
-      parts.add(bldr.toString());
+  public static String prepareUri(final String template, final String... args) {
+    if (args.length % 2 != 0) {
+      throw new RuntimeException("Template args are of incorrect size: " + args.length);
     }
 
-    return parts.stream().collect(Collectors.joining("&"));
-  }
-
-  public static String formatJsonPayload(final Map<String, String> map) {
-    final StringBuilder bldr = new StringBuilder();
-    bldr.append("{");
-
-    final List<String> parts = new ArrayList<>();
-    for (final Entry<String, String> entry : map.entrySet()) {
-      final StringBuilder inner = new StringBuilder();
-      inner.append("\"");
-      inner.append(entry.getKey());
-      inner.append("\"");
-      inner.append(":");
-      inner.append("\"");
-      inner.append(entry.getValue());
-      inner.append("\"");
-
-      parts.add(inner.toString());
+    final TemplatedString bldr = new TemplatedString(template);
+    for (int i = 0; i < args.length; i += 2) {
+      bldr.replace(args[i], args[i + 1]);
     }
-
-    bldr.append(parts.stream().collect(Collectors.joining(",")));
-
-    bldr.append("}");
 
     return bldr.toString();
   }

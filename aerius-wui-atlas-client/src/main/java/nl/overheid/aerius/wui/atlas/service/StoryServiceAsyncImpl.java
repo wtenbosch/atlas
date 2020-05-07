@@ -16,49 +16,20 @@
  */
 package nl.overheid.aerius.wui.atlas.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import nl.overheid.aerius.shared.domain.Criterium;
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.wui.atlas.service.parser.StoryJsonParser;
-import nl.overheid.aerius.wui.domain.auth.AuthContext;
-import nl.overheid.aerius.wui.domain.auth.AuthorizationInfo;
-import nl.overheid.aerius.wui.util.FilterUtil;
 
 @Singleton
 public class StoryServiceAsyncImpl implements StoryServiceAsync {
-  private static final String METHOD_NAME = "GetStoryFragments";
-  private static final String NAME_PARAM_NAME = "id";
-
-  private final AuthContext authContext;
-
-  @Inject
-  public StoryServiceAsyncImpl(final AuthContext authContext) {
-    this.authContext = authContext;
-  }
+  private static final String METHOD_NAME_NEW = "story/{uid}";
 
   @Override
   public void getStory(final String story, final AsyncCallback<Story> callback) {
-    final Optional<AuthorizationInfo> authInfo = authContext.getAuthInfo();
-
-    final List<Criterium> filters = new ArrayList<>();
-    filters.add(Criterium.builder()
-        .name(NAME_PARAM_NAME)
-        .value(story)
-        .build());
-    final String[] formatFilters = FilterUtil.I.formatFilters(filters);
-
-    if (authInfo.isPresent()) {
-      RequestUtil.doAuthenticatedMethodGet(authInfo.get(), METHOD_NAME, v -> StoryJsonParser.wrap(v), callback, formatFilters);
-      // RequestUtil.doMethodGet(METHOD_NAME, v -> StoryJsonParser.wrap(v), callback, formatFilters);
-    } else {
-      RequestUtil.doMethodGet(METHOD_NAME, v -> StoryJsonParser.wrap(v), callback, formatFilters);
-    }
+    final String uri = RequestUtil.prepareUri(METHOD_NAME_NEW, "uid", story);
+    
+    RequestUtil.doGet(uri, v -> StoryJsonParser.convert(v), callback);
   }
 }

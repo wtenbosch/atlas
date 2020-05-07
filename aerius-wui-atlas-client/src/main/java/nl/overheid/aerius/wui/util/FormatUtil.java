@@ -20,16 +20,16 @@ import java.util.Date;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 
 public final class FormatUtil {
-  private static final DateTimeFormat DATE_FORMATTER_DEFAULT = DateTimeFormat.getFormat(M.messages().dateFormat());
+  private static final DateTimeFormat DATE_FORMATTER_DEFAULT = DateTimeFormat.getFormat(AtlasM.messages().dateFormat());
   private static final DateTimeFormat DATE_FORMATTER_SHORT = DateTimeFormat.getFormat("yyyy-MM-dd");
 
   private FormatUtil() {}
 
   public static String formatDate(final Date date) {
-    return date == null ? M.messages().dateFormatNullDefault() : DATE_FORMATTER_DEFAULT.format(date);
+    return date == null ? AtlasM.messages().dateFormatNullDefault() : DATE_FORMATTER_DEFAULT.format(date);
   }
 
   public static String formatDateShort(final Date date) {
@@ -38,7 +38,7 @@ public final class FormatUtil {
 
   public static String formatName(final String authorName) {
     if (authorName == null || authorName.isEmpty()) {
-      return M.messages().nameNullDefault();
+      return AtlasM.messages().nameNullDefault();
     }
 
     return authorName;

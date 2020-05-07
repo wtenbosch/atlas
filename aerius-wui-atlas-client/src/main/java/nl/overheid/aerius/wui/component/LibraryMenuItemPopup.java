@@ -17,13 +17,13 @@
 package nl.overheid.aerius.wui.component;
 
 import nl.overheid.aerius.shared.domain.StoryInformation;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.widget.MaskedButton;
 import nl.overheid.aerius.wui.widget.VerticalMenuItemPopup;
 
 public class LibraryMenuItemPopup extends VerticalMenuItemPopup<StoryInformation> {
   public LibraryMenuItemPopup() {
-    super(M.messages().contextLibraryTitle(), M.messages().contextLibraryDescription());
+    super(AtlasM.messages().contextLibraryTitle(), AtlasM.messages().contextLibraryDescription());
   }
 
   @Override

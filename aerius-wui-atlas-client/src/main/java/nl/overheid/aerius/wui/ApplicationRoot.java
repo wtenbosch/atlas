@@ -45,7 +45,7 @@ import nl.overheid.aerius.wui.dev.DevelopmentObserver;
 import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.history.HistoryManager;
-import nl.overheid.aerius.wui.i18n.M;
+import nl.overheid.aerius.wui.i18n.AtlasM;
 import nl.overheid.aerius.wui.service.RequestAeriusException;
 import nl.overheid.aerius.wui.service.RequestBlockedException;
 import nl.overheid.aerius.wui.service.RequestClientException;
@@ -138,7 +138,7 @@ public class ApplicationRoot extends BasicEventComponent {
     GWT.setUncaughtExceptionHandler(e -> {
       final Throwable cause = findCause(e);
 
-      if (cause instanceof IncompatibleRemoteServiceException && Window.confirm(M.messages().errorInternalApplicationOutdated())) {
+      if (cause instanceof IncompatibleRemoteServiceException && Window.confirm(AtlasM.messages().errorInternalApplicationOutdated())) {
         Window.Location.reload();
         return;
       }
