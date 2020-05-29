@@ -32,7 +32,6 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
@@ -53,13 +52,11 @@ import nl.overheid.aerius.wui.atlas.event.ContextPanelCollapseEvent;
 import nl.overheid.aerius.wui.atlas.event.ContextPanelOpenEvent;
 import nl.overheid.aerius.wui.atlas.event.PanelConfigurationChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.PanelSelectionChangeEvent;
-import nl.overheid.aerius.wui.atlas.factories.ContextWidgetFactory;
 import nl.overheid.aerius.wui.atlas.ui.context.MonitorUpPanel;
 import nl.overheid.aerius.wui.widget.EventComposite;
 import nl.overheid.aerius.wui.widget.HasEventBus;
 
-@Singleton
-public class ContextViewImpl extends EventComposite implements ContextView {
+public abstract class ContextViewImpl extends EventComposite implements ContextView {
   private static final String COLLAPSED_WIDTH = "50px";
   private static final String DEFAULT_SMALL_WIDTH = "35%";
   private static final String DEFAULT_BIG_WIDTH = "55%";
@@ -82,7 +79,8 @@ public class ContextViewImpl extends EventComposite implements ContextView {
   private final LinkedHashMap<PanelNames, MonitorUpPanel> panels = new LinkedHashMap<>();
 
   private IsWidget selected;
-  private final ContextWidgetFactory factory;
+
+  @Inject private ContextWidgetBuilder builder;
 
   private boolean open = true;
   private String fullWidth = getActualFullWidth();
@@ -91,8 +89,7 @@ public class ContextViewImpl extends EventComposite implements ContextView {
   private boolean updateScheduled;
 
   @Inject
-  public ContextViewImpl(final ContextWidgetFactory factory) {
-    this.factory = factory;
+  public ContextViewImpl() {
     this.container = new FlowPanel();
 
     initWidget(UI_BINDER.createAndBindUi(this));
@@ -327,34 +324,8 @@ public class ContextViewImpl extends EventComposite implements ContextView {
     setPanelOpen(open);
   }
 
-  private MonitorUpPanel getContextPanel(final PanelConfiguration conf) {
-    MonitorUpPanel panel;
-
-    switch (conf.asConfigurationProperties().getPanelType()) {
-    case EXPORT:
-      panel = factory.getContextExportView(conf);
-      break;
-    case INFO:
-      panel = factory.getContextInfoView(conf);
-      break;
-    case META:
-      panel = factory.getContextMetaView(conf);
-      break;
-    case LAYERS:
-      panel = factory.getContextLayerView(conf);
-      break;
-    case MAP:
-      panel = factory.getContextMapView(conf);
-      break;
-    case LOCATION:
-      panel = factory.getContextLocationView(conf);
-      break;
-    case PREFERENCES:
-      panel = factory.getContextPreferencesView(conf);
-      break;
-    default:
-      throw new RuntimeException("Option not implemented: " + conf.asConfigurationProperties().getPanelType());
-    }
+  protected MonitorUpPanel getContextPanel(final PanelConfiguration conf) {
+    final MonitorUpPanel panel = builder.createContextPanel(conf);
 
     if (panel instanceof HasEventBus) {
       ((HasEventBus) panel).setEventBus(eventBus);

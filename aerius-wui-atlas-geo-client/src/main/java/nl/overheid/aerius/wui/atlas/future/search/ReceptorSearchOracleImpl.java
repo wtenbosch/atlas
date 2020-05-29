@@ -29,12 +29,12 @@ import nl.overheid.aerius.wui.atlas.service.SearchServiceAsync;
 import nl.overheid.aerius.wui.domain.cache.CacheContext;
 
 @Singleton
-public class SearchOracleImpl extends StaggeredOracle<List<SearchSuggestion>> implements SearchOracle {
+public class ReceptorSearchOracleImpl extends StaggeredOracle<List<SearchSuggestion>> implements SearchOracle {
   private final SearchServiceAsync service;
   private final ReceptorUtil receptorUtil;
 
   @Inject
-  public SearchOracleImpl(final ReceptorUtil receptorUtil, final CacheContext cacheContext, final SearchServiceAsync searchService,
+  public ReceptorSearchOracleImpl(final ReceptorUtil receptorUtil, final CacheContext cacheContext, final SearchServiceAsync searchService,
       final SearchCache cache) {
     super(cacheContext, cache);
     this.receptorUtil = receptorUtil;

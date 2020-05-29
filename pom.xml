@@ -163,6 +163,7 @@
       <modules>
         <module>aerius-wui-common-client</module>
         <module>aerius-wui-atlas-client</module>
+        <module>aerius-wui-atlas-geo-client</module>
         <module>aerius-wui-atlas-shared</module>
         <module>aerius-wui-geo-client</module>
         <module>aerius-wui-geo-ol3-client</module>

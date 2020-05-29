@@ -27,13 +27,10 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
-import nl.overheid.aerius.geo.util.ReceptorUtil;
 import nl.overheid.aerius.shared.domain.Criterium;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
 import nl.overheid.aerius.shared.domain.PanelConfiguration;
 import nl.overheid.aerius.shared.domain.PanelNames;
-import nl.overheid.aerius.shared.domain.PanelType;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.shared.domain.StoryFragment;
@@ -42,10 +39,8 @@ import nl.overheid.aerius.wui.atlas.command.ActivateSmallContextCommand;
 import nl.overheid.aerius.wui.atlas.command.DataSetChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.LibraryItemSelectionCommand;
 import nl.overheid.aerius.wui.atlas.command.NoStoryCommand;
-import nl.overheid.aerius.wui.atlas.command.PanelSelectionChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.ReloadChapterCommand;
 import nl.overheid.aerius.wui.atlas.command.StorySelectionChangeCommand;
-import nl.overheid.aerius.wui.atlas.command.ToggleLayerPanelCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.DataSetChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.DataSetListChangeEvent;
@@ -57,7 +52,6 @@ import nl.overheid.aerius.wui.atlas.event.SelectorEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryFragmentChangedEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryLoadedEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryLoadingEvent;
-import nl.overheid.aerius.wui.atlas.event.ToggleLayerPanelEvent;
 import nl.overheid.aerius.wui.atlas.future.library.LibraryOracle;
 import nl.overheid.aerius.wui.atlas.future.story.StoryOracle;
 import nl.overheid.aerius.wui.atlas.place.StoryPlace;
@@ -65,7 +59,6 @@ import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.atlas.util.ViewModeUtil;
 import nl.overheid.aerius.wui.command.AbstractCommandRouter;
 import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.selector.SelectorContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
@@ -84,29 +77,26 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
   @Inject private StoryOracle storyOracle;
   @Inject private LibraryOracle libraryOracle;
 
-  @Inject protected ReceptorUtil receptorUtil;
+  @Inject private GeoStoryCommandRouter geoStoryCommandRouter;
 
   @Inject protected FilterAssistant filterAssistant;
 
   protected StoryContext context;
-  private final MapContext mapContext;
 
   @Inject private SelectorContext selectors;
 
-  private boolean layerPanelVisible;
-
   private int savedChapterIdx;
 
-  public StoryCommandRouterImpl(final StoryContext context, final MapContext mapContext) {
+  @Inject
+  public StoryCommandRouterImpl(final StoryContext context) {
     this.context = context;
-    this.mapContext = mapContext;
 
     context.reset();
   }
 
   @Override
   public void setEventBus(final EventBus eventBus) {
-    super.setEventBus(eventBus, selectors);
+    super.setEventBus(eventBus, selectors, geoStoryCommandRouter);
     bindEventBus(eventBus);
   }
 
@@ -155,7 +145,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
         } else {
           GWTProd.warn("Could not recover library for empty story.");
         }
-        
+
       } else {
         storyOracle.getStory(storyUid, story -> {
           // Handle edge-case where we are no longer in the story place when done
@@ -334,35 +324,6 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     final Map<DatasetConfiguration, StoryFragment> fragments = e.getValue().fragments();
 
     context.setDatasets(fragments.keySet());
-
-    final StoryPlace previousPlace = getStoryPlaceOrNull(placeController.getPreviousPlace());
-    final StoryPlace currentPlace = getStoryPlace(placeController.getPlace());
-
-    final String prevReceptorId = previousPlace == null ? null : previousPlace.getReceptorId();
-    final String currReceptorId = currentPlace.getReceptorId();
-
-    fireIfChanged(new InfoLocationChangeEvent(),
-        prevReceptorId == null ? null : receptorUtil.createReceptorPointFromId(Integer.parseInt(prevReceptorId)),
-        currReceptorId == null ? null : receptorUtil.createReceptorPointFromId(Integer.parseInt(currReceptorId)));
-  }
-
-  @EventHandler
-  public void onPanelSelectionChangeCommand(final PanelSelectionChangeCommand c) {
-    final PanelConfiguration conf = context.getPanels().get(c.getValue());
-    if (conf == null) {
-      return;
-    }
-
-    if (conf.asConfigurationProperties().getPanelType() == PanelType.LAYERS && conf.isIndependent()) {
-      eventBus.fireEventFromSource(new ToggleLayerPanelCommand(!layerPanelVisible), mapContext.getActiveMap());
-    } else if (conf.asConfigurationProperties().getPanelType() != PanelType.MAP) {
-      layerPanelVisible = false;
-    }
-  }
-
-  @EventHandler
-  public void onToggleLayerPanelEvent(final ToggleLayerPanelEvent c) {
-    layerPanelVisible = c.getValue();
   }
 
   @EventHandler

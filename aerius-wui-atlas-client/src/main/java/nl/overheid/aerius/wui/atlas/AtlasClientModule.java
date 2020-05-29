@@ -22,7 +22,6 @@ import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.inject.Singleton;
 
 import nl.overheid.aerius.wui.atlas.factories.ContextWidgetFactory;
-import nl.overheid.aerius.wui.atlas.factories.LayerLegendWidgetFactory;
 import nl.overheid.aerius.wui.atlas.factories.LevelGuideFactory;
 import nl.overheid.aerius.wui.atlas.factories.MainLegendWidgetFactory;
 import nl.overheid.aerius.wui.atlas.factories.SelectableTextWidgetFactory;
@@ -46,7 +45,6 @@ public class AtlasClientModule extends AbstractGinModule {
 
     // Bind factories
     install(new GinFactoryModuleBuilder().build(ContextWidgetFactory.class));
-    install(new GinFactoryModuleBuilder().build(LayerLegendWidgetFactory.class));
     install(new GinFactoryModuleBuilder().build(MainLegendWidgetFactory.class));
     install(new GinFactoryModuleBuilder().build(LevelGuideFactory.class));
     install(new GinFactoryModuleBuilder().build(SelectableTextWidgetFactory.class));

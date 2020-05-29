@@ -25,17 +25,6 @@ import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 import com.google.web.bindery.event.shared.binder.GenericEvent;
 
-import nl.overheid.aerius.geo.command.InfoLocationChangeCommand;
-import nl.overheid.aerius.geo.command.LayerAddedCommand;
-import nl.overheid.aerius.geo.command.LayerHiddenCommand;
-import nl.overheid.aerius.geo.command.LayerVisibleCommand;
-import nl.overheid.aerius.geo.command.MapResizeCommand;
-import nl.overheid.aerius.geo.command.MapSetExtentCommand;
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
-import nl.overheid.aerius.geo.event.LayerAddedEvent;
-import nl.overheid.aerius.geo.event.LayerHiddenEvent;
-import nl.overheid.aerius.geo.event.LayerVisibleEvent;
-import nl.overheid.aerius.geo.event.MapSetExtentEvent;
 import nl.overheid.aerius.wui.atlas.command.ActivateBigContextCommand;
 import nl.overheid.aerius.wui.atlas.command.ActivateSmallContextCommand;
 import nl.overheid.aerius.wui.atlas.command.BroadcastSelectorsCommand;
@@ -118,11 +107,11 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
   @SuppressWarnings("rawtypes")
   @EventHandler(handles = { NotificationEvent.class, ChapterSelectionChangeEvent.class, ContextOptionsChangedEvent.class,
       PanelSelectionChangeEvent.class, DataSetChangeEvent.class, DataSetListChangeEvent.class, LibraryChangeEvent.class,
-      StoryFragmentChangedEvent.class, StoryOptionsChangedEvent.class, StoryLoadedEvent.class, LayerAddedEvent.class, ToggleLayerPanelEvent.class,
-      StorySelectionChangeEvent.class, SelectorConfigurationChangeEvent.class, InfoLocationChangeEvent.class, UserAuthorizationChangedEvent.class,
-      LayerVisibleEvent.class, LayerHiddenEvent.class, UserAuthorizationChangedEvent.class, StoryFilterSelectionChangeEvent.class,
-      MapSearchSuggestionEvent.class, ActivatorActiveEvent.class, ActivatorInactiveEvent.class, ChapterReplacementEvent.class, SelectionEvent.class,
-      SelectorConfigurationReloadEvent.class, PanelConfigurationChangeEvent.class
+      StoryFragmentChangedEvent.class, StoryOptionsChangedEvent.class, StoryLoadedEvent.class, ToggleLayerPanelEvent.class,
+      StorySelectionChangeEvent.class, SelectorConfigurationChangeEvent.class, UserAuthorizationChangedEvent.class,
+      UserAuthorizationChangedEvent.class, StoryFilterSelectionChangeEvent.class, MapSearchSuggestionEvent.class, ActivatorActiveEvent.class,
+      ActivatorInactiveEvent.class, ChapterReplacementEvent.class, SelectionEvent.class, SelectorConfigurationReloadEvent.class,
+      PanelConfigurationChangeEvent.class
   })
   public void onSimpleGenericEvent(final SimpleGenericEvent e) {
     log(e.getClass().getSimpleName(), e.getValue());
@@ -130,8 +119,7 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
 
   @SuppressWarnings("rawtypes")
   @EventHandler(handles = { ChapterSelectionChangeCommand.class, PanelSelectionChangeCommand.class, DataSetChangeCommand.class,
-      InfoLocationChangeCommand.class, LayerAddedCommand.class, ToggleLayerPanelCommand.class, StorySelectionChangeCommand.class,
-      UserAuthorizationChangedCommand.class, LayerVisibleCommand.class, LayerHiddenCommand.class, UserAuthorizationChangedCommand.class,
+      ToggleLayerPanelCommand.class, StorySelectionChangeCommand.class, UserAuthorizationChangedCommand.class, UserAuthorizationChangedCommand.class,
       StoryFilterSelectionChangeCommand.class, ChapterReplacementCommand.class, SelectionCommand.class })
   public void onSimpleGenericCommand(final SimpleGenericCommand c) {
     log(c.getClass().getSimpleName(), c.getValue());
@@ -142,19 +130,9 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
     log("CONFIG", c.getKey() + " > " + c.getValue());
   }
 
-  @EventHandler(handles = { MapSetExtentCommand.class })
-  public void onZoomToExtentCommand(final MapSetExtentCommand c) {
-    log(c.getClass().getSimpleName(), c.getValue() == null ? "NULL" : c.getValue().hashCode());
-  }
-
   @EventHandler
   public void onLibraryStatusChangedEvent(final LibraryStatusChangedEvent e) {
     log(e.getClass().getSimpleName(), e.getValue() + " > " + e.isAvailable());
-  }
-
-  @EventHandler(handles = { MapSetExtentEvent.class })
-  public void onZoomToExtentEvent(final MapSetExtentEvent e) {
-    log(e.getClass().getSimpleName(), e.getValue() == null ? "NULL" : e.getValue().hashCode());
   }
 
   @SuppressWarnings("rawtypes")
@@ -185,7 +163,7 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
     log(e.getClass().getSimpleName(), e.getSelector().getType() + " > " + e.getValue().getValue().orElse("N/A"));
   }
 
-  @EventHandler(handles = { StoryLoadingEvent.class, MapResizeCommand.class, SelectorConfigurationClearEvent.class })
+  @EventHandler(handles = { StoryLoadingEvent.class, SelectorConfigurationClearEvent.class })
   public void onGenericEvent(final GenericEvent e) {
     log(e.getClass().getSimpleName());
   }

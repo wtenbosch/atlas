@@ -21,13 +21,11 @@ import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.DataResource.MimeType;
 import com.google.gwt.resources.client.ImageResource;
 
-import nl.overheid.aerius.geo.resources.GeoResources;
-
 /**
  * Image Resource interface to all images.
  */
 public interface ImageResources extends ClientBundle, AdditionalNavigationResources, StoryNavigationResources, ChapterNavigationResources,
-    GeoResources, AreaGroupResources, EditorResources, ProvinceOverlays {
+    AreaGroupResources, EditorResources, ProvinceOverlays {
   @Source("images/AERIUS-Monitor.svg")
   @MimeType("image/svg+xml")
   DataResource monitorLogo();

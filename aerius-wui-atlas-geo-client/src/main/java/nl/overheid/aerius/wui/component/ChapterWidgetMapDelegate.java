@@ -15,6 +15,7 @@ import nl.overheid.aerius.geo.wui.Map;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.PanelNames;
 import nl.overheid.aerius.shared.domain.Selector;
+import nl.overheid.aerius.wui.atlas.event.MapActiveEvent;
 import nl.overheid.aerius.wui.atlas.service.LayerServiceAsync;
 import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.domain.map.MapContext;
@@ -68,11 +69,16 @@ public class ChapterWidgetMapDelegate extends BasicEventComponent implements Pan
   }
 
   @Override
+  public void clear() {
+    eventBus.fireEvent(new MapActiveEvent(false));
+  }
+
+  @Override
   public void show() {
+    eventBus.fireEvent(new MapActiveEvent(true));
     mapContext.claimMapPrimacy(map);
     panel.setWidget(container);
     map.attach();
-
 
     eventBus.fireEvent(new MapResizeCommand());
 

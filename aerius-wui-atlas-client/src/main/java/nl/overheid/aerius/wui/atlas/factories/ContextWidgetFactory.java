@@ -19,9 +19,6 @@ package nl.overheid.aerius.wui.atlas.factories;
 import nl.overheid.aerius.shared.domain.PanelConfiguration;
 import nl.overheid.aerius.wui.atlas.ui.context.export.ContextExportViewImpl;
 import nl.overheid.aerius.wui.atlas.ui.context.info.ContextInfoViewImpl;
-import nl.overheid.aerius.wui.atlas.ui.context.layer.ContextLayerViewImpl;
-import nl.overheid.aerius.wui.atlas.ui.context.location.ContextLocationViewImpl;
-import nl.overheid.aerius.wui.atlas.ui.context.map.ContextMapViewImpl;
 import nl.overheid.aerius.wui.atlas.ui.context.meta.ContextMetaViewImpl;
 import nl.overheid.aerius.wui.atlas.ui.context.preferences.ContextPreferencesViewImpl;
 
@@ -30,13 +27,7 @@ public interface ContextWidgetFactory {
 
   ContextMetaViewImpl getContextMetaView(PanelConfiguration config);
 
-  ContextMapViewImpl getContextMapView(PanelConfiguration config);
-
   ContextPreferencesViewImpl getContextPreferencesView(PanelConfiguration config);
 
   ContextExportViewImpl getContextExportView(PanelConfiguration config);
-
-  ContextLayerViewImpl getContextLayerView(PanelConfiguration conf);
-
-  ContextLocationViewImpl getContextLocationView(PanelConfiguration conf);
 }

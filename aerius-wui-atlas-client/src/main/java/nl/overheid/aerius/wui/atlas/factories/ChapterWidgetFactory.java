@@ -23,12 +23,9 @@ import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.wui.component.ChapterWidgetComponentDelegate;
 import nl.overheid.aerius.wui.component.ChapterWidgetErrorDelegate;
 import nl.overheid.aerius.wui.component.ChapterWidgetLegacyComponentDelegate;
-import nl.overheid.aerius.wui.component.ChapterWidgetMapDelegate;
 import nl.overheid.aerius.wui.component.ChapterWidgetTextDelegate;
 
 public interface ChapterWidgetFactory {
-  ChapterWidgetMapDelegate getMapChapter(AcceptsOneWidget panel, Chapter chapter, PanelContent config);
-
   ChapterWidgetComponentDelegate getComponentChapter(AcceptsOneWidget panel, PanelContent config);
 
   ChapterWidgetLegacyComponentDelegate getLegacyComponentChapter(AcceptsOneWidget panel, PanelContent config);

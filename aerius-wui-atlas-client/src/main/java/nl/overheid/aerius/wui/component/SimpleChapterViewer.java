@@ -32,7 +32,6 @@ import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.SelectorEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryFragmentChangedEvent;
-import nl.overheid.aerius.wui.atlas.factories.ChapterWidgetFactory;
 import nl.overheid.aerius.wui.resources.R;
 import nl.overheid.aerius.wui.widget.SwitchPanel;
 
@@ -45,14 +44,12 @@ public class SimpleChapterViewer extends SwitchPanel implements ChapterViewer {
 
   private MainPanelWidget activeChapter;
 
-  private final ChapterWidgetFactory chapterWidgetFactory;
+  @Inject private ChapterWidgetBuilder chapterWidgetBuilder;
 
   private ResettableEventBus eventBus;
 
   @Inject
-  public SimpleChapterViewer(final ChapterWidgetFactory chapterWidgetFactory) {
-    this.chapterWidgetFactory = chapterWidgetFactory;
-
+  public SimpleChapterViewer() {
     addStyleName(R.css().flex());
     addStyleName(R.css().grow());
     addStyleName(R.css().overflow());
@@ -116,7 +113,7 @@ public class SimpleChapterViewer extends SwitchPanel implements ChapterViewer {
       throw new IllegalStateException("No main panel in chapter: " + chapter);
     }
 
-    final MainPanelWidget chapterWidget = new MainPanelWidget(chapterWidgetFactory, chapter, chapter.getMainPanel());
+    final MainPanelWidget chapterWidget = new MainPanelWidget(chapterWidgetBuilder, chapter, chapter.getMainPanel());
     chapterWidget.setEventBus(eventBus);
     add(chapterWidget);
   }

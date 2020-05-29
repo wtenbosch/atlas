@@ -14,14 +14,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package nl.overheid.aerius.wui.atlas.future.search;
+package nl.overheid.aerius.wui.atlas.factories;
 
-import java.util.List;
-import java.util.function.Consumer;
+import nl.overheid.aerius.shared.domain.PanelConfiguration;
+import nl.overheid.aerius.wui.atlas.ui.context.layer.ContextLayerViewImpl;
+import nl.overheid.aerius.wui.atlas.ui.context.location.ContextLocationViewImpl;
+import nl.overheid.aerius.wui.atlas.ui.context.map.ContextMapViewImpl;
 
-import nl.overheid.aerius.shared.domain.SearchSuggestion;
-import nl.overheid.aerius.wui.future.Oracle;
+public interface GeoContextWidgetFactory {
+  ContextMapViewImpl getContextMapView(PanelConfiguration config);
 
-public interface SearchOracle extends Oracle<List<SearchSuggestion>> {
-  boolean searchQuery(String query, Consumer<SearchSuggestion> callback);
+  ContextLayerViewImpl getContextLayerView(PanelConfiguration conf);
+
+  ContextLocationViewImpl getContextLocationView(PanelConfiguration conf);
 }

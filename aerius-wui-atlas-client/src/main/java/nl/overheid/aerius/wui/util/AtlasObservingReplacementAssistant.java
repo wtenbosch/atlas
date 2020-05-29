@@ -29,7 +29,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
 import nl.overheid.aerius.wui.atlas.command.ChapterReplacementEvent;
 import nl.overheid.aerius.wui.atlas.command.StoryReplacementEvent;
 import nl.overheid.aerius.wui.atlas.event.ActivatorActiveEvent;
@@ -37,8 +36,8 @@ import nl.overheid.aerius.wui.atlas.event.SelectorEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryLoadedEvent;
 
 @Singleton
-public class MonitorUpObservingReplacementAssistant implements ObservingReplacementAssistant {
-  interface ObservingReplacementAssistantEventBinder extends EventBinder<MonitorUpObservingReplacementAssistant> {}
+public class AtlasObservingReplacementAssistant implements ObservingReplacementAssistant {
+  interface ObservingReplacementAssistantEventBinder extends EventBinder<AtlasObservingReplacementAssistant> {}
 
   private final ObservingReplacementAssistantEventBinder EVENT_BINDER = GWT.create(ObservingReplacementAssistantEventBinder.class);
 
@@ -67,9 +66,13 @@ public class MonitorUpObservingReplacementAssistant implements ObservingReplacem
   private boolean scheduled;
 
   @Inject
-  public MonitorUpObservingReplacementAssistant(final ReplacementAssistant replacer, final EventBus eventBus) {
+  public AtlasObservingReplacementAssistant(final ReplacementAssistant replacer, final EventBus eventBus) {
     this.replacer = replacer;
 
+    setEventBus(eventBus);
+  }
+
+  protected void setEventBus(final EventBus eventBus) {
     EVENT_BINDER.bindEventHandlers(this, eventBus);
   }
 
@@ -114,11 +117,6 @@ public class MonitorUpObservingReplacementAssistant implements ObservingReplacem
   }
 
   @EventHandler
-  public void onInfoLocationChangeEvent(final InfoLocationChangeEvent e) {
-    scheduleUpdate();
-  }
-
-  @EventHandler
   public void onStoryLoadedEvent(final StoryLoadedEvent e) {
     scheduleUpdate();
   }
@@ -128,7 +126,7 @@ public class MonitorUpObservingReplacementAssistant implements ObservingReplacem
     scheduleUpdate();
   }
 
-  private void scheduleUpdate() {
+  protected void scheduleUpdate() {
     if (scheduled) {
       return;
     }

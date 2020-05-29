@@ -14,14 +14,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package nl.overheid.aerius.wui.atlas.future.search;
+package nl.overheid.aerius.wui.atlas.ui.story;
 
-import java.util.List;
-import java.util.function.Consumer;
+import com.google.inject.ImplementedBy;
 
-import nl.overheid.aerius.shared.domain.SearchSuggestion;
-import nl.overheid.aerius.wui.future.Oracle;
+import nl.overheid.aerius.wui.widget.HasEventBus;
 
-public interface SearchOracle extends Oracle<List<SearchSuggestion>> {
-  boolean searchQuery(String query, Consumer<SearchSuggestion> callback);
-}
+@ImplementedBy(GeoStoryPlaceTrackerNoOp.class)
+public interface GeoStoryPlaceTracker extends HasEventBus {}

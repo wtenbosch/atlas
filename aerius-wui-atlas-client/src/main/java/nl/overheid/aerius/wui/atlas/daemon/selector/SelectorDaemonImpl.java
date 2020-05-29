@@ -11,10 +11,10 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.SelectorResource;
 import nl.overheid.aerius.wui.atlas.command.BroadcastSelectorsCommand;
+import nl.overheid.aerius.wui.atlas.command.ReloadSelectorsCommand;
 import nl.overheid.aerius.wui.atlas.command.SelectorCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.SelectorConfigurationChangeEvent;
@@ -53,13 +53,13 @@ public class SelectorDaemonImpl extends BasicEventComponent implements SelectorD
   }
 
   @EventHandler
-  public void onInfoLocationChangedEvent(final InfoLocationChangeEvent e) {
+  public void onBroadcastSelectorsCommand(final BroadcastSelectorsCommand c) {
+    loaded.clear();
     reloadSelectors();
   }
 
   @EventHandler
-  public void onBroadcastSelectorsCommand(final BroadcastSelectorsCommand c) {
-    loaded.clear();
+  public void onSelectorCommand(final ReloadSelectorsCommand e) {
     reloadSelectors();
   }
 
@@ -86,7 +86,7 @@ public class SelectorDaemonImpl extends BasicEventComponent implements SelectorD
     }
   }
 
-  private void reloadSelectors() {
+  public void reloadSelectors() {
     if (selectorResources.isEmpty()) {
       return;
     }

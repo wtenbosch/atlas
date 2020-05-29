@@ -26,13 +26,11 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.InvocationException;
 import com.google.gwt.user.client.rpc.StatusCodeException;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.GeoInitializer;
 import nl.overheid.aerius.wui.activity.ActivityManager;
 import nl.overheid.aerius.wui.atlas.event.RequestClientLoadFailureEvent;
 import nl.overheid.aerius.wui.atlas.event.RequestConnectionFailureEvent;

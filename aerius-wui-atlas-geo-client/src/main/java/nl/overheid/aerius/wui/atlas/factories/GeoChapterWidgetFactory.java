@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package nl.overheid.aerius.wui.atlas.future.search;
+package nl.overheid.aerius.wui.atlas.factories;
 
-import java.util.List;
-import java.util.function.Consumer;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-import nl.overheid.aerius.shared.domain.SearchSuggestion;
-import nl.overheid.aerius.wui.future.Oracle;
+import nl.overheid.aerius.shared.domain.Chapter;
+import nl.overheid.aerius.shared.domain.PanelContent;
+import nl.overheid.aerius.wui.component.ChapterWidgetMapDelegate;
 
-public interface SearchOracle extends Oracle<List<SearchSuggestion>> {
-  boolean searchQuery(String query, Consumer<SearchSuggestion> callback);
+public interface GeoChapterWidgetFactory {
+  ChapterWidgetMapDelegate getMapChapter(AcceptsOneWidget panel, Chapter chapter, PanelContent config);
 }

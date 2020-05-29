@@ -28,7 +28,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.Criterium;
 import nl.overheid.aerius.shared.domain.PanelConfiguration;
@@ -57,8 +56,10 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
   private final StoryPlaceTrackerImplEventBinder EVENT_BINDER = GWT.create(StoryPlaceTrackerImplEventBinder.class);
   private final PlaceController placeController;
   private final StoryContext context;
-  
+
   @Inject FilterAssistant filterAssistant;
+
+  @Inject GeoStoryPlaceTracker geoStoryPlaceTracker;
 
   @Inject
   public StoryPlaceTrackerImpl(final PlaceController placeController, final StoryContext context) {
@@ -68,8 +69,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
 
   @Override
   public void setEventBus(final EventBus eventBus) {
-    super.setEventBus(eventBus);
-    bindEventHandlers(this, EVENT_BINDER);
+    super.setEventBus(eventBus, this, EVENT_BINDER, geoStoryPlaceTracker);
   }
 
   @EventHandler
@@ -184,18 +184,6 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
     final Object leftPost = leftSupplier.get();
 
     return leftPost == null || !leftPost.equals(leftPre);
-  }
-
-  @EventHandler
-  public void onReceptorLocationChangeEvent(final InfoLocationChangeEvent e) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
-    if (place.getReceptorId() != null && String.valueOf(place.getReceptorId()).equals(String.valueOf(e.getValue().getId()))) {
-      return;
-    }
-
-    place.setReceptorId(String.valueOf(e.getValue().getId()));
-    placeController.goTo(place);
-
   }
 
   private StoryPlace getStoryPlace(final ApplicationPlace place) {

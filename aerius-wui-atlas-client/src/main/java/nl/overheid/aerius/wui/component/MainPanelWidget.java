@@ -27,8 +27,6 @@ import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.MainContentType;
 import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.shared.domain.Selector;
-import nl.overheid.aerius.wui.atlas.event.MapActiveEvent;
-import nl.overheid.aerius.wui.atlas.factories.ChapterWidgetFactory;
 import nl.overheid.aerius.wui.util.SelectorUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
 import nl.overheid.aerius.wui.widget.HasEventBus;
@@ -40,46 +38,20 @@ public class MainPanelWidget extends EventComposite {
 
   @UiField SimplePanel target;
 
-  private PanelWidgetDelegate delegate;
+  private final PanelWidgetDelegate delegate;
 
   private final PanelContent config;
-
-  private boolean mapActive;
 
   /**
    * @param config Must not be null.
    */
-  public MainPanelWidget(final ChapterWidgetFactory chapterWidgetFactory, final Chapter chapter, final PanelContent config) {
+  public MainPanelWidget(final ChapterWidgetBuilder builder, final Chapter chapter, final PanelContent config) {
     this.config = config;
     initWidget(UI_BINDER.createAndBindUi(this));
 
     final MainContentType contentType = config.asMainProperties().getContentType();
-    if (contentType == null) {
-      delegate = chapterWidgetFactory.getErrorChapter(target, "No valid main content type.");
-      return;
-    }
 
-    switch (contentType) {
-    case COMPONENT:
-      switch (config.asMainComponentProperties().getVersion()) {
-      case 3:
-        delegate = chapterWidgetFactory.getComponentChapter(target, config);
-        break;
-      case 1:
-      default:
-        delegate = chapterWidgetFactory.getLegacyComponentChapter(target, config);
-        break;
-      }
-      break;
-    case MAP:
-      mapActive = true;
-      delegate = chapterWidgetFactory.getMapChapter(target, chapter, config);
-      break;
-    case TEXT:
-    default:
-      delegate = chapterWidgetFactory.getTextChapter(target, chapter, config);
-      break;
-    }
+    delegate = builder.createChapterWidget(contentType, chapter, config, target);
   }
 
   public void clear() {
@@ -89,7 +61,6 @@ public class MainPanelWidget extends EventComposite {
   public void show() {
     delegate.show();
 
-    eventBus.fireEvent(new MapActiveEvent(mapActive));
   }
 
   public void notifySelector(final Selector selector) {
