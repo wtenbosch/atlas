@@ -1,22 +1,26 @@
 package nl.overheid.aerius.domain;
 
-public class BboxContainer {
-  private String bbox;
-  private String title;
+import java.io.Serializable;
 
-  public String getBbox() {
-    return bbox;
+import com.google.auto.value.AutoValue;
+
+@AutoValue
+public abstract class BboxContainer implements Serializable {
+  public static Builder builder() {
+    return new AutoValue_BboxContainer.Builder();
   }
 
-  public void setBbox(final String bbox) {
-    this.bbox = bbox;
+  public abstract String bbox();
+
+  public abstract String title();
+
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder bbox(String value);
+
+    public abstract Builder title(String value);
+
+    public abstract BboxContainer build();
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(final String title) {
-    this.title = title;
-  }
 }

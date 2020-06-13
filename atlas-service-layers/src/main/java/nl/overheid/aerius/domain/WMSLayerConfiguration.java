@@ -2,7 +2,7 @@ package nl.overheid.aerius.domain;
 
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 

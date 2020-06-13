@@ -1,16 +1,16 @@
 package nl.overheid.aerius.domain;
 
-import java.util.List;
-import java.util.function.Consumer;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import javax.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
-import nl.overheid.aerius.domain.legend.LegendConfiguration;
-
 @AutoValue
-public abstract class LayerConfiguration {
+public abstract class LayerConfiguration implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   public static Builder builder() {
     return new AutoValue_LayerConfiguration.Builder();
   }
@@ -28,15 +28,11 @@ public abstract class LayerConfiguration {
   @Nullable
   public abstract LayerBehaviour behaviour();
 
-  public abstract LegendConfiguration legend();
-
   @Nullable
-  public abstract List<String> selectables();
+  public abstract ArrayList<String> selectables();
 
   @AutoValue.Builder
   public abstract static class Builder {
-    private LayerBehaviour behaviour;
-
     public abstract Builder name(String value);
 
     public abstract Builder title(String value);
@@ -49,20 +45,8 @@ public abstract class LayerConfiguration {
 
     public abstract Builder behaviour(LayerBehaviour value);
 
-    public abstract Builder legend(LegendConfiguration value);
-
-    public abstract Builder selectables(List<String> value);
+    public abstract Builder selectables(ArrayList<String> value);
 
     public abstract LayerConfiguration build();
-
-    public Builder addBehaviour(final Consumer<LayerBehaviour> consumer) {
-      if (behaviour == null) {
-        behaviour = new LayerBehaviour();
-        behaviour(behaviour);
-      }
-
-      consumer.accept(behaviour);
-      return this;
-    }
   }
 }

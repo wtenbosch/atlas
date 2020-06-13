@@ -9,7 +9,8 @@ import org.json.JSONObject;
 
 import com.mashape.unirest.http.JsonNode;
 
-import nl.overheid.aerius.service.domain.ServiceSelector;
+import nl.overheid.aerius.shared.domain.ServiceSelector;
+import nl.overheid.aerius.shared.domain.ServiceSelector.Builder;
 
 public class Nature2000AreaParser {
   public static List<ServiceSelector> parseSelectors(final Optional<JsonNode> json) {
@@ -20,13 +21,11 @@ public class Nature2000AreaParser {
       for (int i = 0; i < habitats.length(); i++) {
         final JSONObject habitat = habitats.getJSONObject(i);
 
-        final ServiceSelector selector = new ServiceSelector();
-        final String code = habitat.getString("code");
-        final String name = habitat.getString("name");
+        final Builder bldr = ServiceSelector.builder()
+            .value(habitat.getString("code"))
+            .name(habitat.getString("name"));
 
-        selector.setName(name);
-        selector.setValue(code);
-        selectors.add(selector);
+        selectors.add(bldr.build());
       }
     });
 

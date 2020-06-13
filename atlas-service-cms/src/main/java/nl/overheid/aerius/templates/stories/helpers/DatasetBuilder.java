@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import nl.overheid.aerius.boilerplate.collections.BackportedMap;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.ChapterIcon;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
@@ -19,7 +18,7 @@ public class DatasetBuilder {
 
   /**
    * Specify a chapter using the given ChapterBuilder. Applies a default
-   * common-sense ordering (if not explicitly set) of using the current chapter 
+   * common-sense ordering (if not explicitly set) of using the current chapter
    * size. In other words the first chapter will appear first, the second will
    * appear second.
    */
@@ -91,7 +90,7 @@ public class DatasetBuilder {
     return StoryFragment.builder()
         .dataset(dataset)
         .chapters(buildChapters(story))
-        .panels(BackportedMap.of())
+        .panels(Map.of())
         .viewMode(viewMode.getCode())
         .build();
   }

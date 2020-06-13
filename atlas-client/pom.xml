@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.overheid.aerius</groupId>
+    <artifactId>atlas-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>atlas-client</artifactId>
+  <name>AERIUS Atlas :: client</name>
+  
+  <packaging>gwt-lib</packaging>
+
+  <dependencies>
+    <!-- AERIUS Libraries -->
+    <dependency>
+      <groupId>nl.overheid.aerius</groupId>
+      <artifactId>atlas-shared</artifactId>
+      <version>${project.version}</version>
+      <type>gwt-lib</type>
+    </dependency>
+    <dependency>
+      <groupId>nl.overheid.aerius</groupId>
+      <artifactId>atlas-client-common</artifactId>
+      <version>${project.version}</version>
+      <type>gwt-lib</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-core</artifactId>
+      <version>1.0.0-RC1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-dom</artifactId>
+      <version>1.0.0-RC1</version>
+    </dependency>
+    
+    <!-- GWT dependencies -->
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+    </dependency>
+    
+    <!-- Third party GWT dependencies -->
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+    
+    <plugins>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <skipModule>true</skipModule>
+          <codeserverArgs>
+            <arg>-generateJsInteropExports</arg>
+          </codeserverArgs>
+          <moduleName>nl.overheid.aerius.Atlas</moduleName>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

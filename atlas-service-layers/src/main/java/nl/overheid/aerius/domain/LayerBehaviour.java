@@ -1,43 +1,43 @@
 package nl.overheid.aerius.domain;
 
-public class LayerBehaviour {
+import java.io.Serializable;
+
+import com.google.auto.value.AutoValue;
+
+@AutoValue
+public abstract class LayerBehaviour implements Serializable {
+  private static final long serialVersionUID = 1L;
+
+  public static Builder builder() {
+    return new AutoValue_LayerBehaviour.Builder();
+  }
+
   /**
    * The radio group name for this layer, this behaviour will cause all layers
    * under this bundle group name to be grouped under one radio item.
    */
-  private String bundleGroup;
+  public abstract String bundleGroup();
+
   /**
    * The cluster name for this layer; this behaviour will cause only one of the
    * layers within a cluster to be visible.
    */
-  private String clusterGroup;
+  public abstract String clusterGroup();
+
   /**
    * A friendly, simple, short, but unspecific, name that will identify this layer
    * within a specific context.
    */
-  private String friendlyName;
+  public abstract String friendlyName();
 
-  public String getBundleGroup() {
-    return bundleGroup;
-  }
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder bundleGroup(String value);
 
-  public void setBundleGroup(final String bundleGroup) {
-    this.bundleGroup = bundleGroup;
-  }
+    public abstract Builder clusterGroup(String value);
 
-  public String getFriendlyName() {
-    return friendlyName;
-  }
+    public abstract Builder friendlyName(String value);
 
-  public void setFriendlyName(final String friendlyName) {
-    this.friendlyName = friendlyName;
-  }
-
-  public String getClusterGroup() {
-    return clusterGroup;
-  }
-
-  public void setClusterGroup(final String clusterGroup) {
-    this.clusterGroup = clusterGroup;
+    public abstract LayerBehaviour build();
   }
 }

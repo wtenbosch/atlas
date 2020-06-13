@@ -1,19 +1,19 @@
 package nl.overheid.aerius.domain.availability;
 
-public class AvailabilityResponse {
-  private boolean result;
+import com.google.auto.value.AutoValue;
 
-  public AvailabilityResponse() {}
-
-  public AvailabilityResponse(final boolean result) {
-    this.result = result;
+@AutoValue
+public abstract class AvailabilityResponse {
+  public static Builder builder() {
+    return new AutoValue_AvailabilityResponse.Builder();
   }
 
-  public boolean getResult() {
-    return result;
-  }
+  public abstract boolean result();
 
-  public void setResult(final boolean result) {
-    this.result = result;
+  @AutoValue.Builder
+  public abstract static class Builder {
+    public abstract Builder result(boolean value);
+
+    public abstract AvailabilityResponse build();
   }
 }
