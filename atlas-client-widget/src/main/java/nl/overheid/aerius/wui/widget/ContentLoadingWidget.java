@@ -19,20 +19,20 @@ package nl.overheid.aerius.wui.widget;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 /**
  * Simple widget showing a 'loading' image with some styling.
  */
 public class ContentLoadingWidget extends SimplePanel {
   public ContentLoadingWidget() {
-    final Image img = new Image(R.images().waitingAnimation());
-    img.setStyleName(R.css().loader(), true);
+    final Image img = new Image(AtlasR.images().waitingAnimation());
+    img.setStyleName(AtlasR.css().loader(), true);
 
     setWidget(img);
-    setStyleName(R.css().flex(), true);
-    setStyleName(R.css().alignCenter(), true);
-    setStyleName(R.css().justify(), true);
-    setStyleName(R.css().grow(), true);
+    setStyleName(AtlasR.css().flex(), true);
+    setStyleName(AtlasR.css().alignCenter(), true);
+    setStyleName(AtlasR.css().justify(), true);
+    setStyleName(AtlasR.css().grow(), true);
   }
 }

@@ -53,7 +53,7 @@ import nl.overheid.aerius.wui.atlas.event.StoryLoadedEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryLoadingEvent;
 import nl.overheid.aerius.wui.atlas.future.library.LibraryOracle;
 import nl.overheid.aerius.wui.atlas.future.story.StoryOracle;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.atlas.util.ViewModeUtil;
 import nl.overheid.aerius.wui.command.AbstractCommandRouter;
@@ -105,11 +105,11 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
 
   @EventHandler
   public void onPlaceChangeEvent(final PlaceChangeEvent e) {
-    if (!(e.getValue() instanceof StoryPlace)) {
+    if (!(e.getValue() instanceof MonitorStoryPlace)) {
       return;
     }
 
-    final StoryPlace currentPlace = getStoryPlace(e.getValue());
+    final MonitorStoryPlace currentPlace = getStoryPlace(e.getValue());
     doStoryPlaceChange(currentPlace);
   }
 
@@ -121,13 +121,13 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     eventBus.fireEvent(new MapActiveEvent(false));
   }
 
-  private void pushDefaultPanel(final StoryPlace place) {
+  private void pushDefaultPanel(final MonitorStoryPlace place) {
     final Map<PanelNames, PanelConfiguration> panels = ViewModeUtil.findPanelConfiguration(place);
 
     context.setPanels(panels);
   }
 
-  private void doStoryPlaceChange(final StoryPlace currentPlace) {
+  private void doStoryPlaceChange(final MonitorStoryPlace currentPlace) {
 
     final String storyUid = currentPlace.getStory();
     if (context.getStory() == null || !context.getStory().uid().equals(storyUid)) {
@@ -149,7 +149,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
         storyOracle.getStory(storyUid, story -> {
           // Handle edge-case where we are no longer in the story place when done
           // fetching, and abort
-          final StoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
+          final MonitorStoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
           if (currentPlaceLater == null) {
             return;
           }
@@ -176,7 +176,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     final boolean loading = storyOracle.getStory(e.getValue().uid(), story -> {
       // Handle edge-case where we are no longer in the story place when done
       // fetching, and abort
-      final StoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
+      final MonitorStoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
       if (currentPlaceLater == null) {
         return;
       }
@@ -201,9 +201,9 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
       return;
     }
 
-    final StoryPlace currentPlace = getStoryPlaceOrNull(placeController.getPlace());
+    final MonitorStoryPlace currentPlace = getStoryPlaceOrNull(placeController.getPlace());
     final boolean loading = storyOracle.getStory(c.getValue().uid(), cs -> {
-      final StoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
+      final MonitorStoryPlace currentPlaceLater = getStoryPlaceOrNull(placeController.getPlace());
       if (currentPlaceLater == null) {
         return;
       }
@@ -237,7 +237,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
       eventBus.fireEvent(new StoryLoadingEvent());
     }
 
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     if (place.getStory() != null && place.getStory().equals(c.getValue().uid())) {
       return;
@@ -305,7 +305,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
 
     context.setPanels(fragment.panels());
     eventBus.fireEvent(new StoryFragmentChangedEvent(fragment));
-    eventBus.fireEvent(new PanelSelectionChangeEvent(((StoryPlace) placeController.getPlace()).getPanel()));
+    eventBus.fireEvent(new PanelSelectionChangeEvent(((MonitorStoryPlace) placeController.getPlace()).getPanel()));
 
     if (savedChapterIdx >= 0) {
       context.setChapter(fragment.chapters().values().stream()
@@ -332,7 +332,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     }
 
     eventBus.fireEvent(new SelectorConfigurationClearEvent());
-    eventBus.fireEvent(new PanelSelectionChangeEvent(((StoryPlace) placeController.getPlace()).getPanel()));
+    eventBus.fireEvent(new PanelSelectionChangeEvent(((MonitorStoryPlace) placeController.getPlace()).getPanel()));
   }
 
   @EventHandler
@@ -344,17 +344,17 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     eventBus.fireEvent(cmd);
   }
 
-  protected StoryPlace getStoryPlaceOrNull(final Place place) {
+  protected MonitorStoryPlace getStoryPlaceOrNull(final Place place) {
     return getStoryPlace(place, false);
   }
 
-  protected StoryPlace getStoryPlace(final Place place) {
+  protected MonitorStoryPlace getStoryPlace(final Place place) {
     return getStoryPlace(place, true);
   }
 
-  protected StoryPlace getStoryPlace(final Place place, final boolean strict) {
-    if (place instanceof StoryPlace) {
-      return (StoryPlace) place;
+  protected MonitorStoryPlace getStoryPlace(final Place place, final boolean strict) {
+    if (place instanceof MonitorStoryPlace) {
+      return (MonitorStoryPlace) place;
     } else if (strict) {
       throw new RuntimeException("[StoryCommandRouterImpl] Unreachable state attained. PlaceChangeEvent of type " + place.getClass().getSimpleName()
           + " received while not supposed to be able to receive this type.");

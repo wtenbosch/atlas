@@ -16,7 +16,7 @@ import com.google.web.bindery.event.shared.binder.EventHandler;
 import nl.overheid.aerius.shared.domain.StoryInformation;
 import nl.overheid.aerius.wui.atlas.command.LibraryItemSelectionCommand;
 import nl.overheid.aerius.wui.atlas.daemon.library.LibraryStatusChangedEvent;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.FormatUtil;
 import nl.overheid.aerius.wui.util.StoryNavigationImageUtil;
 import nl.overheid.aerius.wui.util.SvgUtil;
@@ -52,8 +52,8 @@ public class BigStoryNavigationControl extends MaskedButton<StoryInformation> {
 
     creationDate.setText(FormatUtil.formatDate(option.creationDate()));
 
-    SvgUtil.I.setSvg(authorIcon, R.images().authorIcon());
-    SvgUtil.I.setSvg(creationIcon, R.images().lastEditedIcon());
+    SvgUtil.I.setSvg(authorIcon, AtlasR.images().authorIcon());
+    SvgUtil.I.setSvg(creationIcon, AtlasR.images().lastEditedIcon());
 
     this.eventBus = eventBus;
     EVENT_BINDER.bindEventHandlers(this, eventBus);

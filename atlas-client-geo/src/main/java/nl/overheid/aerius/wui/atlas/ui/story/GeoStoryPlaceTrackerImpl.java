@@ -23,7 +23,7 @@ import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
 import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.place.Place;
@@ -51,7 +51,7 @@ public class GeoStoryPlaceTrackerImpl extends BasicEventComponent implements Sto
 
   @EventHandler
   public void onReceptorLocationChangeEvent(final InfoLocationChangeEvent e) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
     if (place.getReceptorId() != null && String.valueOf(place.getReceptorId()).equals(String.valueOf(e.getValue().getId()))) {
       return;
     }
@@ -60,9 +60,9 @@ public class GeoStoryPlaceTrackerImpl extends BasicEventComponent implements Sto
     placeController.goTo(place);
   }
 
-  private StoryPlace getStoryPlace(final Place place) {
-    if (place instanceof StoryPlace) {
-      return (StoryPlace) place;
+  private MonitorStoryPlace getStoryPlace(final Place place) {
+    if (place instanceof MonitorStoryPlace) {
+      return (MonitorStoryPlace) place;
     } else {
       throw new RuntimeException("Unreachable state attained. PlaceChangeEvent of type " + place.getClass().getSimpleName()
           + " received while not supposed to be able to receive this type.");

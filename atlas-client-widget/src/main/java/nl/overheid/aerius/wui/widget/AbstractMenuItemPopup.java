@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.web.bindery.event.shared.EventBus;
 
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.MathUtil;
 
 public abstract class AbstractMenuItemPopup<T> extends PopupPanel implements HasEventBus {
@@ -50,7 +50,7 @@ public abstract class AbstractMenuItemPopup<T> extends PopupPanel implements Has
   }
 
   protected void config() {
-    setGlassStyleName(R.css().glassPanel());
+    setGlassStyleName(AtlasR.css().glassPanel());
     setGlassEnabled(true);
   }
 
@@ -64,12 +64,12 @@ public abstract class AbstractMenuItemPopup<T> extends PopupPanel implements Has
     super.show();
 
     Scheduler.get().scheduleDeferred(() -> {
-      getGlassElement().addClassName(R.css().glassPanelFull());
+      getGlassElement().addClassName(AtlasR.css().glassPanelFull());
     });
   }
 
   public void prepareHide() {
-    getGlassElement().removeClassName(R.css().glassPanelFull());
+    getGlassElement().removeClassName(AtlasR.css().glassPanelFull());
   }
 
   @Override

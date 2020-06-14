@@ -1,15 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>nl.overheid.aerius</groupId>
     <artifactId>atlas-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>atlas-shared</artifactId>
   <name>AERIUS Atlas :: shared</name>
-  <packaging>gwt-lib</packaging>
+  <packaging>jar</packaging>
 
   <dependencies>
     <!-- AutoValue dependencies -->
@@ -41,8 +40,81 @@
 
     <plugins>
       <plugin>
-        <artifactId>maven-source-plugin</artifactId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <excludes>
+                <exclude>**/*JsonParser*</exclude>
+                <exclude>**/*JsonSerializer*</exclude>
+                <exclude>**/SerializationFactory*</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>serializers</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <classifier>serializers</classifier>
+              <includes>
+                <include>**/*JsonSerializer*</include>
+                <include>**/SerializationFactory*</include>
+              </includes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>parsers</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <classifier>parsers</classifier>
+              <includes>
+                <include>**/*JsonParser*</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <configuration>
+              <excludes>
+                <exclude>**/*JsonSerializer*</exclude>
+                <exclude>**/SerializationFactory*</exclude>f
+              </excludes>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <configuration>
+              <classifier>sources</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -73,6 +145,7 @@
         <extensions>true</extensions>
         <configuration>
           <moduleName>nl.overheid.aerius.AtlasShared</moduleName>
+          <skipModule>true</skipModule>
         </configuration>
       </plugin>
     </plugins>

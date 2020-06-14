@@ -16,7 +16,7 @@
  */
 package nl.overheid.aerius.wui.atlas.history;
 
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.history.PlaceHistoryMapper;
 import nl.overheid.aerius.wui.place.TokenizedPlace;
 
@@ -25,8 +25,8 @@ public class AtlasPlaceHistoryMapper implements PlaceHistoryMapper {
   public String getToken(final TokenizedPlace value) {
     String token = "";
 
-    if (value instanceof StoryPlace) {
-      token = new StoryPlace.Tokenizer().getToken((StoryPlace) value);
+    if (value instanceof MonitorStoryPlace) {
+      token = new MonitorStoryPlace.Tokenizer().getToken((MonitorStoryPlace) value);
     }
 
     return token;
@@ -34,6 +34,6 @@ public class AtlasPlaceHistoryMapper implements PlaceHistoryMapper {
 
   @Override
   public TokenizedPlace getPlace(final String token) {
-    return new StoryPlace.Tokenizer().getPlace(token);
+    return new MonitorStoryPlace.Tokenizer().getPlace(token);
   }
 }

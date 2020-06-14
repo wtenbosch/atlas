@@ -32,7 +32,7 @@ import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.event.SelectorEvent;
 import nl.overheid.aerius.wui.atlas.event.StoryFragmentChangedEvent;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.widget.SwitchPanel;
 
 public class SimpleChapterViewer extends SwitchPanel implements ChapterViewer {
@@ -50,9 +50,9 @@ public class SimpleChapterViewer extends SwitchPanel implements ChapterViewer {
 
   @Inject
   public SimpleChapterViewer() {
-    addStyleName(R.css().flex());
-    addStyleName(R.css().grow());
-    addStyleName(R.css().overflow());
+    addStyleName(AtlasR.css().flex());
+    addStyleName(AtlasR.css().grow());
+    addStyleName(AtlasR.css().overflow());
   }
 
   @Override

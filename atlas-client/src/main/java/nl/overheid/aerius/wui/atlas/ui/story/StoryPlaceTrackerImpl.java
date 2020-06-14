@@ -36,7 +36,7 @@ import nl.overheid.aerius.wui.atlas.command.DataSetChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.NoStoryCommand;
 import nl.overheid.aerius.wui.atlas.command.PanelSelectionChangeCommand;
 import nl.overheid.aerius.wui.atlas.event.ChapterSelectionChangeEvent;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
@@ -74,7 +74,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
 
   @EventHandler
   public void onPlaceChangeChangeEvent(final PlaceChangeEvent c) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     // Change only if story is not null _and_ has not changed
     if (context.getStory() != null && context.getStory().uid().equals(place.getStory())) {
@@ -88,7 +88,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
 
   @EventHandler
   public void onNoStoryCommand(final NoStoryCommand c) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     place.setChapter(null);
     place.setStory(null);
@@ -109,7 +109,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
 
   @EventHandler
   public void onPanelSelectionChangeCommand(final PanelSelectionChangeCommand c) {
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     if (place.getPanel() != null && place.getPanel().equals(c.getValue())) {
       // c.silence();
@@ -129,7 +129,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
   public void onDatasetChangeCommand(final DataSetChangeCommand c) {
     c.silence();
 
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     final boolean changed = context.setDataset(c.getValue());
     if (changed) {
@@ -143,7 +143,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
   public void onChapterChangeCommand(final ChapterSelectionChangeCommand c) {
     c.silence();
 
-    final StoryPlace place = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
     final boolean changed = context.setChapter(c.getValue().uid());
     if (changed) {
@@ -155,7 +155,7 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
   @EventHandler
   public void onChapterChangeEvent(final ChapterSelectionChangeEvent e) {
     Scheduler.get().scheduleDeferred(() -> {
-      final StoryPlace place = getStoryPlace(placeController.getPlace());
+      final MonitorStoryPlace place = getStoryPlace(placeController.getPlace());
 
       if (isChanged(
           () -> place.getChapter(),
@@ -186,9 +186,9 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
     return leftPost == null || !leftPost.equals(leftPre);
   }
 
-  private StoryPlace getStoryPlace(final Place place) {
-    if (place instanceof StoryPlace) {
-      return (StoryPlace) place;
+  private MonitorStoryPlace getStoryPlace(final Place place) {
+    if (place instanceof MonitorStoryPlace) {
+      return (MonitorStoryPlace) place;
     } else {
       throw new RuntimeException("Unreachable state attained. PlaceChangeEvent of type " + place.getClass().getSimpleName()
           + " received while not supposed to be able to receive this type.");

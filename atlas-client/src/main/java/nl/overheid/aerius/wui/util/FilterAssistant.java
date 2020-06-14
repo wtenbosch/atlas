@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import nl.overheid.aerius.shared.domain.Criterium;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 
 public interface FilterAssistant {
   public static final String LEVEL = "level";
@@ -13,7 +13,7 @@ public interface FilterAssistant {
 
   List<Criterium> constructLibraryFiltersFromStory(Map<String, String> properties);
 
-  List<Criterium> constructLibraryFiltersFromPlace(StoryPlace currentPlace);
+  List<Criterium> constructLibraryFiltersFromPlace(MonitorStoryPlace currentPlace);
 
   Map<String, String> toMap(List<Criterium> criteria);
 

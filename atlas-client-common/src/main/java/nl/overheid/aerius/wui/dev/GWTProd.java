@@ -35,7 +35,7 @@ public class GWTProd {
    * Logs a message to the warn console. Calls are _not_ optimized out in Production Mode.
    */
   public static native void error(Object message) /*-{
-    console.error(message );
+    console.error(message);
   }-*/;
 
   public static void info(final String string) {
@@ -43,7 +43,16 @@ public class GWTProd {
   }
 
   public static void error(final String marker, final String string) {
-    error("[" + marker + "] " + string);
+    error("[" + marker + "] " + string); 
+  }
+
+  public static void error(final String marker, final String string, final Exception e) {
+    error("[" + marker + "] " + string, e);
+  }
+
+  public static void error(final String string, final Throwable e) {
+    error(string); 
+    e.printStackTrace();
   }
 
   public static void warn(final String marker, final String string) {

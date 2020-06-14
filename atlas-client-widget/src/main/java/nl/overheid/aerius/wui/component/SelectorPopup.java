@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.wui.i18n.AtlasM;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class SelectorPopup extends PopupPanel {
   private static final SelectorPopupUiBinder UI_BINDER = GWT.create(SelectorPopupUiBinder.class);
@@ -63,7 +63,7 @@ public class SelectorPopup extends PopupPanel {
     setAnimationEnabled(true);
     setAnimationType(AnimationType.ROLL_DOWN);
     setGlassEnabled(true);
-    setGlassStyleName(R.css().glassPanel());
+    setGlassStyleName(AtlasR.css().glassPanel());
   }
 
   public void setParentWidget(final Widget parent) {
@@ -87,7 +87,7 @@ public class SelectorPopup extends PopupPanel {
     new Timer() {
       @Override
       public void run() {
-        getGlassElement().addClassName(R.css().glassPanelFull());
+        getGlassElement().addClassName(AtlasR.css().glassPanelFull());
       }
     }.schedule(20);
 
@@ -123,7 +123,7 @@ public class SelectorPopup extends PopupPanel {
       }
     }.schedule(20);
 
-    getGlassElement().removeClassName(R.css().glassPanelFull());
+    getGlassElement().removeClassName(AtlasR.css().glassPanelFull());
   }
 
   public void setList(final Collection<Selector> items) {

@@ -23,7 +23,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.SvgUtil;
 
 public abstract class HorizontalImageMenuItemListWidget<P extends AbstractMenuItemPopup<T>, T> extends MenuItemListWidget<P, T> {
@@ -53,7 +53,7 @@ public abstract class HorizontalImageMenuItemListWidget<P extends AbstractMenuIt
 
   @Override
   protected void setEmpty() {
-    SvgUtil.I.setSvg(imagePanel, R.images().filterIcon());
+    SvgUtil.I.setSvg(imagePanel, AtlasR.images().filterIcon());
   }
 
   protected abstract DataResource getImage(final T selection);

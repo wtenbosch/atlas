@@ -46,7 +46,7 @@ import nl.overheid.aerius.wui.atlas.event.SelectorLoadFailureEvent;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
 import nl.overheid.aerius.wui.event.BundledRegistration;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.MathUtil;
 import nl.overheid.aerius.wui.util.SelectorUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
@@ -152,7 +152,7 @@ public class SelectorWidget extends EventComposite implements SelectorParent {
     }
 
     popup.show();
-    textContainer.addStyleName(R.css().focus());
+    textContainer.addStyleName(AtlasR.css().focus());
     getElement().getStyle().setZIndex(POPUP_ZINDEX);
     selectorText.getElement().getStyle().setZIndex(POPUP_ZINDEX);
     textContainer.getElement().getStyle().setZIndex(POPUP_ZINDEX);
@@ -161,7 +161,7 @@ public class SelectorWidget extends EventComposite implements SelectorParent {
   }
 
   private void hide() {
-    textContainer.removeStyleName(R.css().focus());
+    textContainer.removeStyleName(AtlasR.css().focus());
     getElement().getStyle().clearZIndex();
     selectorText.getElement().getStyle().clearZIndex();
     textContainer.getElement().getStyle().clearZIndex();

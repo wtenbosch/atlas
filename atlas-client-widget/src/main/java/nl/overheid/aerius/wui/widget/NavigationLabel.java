@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.SvgUtil;
 
 public class NavigationLabel extends Composite implements HasClickHandlers {
@@ -48,7 +48,7 @@ public class NavigationLabel extends Composite implements HasClickHandlers {
 
     setText(null);
 
-    SvgUtil.I.setSvg(flipButton, R.images().flipButton());
+    SvgUtil.I.setSvg(flipButton, AtlasR.images().flipButton());
     backButton.ensureDebugId(AtlasTestIDs.BUTTON_BACK);
   }
 

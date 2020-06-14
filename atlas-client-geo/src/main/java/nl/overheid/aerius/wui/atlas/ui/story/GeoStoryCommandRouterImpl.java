@@ -30,7 +30,7 @@ import nl.overheid.aerius.wui.atlas.command.PanelSelectionChangeCommand;
 import nl.overheid.aerius.wui.atlas.command.ToggleLayerPanelCommand;
 import nl.overheid.aerius.wui.atlas.event.StoryLoadedEvent;
 import nl.overheid.aerius.wui.atlas.event.ToggleLayerPanelEvent;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.command.AbstractCommandRouter;
 import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
@@ -54,8 +54,8 @@ public class GeoStoryCommandRouterImpl extends AbstractCommandRouter implements 
 
   @EventHandler
   public void onStoryChangeEvent(final StoryLoadedEvent e) {
-    final StoryPlace previousPlace = getStoryPlaceOrNull(placeController.getPreviousPlace());
-    final StoryPlace currentPlace = getStoryPlace(placeController.getPlace());
+    final MonitorStoryPlace previousPlace = getStoryPlaceOrNull(placeController.getPreviousPlace());
+    final MonitorStoryPlace currentPlace = getStoryPlace(placeController.getPlace());
 
     final String prevReceptorId = previousPlace == null ? null : previousPlace.getReceptorId();
     final String currReceptorId = currentPlace.getReceptorId();
@@ -89,17 +89,17 @@ public class GeoStoryCommandRouterImpl extends AbstractCommandRouter implements 
     super.setEventBus(eventBus, this, EVENT_BINDER);
   }
 
-  protected StoryPlace getStoryPlaceOrNull(final Place place) {
+  protected MonitorStoryPlace getStoryPlaceOrNull(final Place place) {
     return getStoryPlace(place, false);
   }
 
-  protected StoryPlace getStoryPlace(final Place place) {
+  protected MonitorStoryPlace getStoryPlace(final Place place) {
     return getStoryPlace(place, true);
   }
 
-  protected StoryPlace getStoryPlace(final Place place, final boolean strict) {
-    if (place instanceof StoryPlace) {
-      return (StoryPlace) place;
+  protected MonitorStoryPlace getStoryPlace(final Place place, final boolean strict) {
+    if (place instanceof MonitorStoryPlace) {
+      return (MonitorStoryPlace) place;
     } else if (strict) {
       throw new RuntimeException("[StoryCommandRouterImpl] Unreachable state attained. PlaceChangeEvent of type " + place.getClass().getSimpleName()
           + " received while not supposed to be able to receive this type.");

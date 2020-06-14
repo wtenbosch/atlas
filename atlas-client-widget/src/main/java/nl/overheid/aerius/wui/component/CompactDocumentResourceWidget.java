@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import nl.overheid.aerius.shared.domain.DocumentResource;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.FormatUtil;
 import nl.overheid.aerius.wui.util.SvgUtil;
 
@@ -32,7 +32,7 @@ public class CompactDocumentResourceWidget extends Composite {
     this.resource = resource;
     initWidget(UI_BINDER.createAndBindUi(this));
 
-    SvgUtil.I.setSvg(icon, R.images().pdfIcon());
+    SvgUtil.I.setSvg(icon, AtlasR.images().pdfIcon());
 
     name.setText(resource.name());
     date.setText(FormatUtil.formatDate(resource.date()));

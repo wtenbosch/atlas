@@ -19,12 +19,12 @@ package nl.overheid.aerius.wui.component;
 import com.google.gwt.resources.client.DataResource;
 
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class LoginButton extends SVGButton {
   @Override
   protected DataResource getImage() {
-    return R.images().accountLoginIcon();
+    return AtlasR.images().accountLoginIcon();
   }
 
   @Override

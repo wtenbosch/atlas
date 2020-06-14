@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.SvgUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
@@ -60,7 +60,7 @@ public class HideButton extends EventComposite {
   }
 
   protected DataResource getImage() {
-    return R.images().additionalNavigationClose();
+    return AtlasR.images().additionalNavigationClose();
   }
 
   protected void onSelect() {}

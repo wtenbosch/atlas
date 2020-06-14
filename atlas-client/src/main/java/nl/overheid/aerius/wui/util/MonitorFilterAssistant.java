@@ -9,7 +9,7 @@ import com.google.inject.Singleton;
 
 import nl.overheid.aerius.shared.domain.Criterium;
 import nl.overheid.aerius.shared.domain.LevelOption;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 
 @Singleton
 public class MonitorFilterAssistant extends AbstractFilterAssistant {
@@ -43,7 +43,7 @@ public class MonitorFilterAssistant extends AbstractFilterAssistant {
   }
 
   @Override
-  protected void constructLibraryFiltersFromPlace(final Map<String, String> filters, final StoryPlace place) {
+  protected void constructLibraryFiltersFromPlace(final Map<String, String> filters, final MonitorStoryPlace place) {
     Optional.ofNullable(place.getFilters().get(ASSESSMENT_AREA_ID))
         .ifPresent(area -> {
           filters.put(ASSESSMENT_AREA_ID, area);

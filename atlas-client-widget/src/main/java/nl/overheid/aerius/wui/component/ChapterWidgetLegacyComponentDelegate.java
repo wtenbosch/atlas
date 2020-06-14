@@ -37,7 +37,7 @@ import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.properties.MainComponentProperties;
 import nl.overheid.aerius.wui.domain.selector.SelectorContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.LegacyWebComponentUtil;
 import nl.overheid.aerius.wui.util.ObservingReplacementAssistant;
 import nl.overheid.aerius.wui.util.ReplacementRegistration;
@@ -124,7 +124,7 @@ public class ChapterWidgetLegacyComponentDelegate extends BasicEventComponent im
   }
 
   protected void initComponentStyle(final Element component) {
-    component.addClassName(R.css().marginAround());
+    component.addClassName(AtlasR.css().marginAround());
     component.getStyle().setOverflow(Overflow.AUTO);
   }
 

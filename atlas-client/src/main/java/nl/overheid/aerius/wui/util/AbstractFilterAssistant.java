@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import nl.overheid.aerius.shared.domain.Criterium;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 
 public abstract class AbstractFilterAssistant implements FilterAssistant {
   @Override
@@ -45,7 +45,7 @@ public abstract class AbstractFilterAssistant implements FilterAssistant {
   protected void constructLibraryFilters(final Map<String, String> filterMap, final Map<String, String> sanitized) {}
 
   @Override
-  public List<Criterium> constructLibraryFiltersFromPlace(final StoryPlace place) {
+  public List<Criterium> constructLibraryFiltersFromPlace(final MonitorStoryPlace place) {
     final Map<String, String> filters = new HashMap<>();
 
     constructLibraryFiltersFromPlace(filters, place);
@@ -53,7 +53,7 @@ public abstract class AbstractFilterAssistant implements FilterAssistant {
     return constructLibraryFiltersFromStory(filters);
   }
 
-  protected void constructLibraryFiltersFromPlace(final Map<String, String> filters, final StoryPlace place) {}
+  protected void constructLibraryFiltersFromPlace(final Map<String, String> filters, final MonitorStoryPlace place) {}
 
   @Override
   public List<Criterium> constructLibraryFiltersFromStory(final Map<String, String> filters) {

@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 import nl.overheid.aerius.wui.activity.Activity;
 import nl.overheid.aerius.wui.activity.ActivityMapper;
 import nl.overheid.aerius.wui.atlas.factories.AtlasActivityFactory;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.DefaultPlace;
 import nl.overheid.aerius.wui.place.Place;
@@ -49,7 +49,7 @@ public class AtlasActivityMapper<F extends AtlasActivityFactory> implements Acti
   }
 
   protected Activity<?, AcceptsOneWidget> tryGetActivity(final Place place) {
-    if (place instanceof StoryPlace) {
+    if (place instanceof MonitorStoryPlace) {
       return getStoryActivity(place);
     } else {
       return null;
@@ -57,6 +57,6 @@ public class AtlasActivityMapper<F extends AtlasActivityFactory> implements Acti
   }
 
   protected Activity<?, AcceptsOneWidget> getStoryActivity(final Place place) {
-    return factory.createStoryPresenter((StoryPlace) place);
+    return factory.createStoryPresenter((MonitorStoryPlace) place);
   }
 }

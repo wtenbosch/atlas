@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>nl.overheid.aerius</groupId>
     <artifactId>autovalue-processors-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>autovalue-annotations</artifactId>
@@ -20,9 +19,9 @@
       <version>28.2-jre</version>
     </dependency>
     <dependency>
-      <groupId>io.yogh.gwt</groupId>
+      <groupId>nl.overheid.aerius</groupId>
       <artifactId>gwt-client-common-json</artifactId>
-      <version>1.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -36,13 +35,8 @@
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>27.0.1-jre</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>27.0.1-jre</version>
+      <artifactId>guava-gwt</artifactId>
+      <version>29.0-jre</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -60,21 +54,10 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-            <configuration>
-              <classifier>sources</classifier>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

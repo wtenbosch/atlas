@@ -29,7 +29,7 @@ import nl.overheid.aerius.wui.atlas.event.PanelSelectionChangeEvent;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
 import nl.overheid.aerius.wui.i18n.AtlasM;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class PanelVisibilityButton extends SVGButton {
   private final PanelVisibilityButtonEventBinder EVENT_BINDER = GWT.create(PanelVisibilityButtonEventBinder.class);
@@ -42,7 +42,7 @@ public class PanelVisibilityButton extends SVGButton {
 
   @Override
   protected DataResource getImage() {
-    return R.images().contextPanelCollapseButton();
+    return AtlasR.images().contextPanelCollapseButton();
   }
 
   @Override

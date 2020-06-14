@@ -21,7 +21,7 @@ import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.widget.HasEventBus;
 
 public class ChapterWidgetMapDelegate extends BasicEventComponent implements PanelWidgetDelegate, HasEventBus, IsMapCohort {
@@ -46,9 +46,9 @@ public class ChapterWidgetMapDelegate extends BasicEventComponent implements Pan
 
     container = new FlowPanel();
     container.getElement().getStyle().setPosition(Position.RELATIVE);
-    container.addStyleName(R.css().flex());
+    container.addStyleName(AtlasR.css().flex());
 
-    map.asWidget().addStyleName(R.css().grow());
+    map.asWidget().addStyleName(AtlasR.css().grow());
 
     container.add(searchWidget);
     container.add(map);

@@ -19,14 +19,14 @@ package nl.overheid.aerius.wui.util;
 import com.google.gwt.resources.client.DataResource;
 
 import nl.overheid.aerius.shared.domain.StoryIcon;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.resources.StoryNavigationResources;
 
 public final class StoryNavigationImageUtil {
   private StoryNavigationImageUtil() {}
 
   public static DataResource getImageResource(final StoryIcon option) {
-    final StoryNavigationResources sir = R.images();
+    final StoryNavigationResources sir = AtlasR.images();
     final DataResource ir;
 
     switch (option) {

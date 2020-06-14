@@ -35,7 +35,7 @@ import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.properties.MainComponentProperties;
 import nl.overheid.aerius.wui.domain.selector.SelectorContext;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.ObservingReplacementAssistant;
 import nl.overheid.aerius.wui.util.ReplacementRegistration;
 import nl.overheid.aerius.wui.util.WebComponentUtil;
@@ -123,7 +123,7 @@ public class ChapterWidgetComponentDelegate implements PanelWidgetDelegate, HasE
   }
 
   protected void initComponentStyle(final Element component) {
-    component.addClassName(R.css().marginAround());
+    component.addClassName(AtlasR.css().marginAround());
   }
 
   @Override

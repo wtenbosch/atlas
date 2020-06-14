@@ -30,8 +30,10 @@
   <inherits name='com.google.web.bindery.event.EventBinder' />
 
   <!-- ATLAS module inherits -->
+  <inherits name='nl.overheid.aerius.wui.parser.AutoValueParsers' />
   <inherits name='nl.overheid.aerius.AtlasShared' />
   <inherits name='nl.overheid.aerius.Common' />
+  <inherits name='nl.overheid.aerius.Json' />
   
   <!-- Browser-sensitive code should use the 'user.agent.extended' property -->
   <!-- This is a custom interpretation of the concept, because GWT's implementation is outdated and can't distinguish IE11 and FF among other things. -->

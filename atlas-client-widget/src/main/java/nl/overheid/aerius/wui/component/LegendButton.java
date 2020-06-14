@@ -22,12 +22,12 @@ import nl.overheid.aerius.wui.atlas.command.LegendDisplayCommand;
 import nl.overheid.aerius.wui.atlas.test.AtlasTestIDs;
 import nl.overheid.aerius.wui.atlas.util.HoverSelectionUtil;
 import nl.overheid.aerius.wui.i18n.AtlasM;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class LegendButton extends SVGButton {
   @Override
   protected DataResource getImage() {
-    return R.images().additionalNavigationLegend();
+    return AtlasR.images().additionalNavigationLegend();
   }
 
   @Override

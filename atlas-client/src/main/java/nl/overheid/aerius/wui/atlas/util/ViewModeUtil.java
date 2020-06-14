@@ -8,7 +8,7 @@ import nl.overheid.aerius.shared.domain.LevelOption;
 import nl.overheid.aerius.shared.domain.PanelConfiguration;
 import nl.overheid.aerius.shared.domain.PanelNames;
 import nl.overheid.aerius.shared.domain.PanelType;
-import nl.overheid.aerius.wui.atlas.place.StoryPlace;
+import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.util.FilterAssistant;
 
 public final class ViewModeUtil {
@@ -76,7 +76,7 @@ public final class ViewModeUtil {
     return panels;
   }
 
-  public static Map<PanelNames, PanelConfiguration> findPanelConfiguration(final StoryPlace place) {
+  public static Map<PanelNames, PanelConfiguration> findPanelConfiguration(final MonitorStoryPlace place) {
     final String level = place.getFilters().get(FilterAssistant.LEVEL);
 
     if (level != null) {

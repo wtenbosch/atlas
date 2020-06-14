@@ -21,11 +21,11 @@ import com.google.gwt.resources.client.DataResource;
 
 import nl.overheid.aerius.shared.domain.ChapterIcon;
 import nl.overheid.aerius.wui.resources.ChapterNavigationResources;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class ChapterNavigationImageUtil {
   public static DataResource getImageResource(final ChapterIcon option) {
-    final ChapterNavigationResources sir = R.images();
+    final ChapterNavigationResources sir = AtlasR.images();
     DataResource ir;
 
     if (option == null) {

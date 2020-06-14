@@ -12,7 +12,7 @@ import nl.overheid.aerius.shared.domain.StoryFilterOption;
 import nl.overheid.aerius.wui.atlas.event.StoryFilterSelectionChangeEvent;
 import nl.overheid.aerius.wui.component.StoryFilterPopup;
 import nl.overheid.aerius.wui.i18n.AtlasM;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public class StoryFilterWidget extends CompactMenuItemListWidget<StoryFilterOption> {
   interface StoryFilterWidgetEventBinder extends EventBinder<StoryFilterWidget> {}
@@ -25,7 +25,7 @@ public class StoryFilterWidget extends CompactMenuItemListWidget<StoryFilterOpti
 
   @Override
   protected DataResource getImage(final StoryFilterOption selection) {
-    return R.images().filterIcon();
+    return AtlasR.images().filterIcon();
   }
 
   @Override

@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public abstract class MenuItemListWidget<P extends AbstractMenuItemPopup<T>, T> extends EventComposite implements HasEventBus {
   public interface CustomStyle extends CssResource {
@@ -132,14 +132,14 @@ public abstract class MenuItemListWidget<P extends AbstractMenuItemPopup<T>, T> 
   private void hide() {
     popup.prepareHide();
     getElement().getStyle().clearZIndex();
-    panel.removeStyleName(R.css().focus());
+    panel.removeStyleName(AtlasR.css().focus());
     panel.removeStyleName(style.focus());
   }
 
   private void show() {
     popup.show();
     getElement().getStyle().setZIndex(15000);
-    panel.addStyleName(R.css().focus());
+    panel.addStyleName(AtlasR.css().focus());
     panel.addStyleName(style.focus());
   }
 

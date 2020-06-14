@@ -4,13 +4,13 @@ import com.google.gwt.resources.client.DataResource;
 
 import nl.overheid.aerius.shared.domain.PanelType;
 import nl.overheid.aerius.wui.resources.AdditionalNavigationResources;
-import nl.overheid.aerius.wui.resources.R;
+import nl.overheid.aerius.wui.resources.AtlasR;
 
 public final class ContextNavigationImageUtil {
   private ContextNavigationImageUtil() {}
 
   public static DataResource getImageResource(final PanelType option) {
-    final AdditionalNavigationResources sir = R.images();
+    final AdditionalNavigationResources sir = AtlasR.images();
     final DataResource ir;
 
     switch (option) {
