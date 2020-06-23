@@ -23,23 +23,8 @@ public class EnvironmentConfigurationImpl implements EnvironmentConfiguration {
   private final EnvironmentConfigurationWrapper wrapper = new EnvironmentConfigurationWrapper();
 
   @Override
-  public String getLoginEndpoint() {
-    return wrapper.loginEndpoint;
-  }
-
-  @Override
-  public String getLogoutEndpoint() {
-    return wrapper.logoutEndpoint;
-  }
-
-  @Override
   public String getHealthchecksEndpoint() {
     return wrapper.healthchecksEndpoint;
-  }
-
-  @Override
-  public String getSelectorEndpoint() {
-    return wrapper.selectorEndpoint;
   }
 
   @Override
@@ -55,21 +40,6 @@ public class EnvironmentConfigurationImpl implements EnvironmentConfiguration {
   @Override
   public String getBasicAuthEndpoint() {
     return wrapper.basicAuthEndpoint;
-  }
-
-  @Override
-  public String getAuthenticationEndpoint() {
-    return wrapper.authenticationEndpoint;
-  }
-
-  @Override
-  public String getAuthenticationClientId() {
-    return wrapper.authenticationClientId;
-  }
-
-  @Override
-  public String getAuthenticationClientSecret() {
-    return wrapper.authenticationClientSecret;
   }
 
   @Override

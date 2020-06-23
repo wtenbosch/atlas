@@ -20,25 +20,13 @@ import com.google.inject.ImplementedBy;
 
 @ImplementedBy(EnvironmentConfigurationImpl.class)
 public interface EnvironmentConfiguration {
-  String getLoginEndpoint();
-
-  String getLogoutEndpoint();
-
   String getHealthchecksEndpoint();
-
-  String getSelectorEndpoint();
 
   String getLayerEndpoint();
 
   String getCmsEndpoint();
 
   String getBasicAuthEndpoint();
-
-  String getAuthenticationEndpoint();
-
-  String getAuthenticationClientId();
-
-  String getAuthenticationClientSecret();
 
   String getSearchEndpoint();
 
