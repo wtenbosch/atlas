@@ -24,4 +24,8 @@ public class UrlHelper {
   public static String getComponent(final String path) {
     return services.getComponents() + path;
   }
+
+  public static String getGeoserver(final String path) {
+    return services.getGeoserver() + path;
+  }
 }

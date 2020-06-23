@@ -10,4 +10,6 @@ public interface AtlasServices {
   String getComponents();
 
   String getTextTemplates();
+
+  String getGeoserver();
 }
