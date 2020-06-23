@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.overheid.aerius</groupId>
     <artifactId>aerius-atlas-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
   <artifactId>aerius-wui-common-client</artifactId>
   <name>AERIUS Atlas :: common GWT client</name>
