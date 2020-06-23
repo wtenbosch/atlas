@@ -19,7 +19,7 @@
 
   <groupId>nl.overheid.aerius</groupId>
   <artifactId>aerius-atlas-parent</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>AERIUS Atlas parent</name>
   <url>https://www.aerius.nl</url>
