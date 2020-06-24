@@ -18,12 +18,8 @@
       <version>${project.version}</version>
       <exclusions>
         <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
+          <groupId>nl.overheid.aerius</groupId>
+          <artifactId>autovalue-annotations-serializers</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -34,12 +30,8 @@
       <classifier>sources</classifier>
       <exclusions>
         <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
+          <groupId>nl.overheid.aerius</groupId>
+          <artifactId>autovalue-annotations-serializers</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -50,12 +42,8 @@
       <classifier>parsers</classifier>
       <exclusions>
         <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
+          <groupId>nl.overheid.aerius</groupId>
+          <artifactId>autovalue-annotations-serializers</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -68,12 +56,12 @@
     </dependency>
     <dependency>
       <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations</artifactId>
+      <artifactId>autovalue-annotations-parsers</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations</artifactId>
+      <artifactId>autovalue-annotations-parsers</artifactId>
       <version>${project.version}</version>
       <classifier>sources</classifier>
     </dependency>

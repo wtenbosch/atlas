@@ -98,9 +98,14 @@ public class RequestUtil {
       }
     });
 
-    final String host = cms();
+    final String url;
+    if (uri.startsWith("http")) {
+      url = uri;
+    } else {
+      url = cms() + uri;
+    }
 
-    req.open(method, host + uri);
+    req.open(method, url);
     req.send(payload);
   }
 
@@ -144,5 +149,9 @@ public class RequestUtil {
     }
 
     return bldr.toString();
+  }
+
+  public static String prepareUrl(final String host, final String method, final String... args) {
+    return host + prepareUri(method, args);
   }
 }

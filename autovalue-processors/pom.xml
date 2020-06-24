@@ -33,6 +33,8 @@
 
       <modules>
         <module>annotations</module>
+        <module>annotations-parsers</module>
+        <module>annotations-serializers</module>
         <module>processors</module>
         <module>gwt-client-common-json</module>
       </modules>

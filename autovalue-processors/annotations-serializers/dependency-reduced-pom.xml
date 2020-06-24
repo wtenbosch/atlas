@@ -3,11 +3,12 @@
   <parent>
     <artifactId>autovalue-processors-parent</artifactId>
     <groupId>nl.overheid.aerius</groupId>
-    <version>1.1-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>autovalue-processors</artifactId>
-  <name>autovalue-processors :: processors</name>
+  <name>Commons :: autovalue-processors :: sources</name>
+  <description>The AERIUS Commons project for AutoValue Processors</description>
   <build>
     <plugins>
       <plugin>
@@ -16,26 +17,20 @@
       </plugin>
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
             <goals>
               <goal>jar-no-fork</goal>
             </goals>
+            <configuration>
+              <excludes>
+                <exclude>nl/overheid/aerius/processors/**</exclude>
+              </excludes>
+            </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>com.google.auto.service</groupId>
-              <artifactId>auto-service</artifactId>
-              <version>${auto-service.version}</version>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -46,9 +41,10 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <minimizeJar>true</minimizeJar>
               <filters>
                 <filter>
-                  <artifact>nl.overheid.aerius:gwt-client-common-json</artifact>
+                  <artifact>nl.overheid.aerius:commons-wui-gwt-json</artifact>
                   <includes>
                     <include>**</include>
                   </includes>
@@ -64,57 +60,42 @@
               </filters>
               <artifactSet>
                 <includes>
-                  <include>nl.overheid.aerius:gwt-client-common-json</include>
+                  <include>nl.overheid.aerius:commons-wui-gwt-json</include>
                   <include>com.google.gwt:gwt-user</include>
-                  <include>com.google.guava:guava</include>
                 </includes>
               </artifactSet>
             </configuration>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>net.ltgt.gwt.maven</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <moduleName>nl.overheid.aerius.AutoValueProcessor</moduleName>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
     <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-inject</artifactId>
-      <version>1.2.2</version>
+      <groupId>nl.overheid.aerius.bom</groupId>
+      <artifactId>bom.source.auto-value</artifactId>
+      <version>3.0-SNAPSHOT</version>
+      <type>pom</type>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-validation</artifactId>
-      <version>1.2.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-runtime</artifactId>
-      <version>1.2.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations</artifactId>
-      <version>1.1-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.auto.value</groupId>
-      <artifactId>auto-value-annotations</artifactId>
-      <version>1.7</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot</artifactId>
-      <version>2.3.1.RELEASE</version>
+      <groupId>nl.overheid.aerius.bom</groupId>
+      <artifactId>bom.source.micronaut</artifactId>
+      <version>3.0-SNAPSHOT</version>
+      <type>pom</type>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.google.auto.service</groupId>
-      <artifactId>auto-service-annotations</artifactId>
+      <artifactId>auto-service</artifactId>
       <version>1.0-rc6</version>
       <scope>compile</scope>
     </dependency>
@@ -135,16 +116,6 @@
       <artifactId>compile-testing</artifactId>
       <version>0.18</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>auto-value</artifactId>
-          <groupId>com.google.auto.value</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.truth</groupId>
@@ -160,28 +131,11 @@
           <artifactId>diffutils</artifactId>
           <groupId>com.googlecode.java-diff-utils</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.micronaut</groupId>
-        <artifactId>micronaut-bom</artifactId>
-        <version>${micronaut.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <properties>
-    <micronaut.version>1.2.2</micronaut.version>
-    <auto-value.version>1.7</auto-value.version>
-    <auto-service.version>1.0-rc6</auto-service.version>
-    <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
+    <com.google.gwt.version>2.8.2</com.google.gwt.version>
   </properties>
 </project>
+

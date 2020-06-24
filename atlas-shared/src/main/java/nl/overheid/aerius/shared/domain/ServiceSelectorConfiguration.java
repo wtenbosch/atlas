@@ -7,10 +7,11 @@ import com.google.auto.value.AutoValue;
 
 @AutoValue
 public abstract class ServiceSelectorConfiguration implements Serializable {
-  private static final long serialVersionUID = -7187859046296122525L;
+  private static final long serialVersionUID = 1L;
 
   public static Builder builder() {
-    return new AutoValue_ServiceSelectorConfiguration.Builder();
+    return new AutoValue_ServiceSelectorConfiguration.Builder()
+        .multiselect(false);
   }
 
   public abstract String type();

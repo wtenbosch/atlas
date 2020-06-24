@@ -163,6 +163,7 @@
       <modules>
         <module>aerius-client-geo</module>
         <module>aerius-client-geo-ol3</module>
+        <module>aerius-client-geo-ol3-vue</module>
         <module>atlas-client</module>
         <module>atlas-client-vue</module>
         <module>atlas-client-common</module>

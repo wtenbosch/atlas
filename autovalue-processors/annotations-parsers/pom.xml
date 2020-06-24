@@ -7,21 +7,34 @@
     <version>1.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>autovalue-annotations</artifactId>
+  <artifactId>autovalue-annotations-parsers</artifactId>
   <packaging>jar</packaging>
 
-  <name>autovalue-processors :: annotations</name>
+  <name>autovalue-processors :: annotations (parsers only)</name>
 
   <dependencies>
     <dependency>
-      <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations-parsers</artifactId>
-      <version>${project.version}</version>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>28.2-jre</version>
     </dependency>
     <dependency>
       <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations-serializers</artifactId>
+      <artifactId>gwt-client-common-json</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+      <version>29.0-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
     </dependency>
   </dependencies>
 

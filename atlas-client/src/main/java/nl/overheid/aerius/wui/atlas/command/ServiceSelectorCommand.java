@@ -14,24 +14,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package nl.overheid.aerius.geo.wui;
+package nl.overheid.aerius.wui.atlas.command;
 
-import nl.overheid.aerius.geo.domain.HasMapCohort;
-import nl.overheid.aerius.geo.domain.IsMapCohort;
-import nl.overheid.aerius.wui.widget.HasEventBus;
+import java.util.List;
 
-public interface Map extends HasEventBus {
-  void attach();
+import nl.overheid.aerius.shared.domain.ServiceSelector;
+import nl.overheid.aerius.wui.atlas.event.ServiceSelectorEvent;
+import nl.overheid.aerius.wui.command.SimpleGenericCommand;
 
-  void registerEventCohort(IsMapCohort mapCohort);
-
-  default void registerEventCohort(final HasMapCohort mapCohort) {
-    registerEventCohort(mapCohort.asMapCohort());
+public class ServiceSelectorCommand extends SimpleGenericCommand<List<ServiceSelector>, ServiceSelectorEvent> {
+  public ServiceSelectorCommand(final List<ServiceSelector> value) {
+    super(value);
   }
 
-  String getUniqueId();
-
-  void setUniqueId(String uniqueId);
-
-  <T> T getMap();
+  @Override
+  protected ServiceSelectorEvent createEvent(final List<ServiceSelector> value) {
+    return new ServiceSelectorEvent(value);
+  }
 }

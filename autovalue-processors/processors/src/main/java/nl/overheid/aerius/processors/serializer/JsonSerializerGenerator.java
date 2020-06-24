@@ -32,6 +32,8 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic.Kind;
 
+import org.springframework.boot.jackson.JsonComponent;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -74,7 +76,8 @@ public class JsonSerializerGenerator {
 
     // Create the type
     final Builder bldr = TypeSpec.classBuilder(target)
-        .addModifiers(Modifier.PUBLIC, Modifier.FINAL);
+        .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+        .addAnnotation(JsonComponent.class);
 
     AutoValueGeneratorUtil.addGeneratorIfExists(elements, version, bldr, AutoValueJsonSerializerProcessor.class.getCanonicalName());
 

@@ -28,6 +28,8 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
+import jsinterop.base.Js;
+
 import nl.overheid.aerius.geo.domain.IsMapCohort;
 import nl.overheid.aerius.geo.event.MapEventBus;
 
@@ -110,5 +112,10 @@ public class OL3Map extends Composite implements Map {
   @Override
   public String getUniqueId() {
     return uniqueId;
+  }
+
+  @Override
+  public <T> T getMap() {
+    return Js.cast(map.getMap());
   }
 }

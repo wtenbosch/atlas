@@ -16,6 +16,7 @@
     <auto-service.version>1.0-rc6</auto-service.version>
     <auto-value.version>1.7</auto-value.version>
     <micronaut.version>1.2.2</micronaut.version>
+    <spring-boot.version>2.3.1.RELEASE</spring-boot.version>
   </properties>
 
   <dependencyManagement>
@@ -72,6 +73,12 @@
       <groupId>nl.overheid.aerius</groupId>
       <artifactId>gwt-client-common-json</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+      <version>${spring-boot.version}</version>
     </dependency>
 
     <dependency>

@@ -8,7 +8,7 @@ import nl.overheid.aerius.shared.domain.ServiceSelector;
 import nl.overheid.aerius.shared.domain.ServiceSelectorConfiguration;
 
 public class SelectorBuilder {
-  public static ServiceSelector.Builder selector(final String value, final String name, final ServiceSelector.Builder... subs) {
+  public static ServiceSelector.Builder selector(final String name, final String value, final ServiceSelector.Builder... subs) {
     return ServiceSelector.builder()
         .name(name)
         .value(value)

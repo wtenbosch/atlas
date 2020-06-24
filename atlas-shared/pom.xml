@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>nl.overheid.aerius</groupId>
@@ -17,12 +18,19 @@
       <artifactId>auto-value-annotations</artifactId>
       <version>${auto-value.version}</version>
     </dependency>
-    
+
     <!-- AERIUS serializer/parser processing -->
     <dependency>
       <groupId>nl.overheid.aerius</groupId>
-      <artifactId>autovalue-annotations</artifactId>
+      <artifactId>autovalue-annotations-parsers</artifactId>
       <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>nl.overheid.aerius</groupId>
+      <artifactId>autovalue-annotations-serializers</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
@@ -52,7 +60,6 @@
               <excludes>
                 <exclude>**/*JsonParser*</exclude>
                 <exclude>**/*JsonSerializer*</exclude>
-                <exclude>**/SerializationFactory*</exclude>
               </excludes>
             </configuration>
           </execution>
@@ -66,7 +73,6 @@
               <classifier>serializers</classifier>
               <includes>
                 <include>**/*JsonSerializer*</include>
-                <include>**/SerializationFactory*</include>
               </includes>
             </configuration>
           </execution>
@@ -98,7 +104,6 @@
             <configuration>
               <excludes>
                 <exclude>**/*JsonSerializer*</exclude>
-                <exclude>**/SerializationFactory*</exclude>f
               </excludes>
             </configuration>
           </execution>
