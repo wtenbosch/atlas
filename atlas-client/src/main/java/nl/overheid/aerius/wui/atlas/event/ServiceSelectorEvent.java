@@ -22,9 +22,14 @@ import nl.overheid.aerius.shared.domain.ServiceSelector;
 import nl.overheid.aerius.wui.event.SimpleGenericEvent;
 
 public class ServiceSelectorEvent extends SimpleGenericEvent<List<ServiceSelector>> {
-  public ServiceSelectorEvent() {}
+  private final String type;
 
-  public ServiceSelectorEvent(final List<ServiceSelector> value) {
+  public ServiceSelectorEvent(final String type, final List<ServiceSelector> value) {
     super(value);
+    this.type = type;
+  }
+
+  public String getType() {
+    return type;
   }
 }

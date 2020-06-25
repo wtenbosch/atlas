@@ -23,12 +23,19 @@ import nl.overheid.aerius.wui.atlas.event.ServiceSelectorEvent;
 import nl.overheid.aerius.wui.command.SimpleGenericCommand;
 
 public class ServiceSelectorCommand extends SimpleGenericCommand<List<ServiceSelector>, ServiceSelectorEvent> {
-  public ServiceSelectorCommand(final List<ServiceSelector> value) {
+  private final String type;
+
+  public ServiceSelectorCommand(final String type, final List<ServiceSelector> value) {
     super(value);
+    this.type = type;
   }
 
   @Override
   protected ServiceSelectorEvent createEvent(final List<ServiceSelector> value) {
-    return new ServiceSelectorEvent(value);
+    return new ServiceSelectorEvent(type, value);
+  }
+
+  public String getType() {
+    return type;
   }
 }
