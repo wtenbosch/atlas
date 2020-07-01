@@ -58,7 +58,7 @@ import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.atlas.util.ViewModeUtil;
 import nl.overheid.aerius.wui.command.AbstractCommandRouter;
 import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.domain.selector.SelectorContext;
+import nl.overheid.aerius.wui.domain.selector.SimpleSelectorContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
 import nl.overheid.aerius.wui.place.Place;
@@ -82,7 +82,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
 
   protected StoryContext context;
 
-  @Inject private SelectorContext selectors;
+  @Inject private SimpleSelectorContext selectors;
 
   private int savedChapterIdx;
 

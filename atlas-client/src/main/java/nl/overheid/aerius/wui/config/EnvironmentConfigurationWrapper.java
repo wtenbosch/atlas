@@ -47,4 +47,6 @@ public class EnvironmentConfigurationWrapper {
   @JsProperty public String basicAuthCredentials;
 
   @JsProperty public String applicationVersion;
+  
+  @JsProperty public String componentsEndpoint;
 }

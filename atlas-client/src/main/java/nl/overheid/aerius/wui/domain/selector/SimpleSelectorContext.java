@@ -49,10 +49,10 @@ import nl.overheid.aerius.wui.widget.HasEventBus;
  * TODO Turn into interface
  */
 @Singleton
-public class SelectorContext implements HasEventBus {
+public class SimpleSelectorContext implements HasEventBus {
   private static final String MONITOR_SELECTORS_START_KEY = "monitor-selectors_";
 
-  interface SelectorContextEventBinder extends EventBinder<SelectorContext> {}
+  interface SelectorContextEventBinder extends EventBinder<SimpleSelectorContext> {}
 
   private final SelectorContextEventBinder EVENT_BINDER = GWT.create(SelectorContextEventBinder.class);
 
@@ -65,7 +65,7 @@ public class SelectorContext implements HasEventBus {
   private EventBus eventBus;
 
   @Inject
-  public SelectorContext(final ConfigurationDaemon config) {
+  public SimpleSelectorContext(final ConfigurationDaemon config) {
     retainStored();
     rememberedDefaults.put(Configurations.UNIT, config.getConfig(Configurations.UNIT));
   }

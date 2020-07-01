@@ -29,12 +29,15 @@ public abstract class ServiceSelector implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public static Builder builder() {
-    return new AutoValue_ServiceSelector.Builder();
+    return new AutoValue_ServiceSelector.Builder()
+        .defaultt(false);
   }
 
   public abstract String value();
 
   public abstract String name();
+
+  public abstract boolean defaultt();
 
   @Nullable
   public abstract HashMap<String, String> tags();
@@ -47,6 +50,8 @@ public abstract class ServiceSelector implements Serializable {
     public abstract Builder value(String value);
 
     public abstract Builder name(String value);
+
+    public abstract Builder defaultt(boolean value);
 
     public abstract Builder tags(HashMap<String, String> value);
 

@@ -86,4 +86,9 @@ public class EnvironmentConfigurationImpl implements EnvironmentConfiguration {
   public String getApplicationVersion() {
     return wrapper.applicationVersion;
   }
+
+  @Override
+  public String getComponentsEndpoint() {
+    return wrapper.componentsEndpoint;
+  }
 }

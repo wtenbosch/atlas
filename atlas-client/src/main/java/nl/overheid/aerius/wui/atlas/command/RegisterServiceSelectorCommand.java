@@ -14,37 +14,18 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
-package nl.overheid.aerius.wui.config;
+package nl.overheid.aerius.wui.atlas.command;
 
-import com.google.inject.ImplementedBy;
+import nl.overheid.aerius.shared.domain.ServiceSelectorConfiguration;
+import nl.overheid.aerius.wui.command.SimpleGenericCommand;
 
-@ImplementedBy(EnvironmentConfigurationImpl.class)
-public interface EnvironmentConfiguration {
-  String getLoginEndpoint();
+public class RegisterServiceSelectorCommand extends SimpleGenericCommand<ServiceSelectorConfiguration, RegisterServiceSelectorEvent> {
+  public RegisterServiceSelectorCommand(final ServiceSelectorConfiguration value) {
+    super(value);
+  }
 
-  String getLogoutEndpoint();
-
-  String getHealthchecksEndpoint();
-
-  String getSelectorEndpoint();
-
-  String getLayerEndpoint();
-
-  String getCmsEndpoint();
-
-  String getBasicAuthEndpoint();
-
-  String getAuthenticationEndpoint();
-
-  String getAuthenticationClientId();
-
-  String getAuthenticationClientSecret();
-
-  String getSearchEndpoint();
-
-  String getBasicAuthCredentials();
-
-  String getApplicationVersion();
-
-  String getComponentsEndpoint();
+  @Override
+  protected RegisterServiceSelectorEvent createEvent(final ServiceSelectorConfiguration value) {
+    return new RegisterServiceSelectorEvent(value);
+  }
 }

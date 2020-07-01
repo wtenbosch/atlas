@@ -9,9 +9,13 @@ import nl.overheid.aerius.shared.domain.ServiceSelectorConfiguration;
 
 public class SelectorBuilder {
   public static ServiceSelector.Builder selector(final String name, final String value, final ServiceSelector.Builder... subs) {
+    return selector(name, value, false, subs);
+  }
+  public static ServiceSelector.Builder selector(final String name, final String value, final boolean defaultt, final ServiceSelector.Builder... subs) {
     return ServiceSelector.builder()
         .name(name)
         .value(value)
+        .defaultt(defaultt)
         .selectors(list(subs));
   }
 

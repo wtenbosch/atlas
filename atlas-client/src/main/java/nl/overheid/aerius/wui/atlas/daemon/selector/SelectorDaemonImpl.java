@@ -23,7 +23,7 @@ import nl.overheid.aerius.wui.atlas.event.SelectorLoadFailureEvent;
 import nl.overheid.aerius.wui.atlas.future.selector.SelectorOracle;
 import nl.overheid.aerius.wui.atlas.util.UglyBoilerPlate;
 import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.domain.selector.SelectorContext;
+import nl.overheid.aerius.wui.domain.selector.SimpleSelectorContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.future.AppAsyncCallback;
 import nl.overheid.aerius.wui.util.NotificationUtil;
@@ -43,10 +43,10 @@ public class SelectorDaemonImpl extends BasicEventComponent implements SelectorD
 
   private boolean reloadScheduled;
 
-  private final SelectorContext selectors;
+  private final SimpleSelectorContext selectors;
 
   @Inject
-  public SelectorDaemonImpl(final SelectorOracle selectorOracle, final ReplacementAssistant replacer, final SelectorContext selectors) {
+  public SelectorDaemonImpl(final SelectorOracle selectorOracle, final ReplacementAssistant replacer, final SimpleSelectorContext selectors) {
     this.selectorOracle = selectorOracle;
     this.replacer = replacer;
     this.selectors = selectors;
