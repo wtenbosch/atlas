@@ -1,4 +1,4 @@
-package nl.overheid.aerius.wui.atlas.service;
+package nl.overheid.aerius.wui.util;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -8,23 +8,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import elemental2.dom.FormData;
 import elemental2.dom.XMLHttpRequest;
 
-import nl.overheid.aerius.wui.config.EnvironmentConfiguration;
-import nl.overheid.aerius.wui.dev.GWTProd;
-import nl.overheid.aerius.wui.util.TemplatedString;
+import nl.overheid.aerius.wui.atlas.service.HttpRequestException;
 
 public class RequestUtil {
-  private static String rerouteCmsRequest;
-  private static EnvironmentConfiguration cfg;
-
-  public static void init(final EnvironmentConfiguration cfg) {
-    RequestUtil.cfg = cfg;
-  }
-
-  public static void rerouteCmsRequests(final String uri) {
-    GWTProd.warn("Rerouting CMS requests to: " + uri);
-    rerouteCmsRequest = uri;
-  }
-
   /** GET **/
 
   public static <T> void doGet(final String uri, final Function<AsyncCallback<T>, AsyncCallback<String>> parser, final AsyncCallback<T> callback) {
@@ -98,26 +84,8 @@ public class RequestUtil {
       }
     });
 
-    final String url;
-    if (uri.startsWith("http")) {
-      url = uri;
-    } else {
-      url = cms() + uri;
-    }
-
-    req.open(method, url);
+    req.open(method, uri);
     req.send(payload);
-  }
-
-  private static String cms() {
-    if (rerouteCmsRequest != null) {
-      return rerouteCmsRequest;
-    } else {
-      if (cfg == null) {
-        throw new RuntimeException("RequestUtil not initialised with environment configuration.");
-      }
-      return cfg.getCmsEndpoint();
-    }
   }
 
   private static void handleError(final AsyncCallback<String> callback, final String responseText) {

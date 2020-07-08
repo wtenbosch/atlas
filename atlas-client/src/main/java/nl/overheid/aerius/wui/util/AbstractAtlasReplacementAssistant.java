@@ -42,9 +42,9 @@ import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.place.PlaceController;
 
 public abstract class AbstractAtlasReplacementAssistant extends GenericReplacementAssistant {
-  interface MonitorUpReplacementAssistantEventBinder extends EventBinder<AbstractAtlasReplacementAssistant> {}
+  private static final AbstractAtlasReplacementAssistantEventBinder EVENT_BINDER = GWT.create(AbstractAtlasReplacementAssistantEventBinder.class);
 
-  private final MonitorUpReplacementAssistantEventBinder EVENT_BINDER = GWT.create(MonitorUpReplacementAssistantEventBinder.class);
+  interface AbstractAtlasReplacementAssistantEventBinder extends EventBinder<AbstractAtlasReplacementAssistant> {}
 
   // Find an alternative to this method of being less strict for certain keys that
   // are deemed optional.

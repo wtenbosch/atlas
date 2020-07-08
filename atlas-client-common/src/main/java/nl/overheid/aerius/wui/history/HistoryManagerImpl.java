@@ -23,6 +23,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
+import nl.overheid.aerius.wui.event.NotifyHistoryEvent;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
 import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.DefaultPlace;
@@ -39,6 +40,8 @@ public class HistoryManagerImpl implements HistoryManager {
 
   private final PlaceController placeController;
 
+  private final EventBus eventBus;
+
   private final Historian historian;
 
   private final PlaceHistoryMapper mapper;
@@ -50,6 +53,7 @@ public class HistoryManagerImpl implements HistoryManager {
     this.placeController = placeController;
     this.historian = historian;
     this.mapper = mapper;
+    this.eventBus = eventBus;
 
     EVENT_BINDER.bindEventHandlers(this, eventBus);
 
@@ -78,8 +82,6 @@ public class HistoryManagerImpl implements HistoryManager {
   }
 
   private void handleHistoryToken(final String token, final boolean silent) {
-    GWT.log("Handling history: " + token);
-
     TokenizedPlace newPlace = null;
 
     if (token == null || token.isEmpty()) {
@@ -95,5 +97,6 @@ public class HistoryManagerImpl implements HistoryManager {
     }
 
     placeController.goTo(newPlace, silent);
+    eventBus.fireEvent(new NotifyHistoryEvent(newPlace));
   }
 }

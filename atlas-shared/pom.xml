@@ -32,6 +32,12 @@
       <version>${project.version}</version>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>nl.overheid.aerius</groupId>
+      <artifactId>autovalue-processors</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
 
     <dependency>
       <groupId>com.google.code.findbugs</groupId>

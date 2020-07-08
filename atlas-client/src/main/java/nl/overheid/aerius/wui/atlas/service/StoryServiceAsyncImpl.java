@@ -21,6 +21,7 @@ import com.google.inject.Singleton;
 
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.wui.atlas.service.parser.StoryJsonParser;
+import nl.overheid.aerius.wui.util.RequestUtil;
 
 @Singleton
 public class StoryServiceAsyncImpl implements StoryServiceAsync {

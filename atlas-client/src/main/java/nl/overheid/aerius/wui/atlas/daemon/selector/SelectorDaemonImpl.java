@@ -116,7 +116,7 @@ public class SelectorDaemonImpl extends BasicEventComponent implements SelectorD
           eventBus.fireEvent(new SelectorLoadFailureEvent(requestedType));
         }));
       } catch (final IllegalStateException e) {
-        GWTProd.log("NOTE: Selector URL could not be fully resolved: " + e.getMessage());
+        GWTProd.log("NOTE", "Selector URL could not be fully resolved: " + e.getMessage());
         return;
       }
     });

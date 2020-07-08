@@ -18,7 +18,6 @@ import nl.overheid.aerius.shared.domain.NarrowLibrary;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.wui.atlas.service.LegacyRequestUtil;
-import nl.overheid.aerius.wui.atlas.service.RequestUtil;
 import nl.overheid.aerius.wui.atlas.service.parser.JSONObjectHandle;
 import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.util.NotificationUtil;
@@ -276,7 +275,6 @@ public class UglyBoilerPlate {
     final String rerouter = Location.getParameter("reroute");
     if (rerouter != null) {
       LegacyRequestUtil.rerouteCmsRequests(rerouter);
-      RequestUtil.rerouteCmsRequests(rerouter);
     }
   }
   

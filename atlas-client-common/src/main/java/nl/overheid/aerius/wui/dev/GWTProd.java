@@ -17,11 +17,19 @@
 package nl.overheid.aerius.wui.dev;
 
 public class GWTProd {
+
+  /**
+   * Logs a message to the console. Calls are _not_ optimized out in Production Mode.
+   */
+  public static native void log(String marker, Object message) /*-{
+    console.info(marker, message);
+  }-*/;
+  
   /**
    * Logs a message to the console. Calls are _not_ optimized out in Production Mode.
    */
   public static native void log(Object message) /*-{
-    console.log(message );
+    console.info(message );
   }-*/;
 
   /**
@@ -57,9 +65,5 @@ public class GWTProd {
 
   public static void warn(final String marker, final String string) {
     warn("[" + marker + "] " + string);
-  }
-
-  public static void log(final String marker, final String string) {
-    log("[" + marker + "] " + string);
   }
 }
