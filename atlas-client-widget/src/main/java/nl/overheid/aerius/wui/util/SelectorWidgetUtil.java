@@ -23,14 +23,14 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.web.bindery.event.shared.EventBus;
 
 import nl.overheid.aerius.wui.component.SelectorWidget;
-import nl.overheid.aerius.wui.domain.selector.SelectorContext;
+import nl.overheid.aerius.wui.domain.selector.SimpleSelectorContext;
 
 public final class SelectorWidgetUtil {
-  private static SelectorContext selectorContext;
+  private static SimpleSelectorContext selectorContext;
 
   private SelectorWidgetUtil() {}
 
-  public static void initializeSelectorContext(final SelectorContext selectorContext) {
+  public static void initializeSelectorContext(final SimpleSelectorContext selectorContext) {
     SelectorWidgetUtil.selectorContext = selectorContext;
   }
 

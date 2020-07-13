@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
@@ -14,9 +15,9 @@ import nl.overheid.aerius.geo.MapBuilder;
 import nl.overheid.aerius.geo.command.MapResizeCommand;
 import nl.overheid.aerius.geo.wui.Map;
 import nl.overheid.aerius.wui.atlas.event.StorySelectionChangeEvent;
-import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
+import nl.overheid.aerius.wui.util.WidgetUtil;
 import nl.overheid.aerius.wui.widget.HasEventBus;
 import nl.overheid.aerius.wui.widget.SwitchPanel;
 
@@ -57,12 +58,14 @@ public class MapPanelSwitcher extends SwitchPanel implements HasEventBus {
   private void initializeMapPanel(final String key) {
     final SimplePanel panel = new SimplePanel();
     final Map map = mapBuilder.getMap();
+    
+    final Widget mapWidget = WidgetUtil.asWidgetIfWidget(map);
 
-    panel.setWidget(map);
+    panel.setWidget(mapWidget);
     panels.put(key, getWidgetCount());
     maps.put(key, map);
-    map.asWidget().getElement().getStyle().setWidth(100, Unit.PCT);
-    map.asWidget().getElement().getStyle().setHeight(100, Unit.PCT);
+    mapWidget.getElement().getStyle().setWidth(100, Unit.PCT);
+    mapWidget.getElement().getStyle().setHeight(100, Unit.PCT);
     add(panel);
 
     map.setEventBus(eventBus);

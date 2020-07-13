@@ -22,6 +22,7 @@ import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.resources.AtlasR;
+import nl.overheid.aerius.wui.util.WidgetUtil;
 import nl.overheid.aerius.wui.widget.HasEventBus;
 
 public class ChapterWidgetMapDelegate extends BasicEventComponent implements PanelWidgetDelegate, HasEventBus, IsMapCohort {
@@ -48,10 +49,10 @@ public class ChapterWidgetMapDelegate extends BasicEventComponent implements Pan
     container.getElement().getStyle().setPosition(Position.RELATIVE);
     container.addStyleName(AtlasR.css().flex());
 
-    map.asWidget().addStyleName(AtlasR.css().grow());
+    WidgetUtil.asWidgetIfWidget(map).addStyleName(AtlasR.css().grow());
 
     container.add(searchWidget);
-    container.add(map);
+    container.add(WidgetUtil.asWidgetIfWidget(map));
 
     this.mapContext = mapContext;
     this.storyContext = storyContext;

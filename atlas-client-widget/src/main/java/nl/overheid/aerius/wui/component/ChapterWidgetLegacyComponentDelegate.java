@@ -35,7 +35,7 @@ import com.google.web.bindery.event.shared.binder.EventBinder;
 import nl.overheid.aerius.shared.domain.PanelContent;
 import nl.overheid.aerius.shared.domain.Selector;
 import nl.overheid.aerius.shared.domain.properties.MainComponentProperties;
-import nl.overheid.aerius.wui.domain.selector.SelectorContext;
+import nl.overheid.aerius.wui.domain.selector.SimpleSelectorContext;
 import nl.overheid.aerius.wui.event.BasicEventComponent;
 import nl.overheid.aerius.wui.resources.AtlasR;
 import nl.overheid.aerius.wui.util.LegacyWebComponentUtil;
@@ -61,11 +61,11 @@ public class ChapterWidgetLegacyComponentDelegate extends BasicEventComponent im
 
   private final Map<String, Timer> removeTimers = new HashMap<>();
 
-  private final SelectorContext selectorContext;
+  private final SimpleSelectorContext selectorContext;
 
   @Inject
   public ChapterWidgetLegacyComponentDelegate(@Assisted final PanelContent conf, final @Assisted AcceptsOneWidget target,
-      final ObservingReplacementAssistant replacer, final SelectorContext selectorContext) {
+      final ObservingReplacementAssistant replacer, final SimpleSelectorContext selectorContext) {
     this.replacer = replacer;
     this.selectorContext = selectorContext;
 

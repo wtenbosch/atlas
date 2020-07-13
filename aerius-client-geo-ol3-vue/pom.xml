@@ -8,6 +8,7 @@
   </parent>
   <artifactId>aerius-client-geo-ol3-vue</artifactId>
   <name>AERIUS Atlas :: geo GWT client for OL3 Vue</name>
+  <packaging>gwt-lib</packaging>
 
   <properties>
     <vue.version>1.0-beta-10-AERIUS</vue.version>
@@ -31,6 +32,11 @@
       <artifactId>aerius-client-geo</artifactId>
       <version>${project.version}</version>
       <type>gwt-lib</type>
+    </dependency>
+    <dependency>
+      <groupId>nl.overheid.aerius</groupId>
+      <artifactId>aerius-client-geo</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -65,6 +71,9 @@
         <artifactId>gwt-maven-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
+          <codeserverArgs>
+            <arg>-generateJsInteropExports</arg>
+          </codeserverArgs>
           <skipModule>true</skipModule>
           <moduleName>nl.overheid.aerius.GeoOL3Vue</moduleName>
         </configuration>
@@ -91,6 +100,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

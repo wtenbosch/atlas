@@ -38,6 +38,7 @@ import nl.overheid.aerius.wui.component.CompactMapSearchWidget;
 import nl.overheid.aerius.wui.component.LayerPanelView;
 import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.event.BundledRegistration;
+import nl.overheid.aerius.wui.util.WidgetUtil;
 import nl.overheid.aerius.wui.widget.EventComposite;
 
 public class ContextLocationViewImpl extends EventComposite implements ContextLocationView {
@@ -67,7 +68,7 @@ public class ContextLocationViewImpl extends EventComposite implements ContextLo
 
     initWidget(UI_BINDER.createAndBindUi(this));
 
-    mapPanel.setWidget(map);
+    mapPanel.setWidget(WidgetUtil.asWidgetIfWidget(map));
 
     registrations.add(mapContext.onMap(layerPanel));
     registrations.add(mapContext.onMap(searchWidget));
