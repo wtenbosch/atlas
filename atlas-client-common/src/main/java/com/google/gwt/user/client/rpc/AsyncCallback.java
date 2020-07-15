@@ -15,6 +15,8 @@
  */
 package com.google.gwt.user.client.rpc;
 
+import nl.overheid.aerius.wui.dev.GWTProd;
+
 /**
  * The primary interface a caller must implement to receive a response from a
  * remote procedure call.
@@ -105,6 +107,7 @@ public interface AsyncCallback<T> {
    * @param caught failure encountered while executing a remote procedure call
    */
   default void onFailure(final Throwable caught) {
+    GWTProd.warn("Falling back to default runtime exception after AsyncCallback. Consider changing this.");
     throw new RuntimeException(caught);
   }
 
