@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.machinezoo.noexception.Exceptions;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
@@ -39,21 +38,31 @@ public class TextTemplates {
         .build();
 
     final List<File> resourceFiles = getResourceFiles(base);
-    resourceFiles.forEach(Exceptions.sneak().consumer(v -> {
-      final Node document = parser.parseReader(new InputStreamReader(new FileInputStream(v)));
-      final String html = renderer.render(document);
 
-      final String fileName = v.getAbsoluteFile().getCanonicalPath();
-      final String cleanedFileName = Stream.of(fileName.split(File.separator))
-          .map(part -> part.indexOf("_") > -1 ? part.substring(part.indexOf("_") + 1) : part)
-          .collect(Collectors.joining(File.separator));
+    LOG.info("Indexing:" + resourceFiles.size());
 
-      final String key = cleanedFileName.substring(cleanedFileName.lastIndexOf(base) + base.length() + 1).replace(File.separator, "/");
+    resourceFiles.forEach(v -> {
+      try {
+        final Node document = parser.parseReader(new InputStreamReader(new FileInputStream(v)));
+        final String html = renderer.render(document);
 
-      LOG.debug("Interpreted and filed [{}] as html text", key);
+        final String fileName = v.getAbsoluteFile().getCanonicalPath();
+        final String cleanedFileName = Stream.of(fileName.split(File.separator))
+            .map(part -> part.indexOf("_") > -1 ? part.substring(part.indexOf("_") + 1) : part)
+            .collect(Collectors.joining(File.separator));
 
-      TextCache.addText(key, html);
-    }));
+        String key = cleanedFileName.substring(cleanedFileName.lastIndexOf(base) + base.length()).replace(File.separator, "/");
+        if (key.startsWith("/")) {
+          key = key.substring(1);
+        }
+
+        LOG.info("Interpreted and filed [{}] as html text", key);
+
+        TextCache.addText(key, html);
+      } catch (final Exception e) {
+        LOG.error("Could not interpret file: {}", v);
+      }
+    });
   }
 
   private List<File> getResourceFiles(final String base) throws IOException {
@@ -64,8 +73,10 @@ public class TextTemplates {
 
   private Stream<File> scavenge(final File file) {
     if (file.isDirectory()) {
+      LOG.info("Moving into: {}", file.toString());
       return Stream.of(file.listFiles()).flatMap(v -> scavenge(v));
     } else if (file.isFile() && file.getName().endsWith(".md")) {
+      LOG.info("Indexing: {}", file);
       return Stream.of(file);
     } else {
       return Stream.of();
