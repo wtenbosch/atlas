@@ -1,8 +1,9 @@
 package nl.overheid.aerius.templates.stories.helpers;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import nl.overheid.aerius.collections.BackportedList;
 
 public class LayerConfigurationBuilder {
   private String layer;
@@ -28,7 +29,7 @@ public class LayerConfigurationBuilder {
   }
 
   public LayerConfigurationBuilder selectors(final String... lst) {
-    selectors.addAll(List.of(lst));
+    selectors.addAll(BackportedList.of(lst));
     return this;
   }
 

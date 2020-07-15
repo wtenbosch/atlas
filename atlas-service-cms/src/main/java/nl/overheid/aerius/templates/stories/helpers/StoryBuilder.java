@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import nl.overheid.aerius.collections.BackportedMap;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
 import nl.overheid.aerius.shared.domain.Story;
 import nl.overheid.aerius.shared.domain.StoryFragment;
@@ -85,7 +86,7 @@ public class StoryBuilder {
     return storyBuilder
         .info(storyInformationBuilder
             .uid(id)
-            .properties(buildProperties(Map.copyOf(properties)))
+            .properties(buildProperties(BackportedMap.copyOf(properties)))
             .build())
         .fragments(buildFragments(id))
         .build();

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import nl.overheid.aerius.collections.BackportedMap;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.ChapterIcon;
 import nl.overheid.aerius.shared.domain.DatasetConfiguration;
@@ -90,7 +91,7 @@ public class DatasetBuilder {
     return StoryFragment.builder()
         .dataset(dataset)
         .chapters(buildChapters(story))
-        .panels(Map.of())
+        .panels(BackportedMap.of())
         .viewMode(viewMode.getCode())
         .build();
   }

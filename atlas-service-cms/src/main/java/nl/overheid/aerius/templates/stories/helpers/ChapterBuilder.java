@@ -13,6 +13,8 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import nl.overheid.aerius.collections.BackportedList;
+import nl.overheid.aerius.collections.BackportedMap;
 import nl.overheid.aerius.shared.domain.Chapter;
 import nl.overheid.aerius.shared.domain.ChapterIcon;
 import nl.overheid.aerius.shared.domain.DocumentResource;
@@ -122,8 +124,8 @@ public class ChapterBuilder {
    */
   public ChapterBuilder description(final String description) {
     panels.put(PanelNames.PANEL_META, PanelContent.builder()
-        .properties(Map.of(
-            "text", Map.of("value", description))));
+        .properties(BackportedMap.of(
+            "text", BackportedMap.of("value", description))));
     return this;
   }
 
@@ -159,7 +161,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder legend(final String text) {
     panels.put(PanelNames.PANEL_LEGEND, PanelContent.builder()
-        .properties(Map.of("content_type", LegendContentType.TEXT.name().toLowerCase(),
+        .properties(BackportedMap.of("content_type", LegendContentType.TEXT.name().toLowerCase(),
             "text", text)));
     return this;
   }
@@ -170,7 +172,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder legend(final TextBuilder text) {
     panels.put(PanelNames.PANEL_LEGEND, PanelContent.builder()
-        .properties(Map.of("content_type", LegendContentType.TEXT.name().toLowerCase(),
+        .properties(BackportedMap.of("content_type", LegendContentType.TEXT.name().toLowerCase(),
             "text", text.build())));
     return this;
   }
@@ -287,7 +289,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder mainMap(final String... layers) {
     panels.put(PanelNames.PANEL_MAIN, PanelContent.builder()
-        .properties(Map.of(
+        .properties(BackportedMap.of(
             "content_type", MainContentType.MAP.name().toLowerCase())));
 
     Stream.of(layers)
@@ -304,7 +306,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder contextMap(final String... layers) {
     panels.put(PanelNames.PANEL_MAP, PanelContent.builder()
-        .properties(Map.of()));
+        .properties(BackportedMap.of()));
 
     Stream.of(layers)
         .forEach(v -> layer(v));
@@ -372,7 +374,7 @@ public class ChapterBuilder {
    * selectables which are configured by default.
    */
   public ChapterBuilder panelSelectables(final PanelNames name, final List<String> selectables) {
-    panelSelectables.put(name, List.copyOf(selectables));
+    panelSelectables.put(name, BackportedList.copyOf(selectables));
 
     return this;
   }
@@ -470,7 +472,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder mainInfo(final String reference) {
     panels.put(PanelNames.PANEL_MAIN, PanelContent.builder()
-        .properties(Map.of(
+        .properties(BackportedMap.of(
             "content_type", MainContentType.TEXT.name().toLowerCase(),
             "reference_name", reference)));
     return this;
@@ -482,7 +484,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder properties() {
     panels.put(PanelNames.PANEL_MAIN, PanelContent.builder()
-        .properties(Map.of("content_type", MainContentType.PROPERTIES.name().toLowerCase())));
+        .properties(BackportedMap.of("content_type", MainContentType.PROPERTIES.name().toLowerCase())));
     return this;
   }
 
@@ -491,7 +493,7 @@ public class ChapterBuilder {
    */
   public ChapterBuilder image(final String url) {
     panels.put(PanelNames.PANEL_INFO, PanelContent.builder()
-        .properties(Map.of("image_source", url)));
+        .properties(BackportedMap.of("image_source", url)));
     return this;
   }
 
@@ -531,7 +533,7 @@ public class ChapterBuilder {
 
     // For simplicity, add main selectables to each panel by default.
     newPanels.forEach((k, v) -> {
-      v.selectables(List.copyOf(mainSelectables));
+      v.selectables(BackportedList.copyOf(mainSelectables));
     });
 
     buildLayerPanel(newPanels);
@@ -547,7 +549,7 @@ public class ChapterBuilder {
   private void buildInfoPanel(final Map<PanelNames, Builder> newPanels, final String story, final String chapter) {
     if (infoUri != null) {
       newPanels.put(PanelNames.PANEL_INFO, PanelContent.builder()
-          .properties(Map.of(
+          .properties(BackportedMap.of(
               InfoProperties.CONTENT_TEXT, infoUri.apply(story, chapter))));
     }
   }
@@ -555,8 +557,8 @@ public class ChapterBuilder {
   private void buildExportPanel(final Map<PanelNames, Builder> newPanels) {
     if (exportText != null || !exportLinks.isEmpty()) {
       newPanels.put(PanelNames.PANEL_EXPORT, PanelContent.builder()
-          .properties(Map.of(
-              "export_text", Map.of("value", exportText),
+          .properties(BackportedMap.of(
+              "export_text", BackportedMap.of("value", exportText),
               "links", accumulateExportLinks())));
     }
   }
@@ -590,12 +592,12 @@ public class ChapterBuilder {
       Collections.reverse(newLayers);
 
       newPanels.put(PanelNames.PANEL_LAYER, PanelContent.builder()
-          .selectables(List.copyOf(layerSelectables))
-          .properties(Map.of(
+          .selectables(BackportedList.copyOf(layerSelectables))
+          .properties(BackportedMap.of(
               "layer_names", newLayers)));
 
       newPanels.computeIfPresent(PanelNames.PANEL_MAP, (panel, bldr) -> {
-        bldr.selectables(List.copyOf(mapSelectables));
+        bldr.selectables(BackportedList.copyOf(mapSelectables));
         return bldr;
       });
     }
@@ -608,8 +610,8 @@ public class ChapterBuilder {
       }
 
       newPanels.put(PanelNames.PANEL_LEGEND, PanelContent.builder()
-          .selectables(List.copyOf(legendComponent.selectors()))
-          .properties(Map.of(
+          .selectables(BackportedList.copyOf(legendComponent.selectors()))
+          .properties(BackportedMap.of(
               BasicParameterizedProperties.PARAMETERS, legendComponent.getParameters(),
               "content_type", LegendContentType.COMPONENT.name().toLowerCase(),
               "component_version", legendComponent.getVersion(),
@@ -629,8 +631,8 @@ public class ChapterBuilder {
       }
 
       newPanels.put(PanelNames.PANEL_MAIN, PanelContent.builder()
-          .selectables(List.copyOf(mainComponent.selectors()))
-          .properties(Map.of(
+          .selectables(BackportedList.copyOf(mainComponent.selectors()))
+          .properties(BackportedMap.of(
               BasicParameterizedProperties.PARAMETERS, mainComponent.getParameters(),
               "content_type", MainContentType.COMPONENT.name().toLowerCase(),
               "component_version", mainComponent.getVersion(),
