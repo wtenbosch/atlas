@@ -43,16 +43,18 @@ public class ExportProperties extends Properties {
   public List<DocumentResource> getExportResources() {
     final List<Map<String, Object>> linksLst = getArrayListOfMap("links");
     final List<DocumentResource> lst = new ArrayList<>();
-    for (final Map<String, Object> link : linksLst) {
-      final DocumentResource.Builder res = DocumentResource.builder()
-          .name(String.valueOf(link.get("name")))
-          .url(String.valueOf(link.get("url")));
+    if (linksLst != null) {
+      for (final Map<String, Object> link : linksLst) {
+        final DocumentResource.Builder res = DocumentResource.builder()
+            .name(String.valueOf(link.get("name")))
+            .url(String.valueOf(link.get("url")));
 
-      if (link.containsKey("date") && link.get("data") != null) {
-        res.date(new Date(Long.parseLong(String.valueOf(link.get("date")))));
+        if (link.containsKey("date") && link.get("data") != null) {
+          res.date(new Date(Long.parseLong(String.valueOf(link.get("date")))));
+        }
+
+        lst.add(res.build());
       }
-
-      lst.add(res.build());
     }
 
     return lst;
