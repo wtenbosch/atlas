@@ -66,4 +66,12 @@ public class GWTProd {
   public static void warn(final String marker, final String string) {
     warn("[" + marker + "] " + string);
   }
+  
+  public static native void time(String marker) /*-{
+    console.time(marker);
+  }-*/;
+  
+  public static native void timeEnd(String marker) /*-{
+    console.timeEnd(marker);
+  }-*/;
 }
