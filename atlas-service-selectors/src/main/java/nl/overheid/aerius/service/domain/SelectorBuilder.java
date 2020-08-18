@@ -9,22 +9,20 @@ import nl.overheid.aerius.shared.domain.ServiceSelectorConfiguration;
 
 public class SelectorBuilder {
   public static ServiceSelector.Builder selector(final String name, final String value) {
-    return selector(name, value, false);
+    return ServiceSelector.builder()
+        .name(name)
+        .value(value);
   }
   
   public static ServiceSelector.Builder selector(final String name, final String value, final ServiceSelector.Builder... subs) {
-    return selector(name, value, false, subs);
+    return selector(name, value)
+        .selectors(list(subs));
   }
-  
-  public static ServiceSelector.Builder selector(final String name, final String value, final boolean defaultt, final ServiceSelector.Builder... subs) {
-    return selector(name, value, defaultt, list(subs));
-  }
-  
-  public static ServiceSelector.Builder selector(final String name, final String value, final boolean defaultt, final List<ServiceSelector> list) {
+
+  public static ServiceSelector.Builder selector(final String name, final String value, final List<ServiceSelector> list) {
     return ServiceSelector.builder()
         .name(name)
         .value(value)
-        .defaultt(defaultt)
         .selectors(list);
   }
 

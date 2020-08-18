@@ -30,7 +30,8 @@ public abstract class ServiceSelector implements Serializable {
 
   public static Builder builder() {
     return new AutoValue_ServiceSelector.Builder()
-        .defaultt(false);
+        .defaultt(false)
+        .selectable(true);
   }
 
   public abstract String value();
@@ -38,6 +39,8 @@ public abstract class ServiceSelector implements Serializable {
   public abstract String name();
 
   public abstract boolean defaultt();
+  
+  public abstract boolean selectable();
 
   @Nullable
   public abstract HashMap<String, String> tags();
@@ -52,6 +55,8 @@ public abstract class ServiceSelector implements Serializable {
     public abstract Builder name(String value);
 
     public abstract Builder defaultt(boolean value);
+    
+    public abstract Builder selectable(boolean value);
 
     public abstract Builder tags(HashMap<String, String> value);
 
