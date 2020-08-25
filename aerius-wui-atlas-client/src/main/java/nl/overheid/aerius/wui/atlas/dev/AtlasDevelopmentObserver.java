@@ -26,6 +26,7 @@ import com.google.web.bindery.event.shared.binder.EventHandler;
 import com.google.web.bindery.event.shared.binder.GenericEvent;
 
 import nl.overheid.aerius.geo.command.InfoLocationChangeCommand;
+import nl.overheid.aerius.geo.command.InformationLayerActiveCommand;
 import nl.overheid.aerius.geo.command.LayerAddedCommand;
 import nl.overheid.aerius.geo.command.LayerHiddenCommand;
 import nl.overheid.aerius.geo.command.LayerVisibleCommand;
@@ -165,7 +166,7 @@ public class AtlasDevelopmentObserver implements DevelopmentObserver {
 
   @EventHandler(handles = { ContextPanelOpenEvent.class, ContextPanelCollapseEvent.class,
       NoStoryCommand.class, ActivateBigContextCommand.class, ActivateSmallContextCommand.class,
-      AdblockerDetectedEvent.class })
+      AdblockerDetectedEvent.class, InformationLayerActiveCommand.class })
   public void onSimpleGenericCommand(final GenericEvent c) {
     log(c.getClass().getSimpleName());
   }

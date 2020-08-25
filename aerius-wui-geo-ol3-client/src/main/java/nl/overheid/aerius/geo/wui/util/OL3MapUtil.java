@@ -18,15 +18,6 @@ package nl.overheid.aerius.geo.wui.util;
 
 import com.google.web.bindery.event.shared.EventBus;
 
-import nl.overheid.aerius.geo.BBox;
-import nl.overheid.aerius.geo.command.InfoLocationChangeCommand;
-import nl.overheid.aerius.geo.domain.IsLayer;
-import nl.overheid.aerius.geo.domain.LayerInfo;
-import nl.overheid.aerius.geo.domain.Point;
-import nl.overheid.aerius.geo.epsg.EPSG;
-import nl.overheid.aerius.geo.util.ReceptorUtil;
-import nl.overheid.aerius.geo.wui.layers.InformationLayer;
-import nl.overheid.aerius.geo.wui.layers.OL3Layer;
 import ol.Collection;
 import ol.Coordinate;
 import ol.Extent;
@@ -51,6 +42,17 @@ import ol.source.Wmts;
 import ol.source.WmtsOptions;
 import ol.tilegrid.WmtsTileGrid;
 import ol.tilegrid.WmtsTileGridOptions;
+
+import nl.overheid.aerius.geo.BBox;
+import nl.overheid.aerius.geo.command.InfoLocationChangeCommand;
+import nl.overheid.aerius.geo.domain.IsLayer;
+import nl.overheid.aerius.geo.domain.LayerInfo;
+import nl.overheid.aerius.geo.domain.Point;
+import nl.overheid.aerius.geo.epsg.EPSG;
+import nl.overheid.aerius.geo.util.ReceptorUtil;
+import nl.overheid.aerius.geo.wui.layers.InformationLayer;
+import nl.overheid.aerius.geo.wui.layers.OL3Layer;
+import nl.overheid.aerius.wui.dev.GWTProd;
 
 /**
  * BOILERPLATE CONTAINER
@@ -285,6 +287,8 @@ public final class OL3MapUtil {
   private static void onInfoChange(final EventBus eventBus, final Coordinate coordinate, final ReceptorUtil receptorUtil) {
     final Point point = new Point(coordinate.getX(), coordinate.getY());
 
+    GWTProd.log("Firing information layer change: " + eventBus);
+    
     eventBus.fireEvent(new InfoLocationChangeCommand(receptorUtil.createReceptorIdFromPoint(point)));
   }
 

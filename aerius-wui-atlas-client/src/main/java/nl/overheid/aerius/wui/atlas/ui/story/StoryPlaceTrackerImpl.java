@@ -195,7 +195,6 @@ public class StoryPlaceTrackerImpl extends BasicEventComponent implements StoryP
 
     place.setReceptorId(String.valueOf(e.getValue().getId()));
     placeController.goTo(place);
-
   }
 
   private StoryPlace getStoryPlace(final ApplicationPlace place) {

@@ -90,6 +90,7 @@ public class StoryPlace extends ApplicationPlace {
 
       composites.put(DATASET, place.getDataset());
       composites.put(CONTEXT, place.getPanel() == null ? null : place.getPanel().getTitle());
+      composites.put(RECEPTOR, place.getReceptorId());
 
       composites.remove(UglyBoilerPlate.LEVEL);
 

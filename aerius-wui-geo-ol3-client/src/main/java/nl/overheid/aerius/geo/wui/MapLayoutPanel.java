@@ -62,6 +62,7 @@ public class MapLayoutPanel implements HasEventBus {
   private final EPSG epsg;
   private Map map;
   private EventBus eventBus;
+  private final EventBus firingEventBus;
   private final ReceptorUtil receptorUtil;
 
   private String deferredExtent;
@@ -83,8 +84,9 @@ public class MapLayoutPanel implements HasEventBus {
   private boolean attachInformationLayer;
 
   @Inject
-  public MapLayoutPanel(final EPSG epsg, final ReceptorUtil receptorUtil) {
+  public MapLayoutPanel(final EPSG epsg, final EventBus eventBus, final ReceptorUtil receptorUtil) {
     this.epsg = epsg;
+    firingEventBus = eventBus;
     this.receptorUtil = receptorUtil;
 
     OL3MapUtil.prepareEPSG(epsg);
@@ -143,7 +145,7 @@ public class MapLayoutPanel implements HasEventBus {
   }
 
   private void attachInformationLayer() {
-    final IsLayer<Layer> infoLayer = OL3MapUtil.prepareInformationLayer(map, Projection.get(epsg.getEpsgCode()), eventBus, receptorUtil);
+    final IsLayer<Layer> infoLayer = OL3MapUtil.prepareInformationLayer(map, Projection.get(epsg.getEpsgCode()), firingEventBus, receptorUtil);
     eventBus.fireEvent(new LayerAddedCommand(infoLayer));
 
   }

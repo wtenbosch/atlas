@@ -155,7 +155,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
         } else {
           GWTProd.warn("Could not recover library for empty story.");
         }
-        
+
       } else {
         storyOracle.getStory(storyUid, story -> {
           // Handle edge-case where we are no longer in the story place when done
@@ -341,6 +341,7 @@ public class StoryCommandRouterImpl extends AbstractCommandRouter implements Sto
     final String prevReceptorId = previousPlace == null ? null : previousPlace.getReceptorId();
     final String currReceptorId = currentPlace.getReceptorId();
 
+    GWTProd.log("Initializing receptor for place: " + prevReceptorId + " > " + currReceptorId);
     fireIfChanged(new InfoLocationChangeEvent(),
         prevReceptorId == null ? null : receptorUtil.createReceptorPointFromId(Integer.parseInt(prevReceptorId)),
         currReceptorId == null ? null : receptorUtil.createReceptorPointFromId(Integer.parseInt(currReceptorId)));

@@ -5,11 +5,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 
-import nl.overheid.aerius.geo.domain.InformationZoomLevel;
-import nl.overheid.aerius.geo.domain.IsLayer;
-import nl.overheid.aerius.geo.domain.Point;
-import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
-import nl.overheid.aerius.geo.util.HexagonUtil;
 import ol.Collection;
 import ol.Coordinate;
 import ol.Feature;
@@ -27,14 +22,22 @@ import ol.style.IconOptions;
 import ol.style.Style;
 import ol.style.StyleOptions;
 
+import nl.overheid.aerius.geo.domain.InformationZoomLevel;
+import nl.overheid.aerius.geo.domain.IsLayer;
+import nl.overheid.aerius.geo.domain.Point;
+import nl.overheid.aerius.geo.event.InfoLocationChangeEvent;
+import nl.overheid.aerius.geo.util.HexagonUtil;
+import nl.overheid.aerius.wui.dev.GWTProd;
+
 public class InformationLayer implements IsLayer<Layer> {
-  private static final String INFO_MARKER_SVG = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'><title>an-location</title><path d='M17,3.64a8.39,8.39,0,0,0-8.57,8.58c0,2.84,1.37,5,3,7.43a33.2,33.2,0,0,1,4.38,9.77,1.26,1.26,0,0,0,2.45,0,33,33,0,0,1,4.38-9.77c1.59-2.46,3-4.59,3-7.43A8.38,8.38,0,0,0,17,3.64ZM17,17.1a4.87,4.87,0,1,1,4.87-4.87A4.87,4.87,0,0,1,17,17.1Z' fill='#d63327'/><circle cx='17' cy='12.23' r='2.39' fill='#d63327'/></svg>";
+  private static final String INFO_MARKER_SVG = "/res/location-icon.svg";
   private final InformationLayerEventBinder EVENT_BINDER = GWT.create(InformationLayerEventBinder.class);
 
   interface InformationLayerEventBinder extends EventBinder<InformationLayer> {}
 
   private final ol.layer.Vector vectorLayer;
   private final Projection projection;
+  private final Style style;
 
   public InformationLayer(final Projection projection, final EventBus eventBus) {
     this.projection = projection;
@@ -45,25 +48,29 @@ public class InformationLayer implements IsLayer<Layer> {
     iconOptions.setSrc(INFO_MARKER_SVG);
     iconOptions.setSnapToPixel(true);
     iconOptions.setAnchor(new double[] { 0.5, 1 });
-    // iconOptions.setImgSize(OLFactory.createSize(40, 20));
+    iconOptions.setImgSize(OLFactory.createSize(32, 32));
     final Icon icon = new Icon(iconOptions);
     styleOptions.setImage(icon);
     styleOptions.setStroke(OLFactory.createStroke(OLFactory.createColor(214, 51, 39, 1), 2));
     styleOptions.setFill(OLFactory.createFill(OLFactory.createColor(255, 255, 255, 0.4)));
 
-    final Style style = new Style(styleOptions);
+    style = new Style(styleOptions);
 
     final VectorLayerOptions vectorLayerOptions = OLFactory.createOptions();
     vectorLayerOptions.setStyle(style);
 
     vectorLayer = new ol.layer.Vector(vectorLayerOptions);
     vectorLayer.setZIndex(10001);
+    
+    GWTProd.log("Initializing information layer: " + eventBus);
 
     EVENT_BINDER.bindEventHandlers(this, eventBus);
   }
 
   @EventHandler
   public void onInformationLocationChangedEvent(final InfoLocationChangeEvent e) {
+    GWTProd.log("Changing information layer: " + e.getValue().getId());
+    
     // Create the final hexagon feature
     final Feature hexagon = createHexagon(e.getValue());
 
