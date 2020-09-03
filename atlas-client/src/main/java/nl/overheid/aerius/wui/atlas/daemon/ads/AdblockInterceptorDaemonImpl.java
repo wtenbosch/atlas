@@ -3,8 +3,6 @@ package nl.overheid.aerius.wui.atlas.daemon.ads;
 import java.util.Optional;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.binder.EventBinder;
@@ -26,8 +24,6 @@ import nl.overheid.aerius.wui.service.RequestClientException;
 import nl.overheid.aerius.wui.service.RequestServerException;
 
 public class AdblockInterceptorDaemonImpl extends BasicEventComponent implements AdblockInterceptorDaemon {
-  private static final String ADS_ELEMENT_ID = "AERIUS-ADS";
-
   interface AdblockInterceptorDaemonImplEventBinder extends EventBinder<AdblockInterceptorDaemonImpl> {}
 
   private final AdblockInterceptorDaemonImplEventBinder EVENT_BINDER = GWT.create(AdblockInterceptorDaemonImplEventBinder.class);
@@ -45,15 +41,7 @@ public class AdblockInterceptorDaemonImpl extends BasicEventComponent implements
   public void setEventBus(final EventBus eventBus) {
     super.setEventBus(eventBus, this, EVENT_BINDER);
 
-    // doAdsTest();
     doHealthChecks();
-  }
-
-  private void doAdsTest() {
-    final Element elem = Document.get().getElementById(ADS_ELEMENT_ID);
-    if (elem == null) {
-      eventBus.fireEvent(new AdblockerDetectedEvent(true));
-    }
   }
 
   @EventHandler

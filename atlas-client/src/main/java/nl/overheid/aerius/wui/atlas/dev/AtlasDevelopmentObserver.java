@@ -81,23 +81,17 @@ import nl.overheid.aerius.wui.dev.GWTProd;
 import nl.overheid.aerius.wui.event.NotificationEvent;
 import nl.overheid.aerius.wui.event.PlaceChangeEvent;
 import nl.overheid.aerius.wui.event.SimpleGenericEvent;
-import nl.overheid.aerius.wui.place.PlaceController;
 
 @Singleton
 public class AtlasDevelopmentObserver implements DevelopmentObserver {
   interface DevelopmentObserverMonitorImplEventBinder extends EventBinder<AtlasDevelopmentObserver> {}
 
   private final DevelopmentObserverMonitorImplEventBinder EVENT_BINDER = GWT.create(DevelopmentObserverMonitorImplEventBinder.class);
-  private final EventBus eventBus;
-  private boolean debugMode;
-  private final PlaceController placeController;
 
   // private final Logger logger = Logger.getLogger("DevelopmentObserver");
 
   @Inject
-  public AtlasDevelopmentObserver(final PlaceController placeController, final EventBus eventBus) {
-    this.placeController = placeController;
-    this.eventBus = eventBus;
+  public AtlasDevelopmentObserver(final EventBus eventBus) {
     EVENT_BINDER.bindEventHandlers(this, eventBus);
   }
 

@@ -34,7 +34,6 @@ import nl.overheid.aerius.wui.atlas.place.MonitorStoryPlace;
 import nl.overheid.aerius.wui.command.AbstractCommandRouter;
 import nl.overheid.aerius.wui.domain.map.MapContext;
 import nl.overheid.aerius.wui.domain.story.StoryContext;
-import nl.overheid.aerius.wui.place.ApplicationPlace;
 import nl.overheid.aerius.wui.place.Place;
 import nl.overheid.aerius.wui.place.PlaceController;
 

@@ -39,7 +39,7 @@ public final class LibraryJsonParser extends CommonJson {
 
       storyJson.getObjectOptional("author").ifPresent(v -> bldr.authorName(v.getString("name")));
 
-      final Map<String, String> props = new HashMap();
+      final Map<String, String> props = new HashMap<>();
 
       bldr.creationDate(new Date(storyJson.getLong("created")))
           .changedDate(new Date(storyJson.getLong("last_changed")));

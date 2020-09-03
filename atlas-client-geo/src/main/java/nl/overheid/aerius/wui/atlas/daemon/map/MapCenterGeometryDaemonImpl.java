@@ -51,6 +51,7 @@ public class MapCenterGeometryDaemonImpl extends BasicEventComponent implements 
     extent.setCorrectedBox(correctedBox);
   }
 
+  @SuppressWarnings("unused")
   private Point correctCenterCropLeft(final double contextWidth, final double fullWidth, final BBox box, final Point original) {
     final double newFakeWidth = box.getWidth() * (1 + fullWidth / contextWidth);
     
