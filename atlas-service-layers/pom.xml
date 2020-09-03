@@ -12,9 +12,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>nl.overheid.aerius</groupId>
+      <groupId>nl.aerius</groupId>
       <artifactId>autovalue-annotations</artifactId>
-      <version>${project.version}</version>
+      <version>${autovalue-processors.version}</version>
     </dependency>
     <dependency>
       <groupId>nl.overheid.aerius</groupId>
@@ -59,9 +59,9 @@
               <version>${auto-value.version}</version>
             </path>
             <path>
-              <groupId>nl.overheid.aerius</groupId>
+              <groupId>nl.aerius</groupId>
               <artifactId>autovalue-processors</artifactId>
-              <version>${project.version}</version>
+              <version>${autovalue-processors.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>

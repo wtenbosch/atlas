@@ -29,6 +29,14 @@
     <name>Ministry of Economic Affairs of The Netherlands</name>
     <url>https://www.government.nl/ministries/ez</url>
   </organization>
+  
+  <repositories>
+    <repository>
+      <id>aerius-nexus-public</id>
+      <name>AERIUS Nexus repository</name>
+      <url>https://nexus.aerius.nl/repository/maven-public/</url>
+    </repository>
+  </repositories>
 
   <licenses>
     <license>
@@ -45,6 +53,8 @@
     <auto-value.version>1.7.2</auto-value.version>
     <junit.version>4.12</junit.version>
     <java.version>8</java.version>
+    <autovalue-processors.version>1.0-SNAPSHOT</autovalue-processors.version>
+    <common-json.version>1.0-SNAPSHOT</common-json.version>
   </properties>
 
   <scm>
@@ -182,8 +192,6 @@
         <module>atlas-service-cms</module>
         <module>atlas-service-layers</module>
         <module>atlas-service-selectors</module>
-
-        <module>autovalue-processors</module>
       </modules>
     </profile>
   </profiles>

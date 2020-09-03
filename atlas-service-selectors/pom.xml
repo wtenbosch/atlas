@@ -14,9 +14,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>nl.overheid.aerius</groupId>
+      <groupId>nl.aerius</groupId>
       <artifactId>autovalue-annotations-serializers</artifactId>
-      <version>${project.version}</version>
+      <version>${autovalue-processors.version}</version>
     </dependency>
 
     <dependency>
@@ -26,7 +26,7 @@
       <scope>compile</scope>
       <exclusions>
         <exclusion>
-          <groupId>nl.overheid.aerius</groupId>
+          <groupId>nl.aerius</groupId>
           <artifactId>autovalue-annotations-parsers</artifactId>
         </exclusion>
       </exclusions>
@@ -59,9 +59,9 @@
                 <version>${auto-value.version}</version>
               </path>
               <path>
-                <groupId>nl.overheid.aerius</groupId>
+                <groupId>nl.aerius</groupId>
                 <artifactId>autovalue-processors</artifactId>
-                <version>${project.version}</version>
+                <version>${autovalue-processors.version}</version>
               </path>
             </annotationProcessorPaths>
           </configuration>

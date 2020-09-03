@@ -3,6 +3,5 @@
 <module>
   <source path="shared">
     <exclude name="**/*JsonSerializer**" />
-    <exclude name="**/SerializationFactory**" />
   </source>
 </module>

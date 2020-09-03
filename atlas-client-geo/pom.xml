@@ -53,12 +53,12 @@
       <type>gwt-lib</type>
     </dependency>
     <dependency>
-      <groupId>nl.overheid.aerius</groupId>
+      <groupId>nl.aerius</groupId>
       <artifactId>autovalue-annotations</artifactId>
-      <version>${project.version}</version>
+      <version>${autovalue-processors.version}</version>
       <exclusions>
         <exclusion>
-          <groupId>nl.overheid.aerius</groupId>
+          <groupId>nl.aerius</groupId>
           <artifactId>autovalue-annotations-serializers</artifactId>
         </exclusion>
       </exclusions>
