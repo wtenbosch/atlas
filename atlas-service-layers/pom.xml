@@ -13,7 +13,7 @@
   <dependencies>
     <dependency>
       <groupId>nl.aerius</groupId>
-      <artifactId>autovalue-annotations</artifactId>
+      <artifactId>autovalue-annotations-serializers</artifactId>
       <version>${autovalue-processors.version}</version>
     </dependency>
     <dependency>
@@ -57,11 +57,6 @@
               <groupId>com.google.auto.value</groupId>
               <artifactId>auto-value</artifactId>
               <version>${auto-value.version}</version>
-            </path>
-            <path>
-              <groupId>nl.aerius</groupId>
-              <artifactId>autovalue-processors</artifactId>
-              <version>${autovalue-processors.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
