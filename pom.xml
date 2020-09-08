@@ -46,7 +46,8 @@
   </properties>
 
   <scm>
-    <developerConnection>scm:git:ssh://git@github.com:aerius/aerius-atlas.git</developerConnection>
+    <connection>scm:git:ssh://git@github.com:aerius/atlas.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:aerius/atlas.git</developerConnection>
   </scm>
 
   <dependencyManagement>
@@ -99,6 +100,19 @@
         <configuration>
           <shortRevisionLength>8</shortRevisionLength>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
     <pluginManagement>
