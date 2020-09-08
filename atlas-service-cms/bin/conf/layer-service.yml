@@ -1,0 +1,8 @@
+atlas:
+  data: https://monitor-dev.aerius.nl/connect/dataservice/monitor/
+  priorityProjects: https://monitor-dev.aerius.nl/connect/dataservice/register/
+  geoserver: https://monitor-dev.aerius.nl/connect/geoserver/monitor/
+  components: http://localhost:9999/components/
+  area: https://monitor-dev.aerius.nl/connect/dataservice/monitor/M18/natura2000areas/
+  referenceDataset: M18
+  basicAuthCredentials: QUVSSVVTOkxFR0VORA==

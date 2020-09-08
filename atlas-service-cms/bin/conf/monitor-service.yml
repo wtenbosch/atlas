@@ -1,0 +1,30 @@
+atlas:
+  # Endpoint to use for the n2000 retrieval call (can be internal)
+  area: https://monitor-dev.aerius.nl/connect/dataservice/monitor/M18/natura2000areas/
+  
+  # Endpoint for ADS
+  data: https://monitor-dev.aerius.nl/connect/dataservice/monitor/
+  priorityProjects: https://dev.aerius.nl/connect/dataservice/register/
+  
+  dataExternal: https://monitor-dev.aerius.nl/connect/dataservice/monitor/
+  
+  # Monitor API endpoints
+  layer: https://monitor-dev.aerius.nl/api/
+  selector: https://monitor-dev.aerius.nl/api/
+  cms: https://monitor-dev.aerius.nl/api/
+  
+  # Monitor web components 
+  components: https://monitor-dev.aerius.nl/monitor/components/
+  
+  # Geoserver host
+  geoserver: https://monitor-dev.aerius.nl/connect/geoserver/monitor/
+  
+  # Reference dataset to use when none is passed
+  referenceDataset: M18
+  
+  # Directory to scavenge for text templates (TODO: support for comma-separation)
+  textTemplates: /path/to/aerius-monitor-web/aerius-wui-monitor-up-service-cms/src/main/content/templates
+  
+  # File to use for center of mass > gravity corrections
+  centersOfMass: /path/to/aerius-monitor-web/scripts/conf/res/n2k_centres_of_gravity_20200410.csv
+  

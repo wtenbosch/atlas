@@ -1,0 +1,12 @@
+atlas:
+  area: https://monitor-dev.aerius.nl/connect/dataservice/monitor/M18/natura2000areas/
+  dataExternal: https://monitor-dev.aerius.nl/connect/dataservice/monitor/
+  priorityProjects: https://monitor-dev.aerius.nl/connect/dataservice/register/
+  layer: http://localhost:8081/
+  selector: http://localhost:8082/
+  components: http://localhost:9999/components/
+  cms: http://localhost:8083/
+  geoserver: https://monitor-dev.aerius.nl/connect/geoserver/monitor/
+  textTemplates: /home/jorn/gitRepos/aerius-monitor-web/aerius-wui-monitor-up-service-cms/src/main/content/templates
+  centersOfMass: /home/jorn/gitRepos/aerius-monitor-web/scripts/conf/res/n2k_centres_of_gravity_20200410.csv
+  credentials: QUVSSVVTOkxFR0VORA==
