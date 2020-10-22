@@ -32,9 +32,10 @@ public class SelectorBuilder {
         .collect(Collectors.toList());
   }
 
-  public static ServiceSelectorConfiguration.Builder createConfig(final String type, final String title, final String description) {
+  public static ServiceSelectorConfiguration.Builder createConfig(final String type, final String singular, final String title, final String description) {
     return ServiceSelectorConfiguration.builder()
         .title(title)
+        .singular(singular)
         .description(description)
         .type(type);
   }

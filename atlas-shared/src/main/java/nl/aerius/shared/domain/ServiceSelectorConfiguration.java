@@ -18,6 +18,9 @@ public abstract class ServiceSelectorConfiguration implements Serializable {
 
   public abstract String type();
 
+  @Nullable
+  public abstract String singular();
+
   public abstract String title();
 
   public abstract String description();
@@ -37,6 +40,8 @@ public abstract class ServiceSelectorConfiguration implements Serializable {
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder type(String value);
+
+    public abstract Builder singular(String value);
 
     public abstract Builder title(String value);
 
