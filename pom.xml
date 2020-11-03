@@ -19,7 +19,7 @@
 
   <groupId>nl.aerius</groupId>
   <artifactId>atlas-parent</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
   <name>AERIUS Atlas parent</name>
   <url>https://www.aerius.nl</url>
@@ -67,8 +67,8 @@
     <auto-value.version>1.7.2</auto-value.version>
     <junit.version>4.12</junit.version>
     <java.version>8</java.version>
-    <autovalue-processors.version>1.0-SNAPSHOT</autovalue-processors.version>
-    <common-json.version>1.0-SNAPSHOT</common-json.version>
+    <autovalue-processors.version>1.0</autovalue-processors.version>
+    <common-json.version>1.0</common-json.version>
   </properties>
 
   <scm>
